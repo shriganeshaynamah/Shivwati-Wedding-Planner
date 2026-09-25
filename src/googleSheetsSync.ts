@@ -132,7 +132,7 @@ export async function ensureWeddingSpreadsheet(existingId?: string): Promise<{ i
   const createPayload = {
     properties: {
       title: 'Royal Indian Wedding Celebration 2026 - Master Planner',
-      locale: 'en_IN',
+      locale: 'en_US',
       autoRecalc: 'ON_CHANGE'
     },
     sheets: [
