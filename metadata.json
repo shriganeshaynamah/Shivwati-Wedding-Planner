@@ -1,0 +1,6 @@
+{
+  "name": "Royal Indian Wedding Planner",
+  "description": "Luxury 6-event Indian wedding management platform with countdown timers, budget tracking, vendor orders, RSVP guest matrix, and ritual checklists.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
