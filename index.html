@@ -1,10 +1,10 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="overflow-x-hidden w-full max-w-full">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>Royal Indian Wedding Planner | 6-Event Celebration Management</title>
-  <meta name="description" content="All-in-One Luxury Indian Wedding Management Platform for Tilak, Matkor, Madwa, Bhatman, Barat, and Reception with live countdowns, budget tracker, vendor management, guest RSVP matrix, and ritual checklists." />
+  <meta name="description" content="All-in-One Luxury Indian Wedding Management Platform for Tilak, Matkor, Madwa, Bhatman, Barat, and Reception with live countdowns, budget tracker, vendor management, guest RSVP matrix, entertainment playlists, and ritual checklists." />
   <meta property="og:title" content="Royal Indian Wedding Planner" />
   <meta property="og:description" content="Luxury 6-event Indian wedding management platform with countdown timers, budget tracking, vendor orders, RSVP guest matrix, and ritual checklists." />
   <meta property="og:type" content="website" />
@@ -60,6 +60,11 @@
   </script>
 
   <style>
+    html, body {
+      overflow-x: hidden;
+      max-width: 100vw;
+      width: 100%;
+    }
     body {
       background-color: #FDFBF7;
       background-image: radial-gradient(#D4AF37 0.75px, transparent 0.75px);
@@ -67,6 +72,7 @@
       font-family: 'Plus Jakarta Sans', sans-serif;
       color: #2D2327;
       min-height: 100vh;
+      -webkit-tap-highlight-color: transparent;
     }
     .font-cinzel { font-family: 'Cinzel', serif; }
     .gold-gradient-text {
@@ -78,403 +84,454 @@
       background: rgba(255, 255, 255, 0.96);
       backdrop-filter: blur(10px);
       border: 1px solid rgba(212, 175, 55, 0.28);
-      box-shadow: 0 4px 20px -2px rgba(128, 0, 32, 0.05);
-      border-radius: 1rem;
+      box-shadow: 0 4px 16px -2px rgba(128, 0, 32, 0.05);
+      border-radius: 0.875rem;
+      max-width: 100%;
     }
-    .custom-scrollbar::-webkit-scrollbar { width: 6px; height: 6px; }
+    .custom-scrollbar::-webkit-scrollbar { width: 5px; height: 5px; }
     .custom-scrollbar::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 4px; }
     .custom-scrollbar::-webkit-scrollbar-thumb { background: #D4AF37; border-radius: 4px; }
     .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #B78727; }
+
     .tab-btn.active {
       background: #D4AF37;
       color: #30040D;
       font-weight: 700;
       box-shadow: 0 2px 8px rgba(212, 175, 55, 0.4);
     }
+    .mobile-tab-btn.active {
+      background: #D4AF37;
+      color: #30040D;
+      font-weight: 700;
+    }
     .animate-fadeIn {
-      animation: fadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      animation: fadeIn 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(6px); }
+      from { opacity: 0; transform: translateY(4px); }
       to { opacity: 1; transform: translateY(0); }
     }
     .task-done { text-decoration: line-through; opacity: 0.6; }
+    
+    table {
+      border-collapse: separate;
+      border-spacing: 0;
+    }
   </style>
 </head>
 <body class="flex flex-col min-h-screen text-slate-800 antialiased selection:bg-gold-light selection:text-maroon-dark">
 
   <!-- TOP HEADER -->
-  <header class="bg-maroon-dark border-b border-gold/40 text-white sticky top-0 z-40 shadow-lg">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex flex-wrap items-center justify-between gap-4">
+  <header class="bg-maroon-dark border-b border-gold/40 text-white sticky top-0 z-40 shadow-lg w-full">
+    <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-2 sm:py-3 flex items-center justify-between gap-2.5">
       
-      <!-- Brand Logo & Title -->
-      <div class="flex items-center gap-3.5">
-        <div class="w-11 h-11 rounded-full border-2 border-gold/70 flex items-center justify-center bg-gradient-to-br from-maroon-deep to-maroon text-gold shadow-md">
-          <i class="fa-solid fa-crown text-lg"></i>
+      <!-- Brand Logo (Lord Ganesha) & Title (Shiv Weds Swati) -->
+      <div class="flex items-center gap-2.5 sm:gap-3 min-w-0">
+        <!-- Sacred Lord Ganesha Image Logo -->
+        <div class="w-9 h-9 sm:w-11 sm:h-11 rounded-full border-2 border-gold shadow-md shrink-0 overflow-hidden bg-maroon-deep flex items-center justify-center ring-1 ring-gold/40">
+          <img src="/lord-ganesha.jpg" onerror="this.src='https://i.pinimg.com/736x/14/80/5f/14805f15c4304749cfadc4aa0cec8a6b.jpg'" alt="Lord Ganesha" class="w-full h-full object-cover" />
         </div>
-        <div>
-          <h1 class="text-xl sm:text-2xl font-cinzel font-bold tracking-wider gold-gradient-text uppercase leading-tight">
-            Royal Wedding Planner
+        <div class="min-w-0">
+          <h1 class="text-base sm:text-xl font-cinzel font-bold tracking-wider gold-gradient-text uppercase leading-tight truncate">
+            Shiv Weds Swati
           </h1>
-          <p class="text-[11px] sm:text-xs text-gold-light/80 tracking-widest font-medium uppercase">
-            Traditional Multi-Event Celebration • Nov 2026
+          <p class="text-[9px] sm:text-xs text-gold-light/90 tracking-widest font-semibold uppercase truncate">
+            Royal Wedding Celebration • Gaya & Patna 2026
           </p>
         </div>
       </div>
 
-      <!-- Google Sheets Auto-Sync Indicator & Quick Actions -->
-      <div class="flex flex-wrap items-center gap-2 sm:gap-3">
-        <!-- Live Google Sheets Sync Status Bar -->
-        <div id="google-sync-indicator" class="flex items-center">
-          <!-- Populated by app.ts -->
-        </div>
-
-        <button id="btn-export" onclick="exportBackupData()" class="px-3.5 py-1.5 rounded-lg border border-gold/40 bg-maroon-deep/80 hover:bg-gold hover:text-maroon-dark text-gold-light text-xs font-semibold transition-all flex items-center gap-1.5 shadow-sm">
-          <i class="fa-solid fa-download"></i>
-          <span class="hidden sm:inline">Export Backup</span>
-        </button>
-
-        <label for="restore-file-input" class="cursor-pointer px-3.5 py-1.5 rounded-lg border border-gold/40 bg-maroon-deep/80 hover:bg-gold hover:text-maroon-dark text-gold-light text-xs font-semibold transition-all flex items-center gap-1.5 shadow-sm">
-          <i class="fa-solid fa-upload"></i>
-          <span class="hidden sm:inline">Restore</span>
-        </label>
-        <input type="file" id="restore-file-input" accept=".json" class="hidden" onchange="restoreBackupData(event)" />
-
-        <button onclick="confirmResetModal()" class="px-3 py-1.5 rounded-lg border border-maroon-light bg-maroon-deep/60 hover:bg-red-800 text-rose-200 text-xs font-semibold transition-all flex items-center gap-1.5" title="Reset to Default Sample Data">
-          <i class="fa-solid fa-rotate-right"></i>
-          <span class="hidden sm:inline">Reset</span>
+      <!-- Right Header: Hamburger Menu Button -->
+      <div class="flex items-center gap-2 shrink-0 ml-auto">
+        <button id="mobile-menu-btn" onclick="window.toggleMobileMenu()" class="p-2 sm:px-3 sm:py-1.5 rounded-xl bg-maroon-deep/90 border border-gold/50 text-gold-light hover:text-white hover:border-gold transition-all flex items-center gap-1.5 shadow-sm focus:outline-none cursor-pointer" aria-label="Open wedding menu and settings">
+          <i class="fa-solid fa-bars text-sm sm:text-base" id="mobile-menu-icon"></i>
+          <span class="text-xs font-semibold tracking-wide">Menu</span>
         </button>
       </div>
     </div>
 
-    <!-- NAVIGATION TABS BAR -->
-    <nav class="bg-maroon-deep border-t border-maroon px-4 sm:px-6 lg:px-8 py-1.5 overflow-x-auto custom-scrollbar">
-      <div class="max-w-7xl mx-auto flex items-center gap-1.5 sm:gap-2 min-w-max text-xs sm:text-sm">
-        <button onclick="switchTab('dashboard')" id="nav-dashboard" class="tab-btn active px-3.5 py-2 rounded-lg text-amber-100 hover:text-gold flex items-center gap-2 transition-all">
+    <!-- HAMBURGER MENU DRAWER (Mobile Full-Width, Desktop Floating Dropdown) -->
+    <div id="mobile-nav-menu" class="hidden sm:absolute sm:right-4 sm:top-[56px] sm:w-80 sm:rounded-2xl border-2 border-gold/60 px-3.5 py-3.5 space-y-3 shadow-2xl animate-fadeIn z-50 text-white" style="background-color: #30040D !important;">
+      
+      <!-- Section 1: Permanent Google Sheets Sync Card -->
+      <div>
+        <p class="text-[10px] font-bold uppercase tracking-wider text-amber-300 mb-1.5 flex items-center gap-1.5">
+          <i class="fa-solid fa-cloud text-gold"></i> Cloud Synchronization
+        </p>
+        <div id="google-sync-indicator" class="w-full">
+          <!-- Populated by app.ts with live permanent sync status and Save to Sheet button -->
+        </div>
+      </div>
+
+      <!-- Section 2: Platform Actions (Export, Restore, Reset) -->
+      <div class="pt-2.5 border-t border-gold/30">
+        <p class="text-[10px] font-bold uppercase tracking-wider text-amber-300 mb-2 flex items-center gap-1.5">
+          <i class="fa-solid fa-database text-gold"></i> Backup & Data Control
+        </p>
+        <div class="grid grid-cols-3 gap-2">
+          <button id="btn-export" onclick="exportBackupData(); window.toggleMobileMenu(false);" class="w-full py-2 px-2 rounded-lg border border-gold/50 bg-[#4A0815] hover:bg-gold hover:text-maroon-dark text-amber-100 text-xs font-bold transition-all flex items-center justify-center gap-1.5 shadow-sm" title="Export Backup JSON">
+            <i class="fa-solid fa-download text-xs text-gold"></i>
+            <span>Export</span>
+          </button>
+
+          <label for="restore-file-input" class="cursor-pointer w-full py-2 px-2 rounded-lg border border-gold/50 bg-[#4A0815] hover:bg-gold hover:text-maroon-dark text-amber-100 text-xs font-bold transition-all flex items-center justify-center gap-1.5 shadow-sm" title="Restore From Backup File">
+            <i class="fa-solid fa-upload text-xs text-gold"></i>
+            <span>Restore</span>
+          </label>
+          <input type="file" id="restore-file-input" accept=".json" class="hidden" onchange="restoreBackupData(event)" />
+
+          <button onclick="confirmResetModal(); window.toggleMobileMenu(false);" class="w-full py-2 px-2 rounded-lg border border-rose-600/70 bg-rose-950 hover:bg-rose-900 text-rose-200 text-xs font-bold transition-all flex items-center justify-center gap-1.5 shadow-sm" title="Reset to Master Wedding Plan">
+            <i class="fa-solid fa-rotate-right text-xs text-rose-400"></i>
+            <span>Reset</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Section 3: Navigation Tabs (for Mobile Screen, sm:hidden) -->
+      <div class="pt-2.5 border-t border-gold/30 space-y-1 sm:hidden">
+        <p class="text-[10px] font-bold uppercase tracking-wider text-amber-300 mb-1.5 flex items-center gap-1.5">
+          <i class="fa-solid fa-compass text-gold"></i> Page Navigation
+        </p>
+        <button onclick="switchTab('dashboard'); window.toggleMobileMenu(false);" id="mob-nav-dashboard" class="mobile-tab-btn active w-full text-left px-3 py-2 rounded-lg text-amber-100 hover:text-gold text-xs font-semibold flex items-center gap-2.5 transition-colors">
+          <i class="fa-solid fa-table-cells-large text-gold w-4 text-center"></i> Dashboard
+        </button>
+        <button onclick="switchTab('events'); window.toggleMobileMenu(false);" id="mob-nav-events" class="mobile-tab-btn w-full text-left px-3 py-2 rounded-lg text-amber-100 hover:text-gold text-xs font-semibold flex items-center gap-2.5 transition-colors">
+          <i class="fa-regular fa-calendar-days text-gold w-4 text-center"></i> Events & Itinerary
+        </button>
+        <button onclick="switchTab('budget'); window.toggleMobileMenu(false);" id="mob-nav-budget" class="mobile-tab-btn w-full text-left px-3 py-2 rounded-lg text-amber-100 hover:text-gold text-xs font-semibold flex items-center gap-2.5 transition-colors">
+          <i class="fa-solid fa-indian-rupee-sign text-gold w-4 text-center"></i> Budget & Expenses
+        </button>
+        <button onclick="switchTab('vendors'); window.toggleMobileMenu(false);" id="mob-nav-vendors" class="mobile-tab-btn w-full text-left px-3 py-2 rounded-lg text-amber-100 hover:text-gold text-xs font-semibold flex items-center gap-2.5 transition-colors">
+          <i class="fa-solid fa-handshake text-gold w-4 text-center"></i> Vendors & Bookings
+        </button>
+        <button onclick="switchTab('guests'); window.toggleMobileMenu(false);" id="mob-nav-guests" class="mobile-tab-btn w-full text-left px-3 py-2 rounded-lg text-amber-100 hover:text-gold text-xs font-semibold flex items-center gap-2.5 transition-colors">
+          <i class="fa-solid fa-users text-gold w-4 text-center"></i> Guest List & RSVP
+        </button>
+        <button onclick="switchTab('rituals'); window.toggleMobileMenu(false);" id="mob-nav-rituals" class="mobile-tab-btn w-full text-left px-3 py-2 rounded-lg text-amber-100 hover:text-gold text-xs font-semibold flex items-center gap-2.5 transition-colors">
+          <i class="fa-solid fa-list-check text-gold w-4 text-center"></i> Ritual Checklist
+        </button>
+        <button onclick="switchTab('entertainment'); window.toggleMobileMenu(false);" id="mob-nav-entertainment" class="mobile-tab-btn w-full text-left px-3 py-2 rounded-lg text-amber-100 hover:text-gold text-xs font-semibold flex items-center gap-2.5 transition-colors">
+          <i class="fa-solid fa-music text-gold w-4 text-center"></i> Entertainment
+        </button>
+      </div>
+    </div>
+
+    <!-- DESKTOP NAVIGATION TABS BAR (hidden on mobile, visible on sm and up) -->
+    <nav class="hidden sm:block bg-maroon-deep border-t border-maroon px-4 lg:px-8 py-1.5 overflow-x-auto custom-scrollbar w-full">
+      <div class="max-w-7xl mx-auto flex items-center gap-1.5 lg:gap-2 text-xs lg:text-sm">
+        <button onclick="switchTab('dashboard')" id="nav-dashboard" class="tab-btn active px-3 py-1.5 rounded-lg text-amber-100 hover:text-gold flex items-center gap-1.5 transition-all shrink-0">
           <i class="fa-solid fa-table-cells-large"></i> Dashboard
         </button>
-        <button onclick="switchTab('events')" id="nav-events" class="tab-btn px-3.5 py-2 rounded-lg text-amber-100 hover:text-gold flex items-center gap-2 transition-all">
+        <button onclick="switchTab('events')" id="nav-events" class="tab-btn px-3 py-1.5 rounded-lg text-amber-100 hover:text-gold flex items-center gap-1.5 transition-all shrink-0">
           <i class="fa-regular fa-calendar-days"></i> Events & Itinerary
         </button>
-        <button onclick="switchTab('budget')" id="nav-budget" class="tab-btn px-3.5 py-2 rounded-lg text-amber-100 hover:text-gold flex items-center gap-2 transition-all">
+        <button onclick="switchTab('budget')" id="nav-budget" class="tab-btn px-3 py-1.5 rounded-lg text-amber-100 hover:text-gold flex items-center gap-1.5 transition-all shrink-0">
           <i class="fa-solid fa-indian-rupee-sign"></i> Budget & Expenses
         </button>
-        <button onclick="switchTab('vendors')" id="nav-vendors" class="tab-btn px-3.5 py-2 rounded-lg text-amber-100 hover:text-gold flex items-center gap-2 transition-all">
+        <button onclick="switchTab('vendors')" id="nav-vendors" class="tab-btn px-3 py-1.5 rounded-lg text-amber-100 hover:text-gold flex items-center gap-1.5 transition-all shrink-0">
           <i class="fa-solid fa-handshake"></i> Vendors & Bookings
         </button>
-        <button onclick="switchTab('guests')" id="nav-guests" class="tab-btn px-3.5 py-2 rounded-lg text-amber-100 hover:text-gold flex items-center gap-2 transition-all">
+        <button onclick="switchTab('guests')" id="nav-guests" class="tab-btn px-3 py-1.5 rounded-lg text-amber-100 hover:text-gold flex items-center gap-1.5 transition-all shrink-0">
           <i class="fa-solid fa-users"></i> Guest List & RSVP
         </button>
-        <button onclick="switchTab('rituals')" id="nav-rituals" class="tab-btn px-3.5 py-2 rounded-lg text-amber-100 hover:text-gold flex items-center gap-2 transition-all">
+        <button onclick="switchTab('rituals')" id="nav-rituals" class="tab-btn px-3 py-1.5 rounded-lg text-amber-100 hover:text-gold flex items-center gap-1.5 transition-all shrink-0">
           <i class="fa-solid fa-list-check"></i> Ritual Checklist
         </button>
-        <button onclick="switchTab('emergency')" id="nav-emergency" class="tab-btn px-3.5 py-2 rounded-lg text-amber-100 hover:text-gold flex items-center gap-2 transition-all">
-          <i class="fa-solid fa-shield-halved"></i> Emergency & Legal
+        <button onclick="switchTab('entertainment')" id="nav-entertainment" class="tab-btn px-3 py-1.5 rounded-lg text-amber-100 hover:text-gold flex items-center gap-1.5 transition-all shrink-0">
+          <i class="fa-solid fa-music"></i> Entertainment
         </button>
       </div>
     </nav>
   </header>
 
   <!-- MAIN APP CONTAINER -->
-  <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
+  <main class="flex-1 max-w-7xl w-full mx-auto px-2.5 sm:px-6 lg:px-8 py-3.5 sm:py-6 overflow-x-hidden">
 
     <!-- VIEW 1: DASHBOARD -->
-    <section id="view-dashboard" class="space-y-6 animate-fadeIn">
+    <section id="view-dashboard" class="space-y-4 sm:space-y-6 animate-fadeIn">
       <!-- Countdown Timers -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5 sm:gap-5">
         <!-- Festivity 1: Tilak Ceremony -->
-        <div class="royal-card p-5 border-l-4 border-l-gold relative overflow-hidden bg-white/95">
+        <div class="royal-card p-3.5 sm:p-5 border-l-4 border-l-gold relative overflow-hidden bg-white/95">
           <div class="flex items-start justify-between">
             <div>
-              <span class="inline-block px-3 py-1 rounded-full text-[11px] font-bold tracking-wider uppercase bg-amber-100 text-amber-900 border border-amber-300">
+              <span class="inline-block px-2 py-0.5 rounded-full text-[9px] sm:text-[11px] font-bold tracking-wider uppercase bg-amber-100 text-amber-900 border border-amber-300">
                 First Festivity
               </span>
-              <h2 class="text-xl sm:text-2xl font-cinzel font-bold text-maroon mt-2">TILAK CEREMONY</h2>
-              <p class="text-xs text-slate-500 font-medium">November 21, 2026 • 11:00 AM onwards</p>
+              <h2 class="text-base sm:text-2xl font-cinzel font-bold text-maroon mt-1">TILAK CEREMONY</h2>
+              <p class="text-[10px] sm:text-xs text-slate-500 font-medium">November 21, 2026 • 03:00 PM • Shanti Kunj, Gaya</p>
             </div>
-            <div class="text-gold text-2xl">
+            <div class="text-gold text-lg sm:text-2xl">
               <i class="fa-solid fa-wand-magic-sparkles"></i>
             </div>
           </div>
           <!-- 4 Countdown boxes -->
-          <div class="grid grid-cols-4 gap-2 sm:gap-3 mt-4 text-center">
-            <div class="bg-amber-warm/40 border border-gold/40 rounded-xl p-2.5">
-              <span id="tilak-days" class="block text-2xl sm:text-3xl font-extrabold text-maroon font-cinzel">00</span>
-              <span class="text-[10px] sm:text-xs font-semibold text-gold-dark uppercase tracking-wider">Days</span>
+          <div class="grid grid-cols-4 gap-1.5 sm:gap-3 mt-3 text-center">
+            <div class="bg-amber-warm/40 border border-gold/40 rounded-lg sm:rounded-xl p-1.5 sm:p-2.5">
+              <span id="tilak-days" class="block text-lg sm:text-3xl font-extrabold text-maroon font-cinzel leading-tight">00</span>
+              <span class="text-[8px] sm:text-xs font-semibold text-gold-dark uppercase tracking-wider">Days</span>
             </div>
-            <div class="bg-amber-warm/40 border border-gold/40 rounded-xl p-2.5">
-              <span id="tilak-hours" class="block text-2xl sm:text-3xl font-extrabold text-maroon font-cinzel">00</span>
-              <span class="text-[10px] sm:text-xs font-semibold text-gold-dark uppercase tracking-wider">Hours</span>
+            <div class="bg-amber-warm/40 border border-gold/40 rounded-lg sm:rounded-xl p-1.5 sm:p-2.5">
+              <span id="tilak-hours" class="block text-lg sm:text-3xl font-extrabold text-maroon font-cinzel leading-tight">00</span>
+              <span class="text-[8px] sm:text-xs font-semibold text-gold-dark uppercase tracking-wider">Hours</span>
             </div>
-            <div class="bg-amber-warm/40 border border-gold/40 rounded-xl p-2.5">
-              <span id="tilak-mins" class="block text-2xl sm:text-3xl font-extrabold text-maroon font-cinzel">00</span>
-              <span class="text-[10px] sm:text-xs font-semibold text-gold-dark uppercase tracking-wider">Mins</span>
+            <div class="bg-amber-warm/40 border border-gold/40 rounded-lg sm:rounded-xl p-1.5 sm:p-2.5">
+              <span id="tilak-mins" class="block text-lg sm:text-3xl font-extrabold text-maroon font-cinzel leading-tight">00</span>
+              <span class="text-[8px] sm:text-xs font-semibold text-gold-dark uppercase tracking-wider">Mins</span>
             </div>
-            <div class="bg-amber-warm/40 border border-gold/40 rounded-xl p-2.5">
-              <span id="tilak-secs" class="block text-2xl sm:text-3xl font-extrabold text-maroon font-cinzel">00</span>
-              <span class="text-[10px] sm:text-xs font-semibold text-gold-dark uppercase tracking-wider">Secs</span>
+            <div class="bg-amber-warm/40 border border-gold/40 rounded-lg sm:rounded-xl p-1.5 sm:p-2.5">
+              <span id="tilak-secs" class="block text-lg sm:text-3xl font-extrabold text-maroon font-cinzel leading-tight">00</span>
+              <span class="text-[8px] sm:text-xs font-semibold text-gold-dark uppercase tracking-wider">Secs</span>
             </div>
           </div>
         </div>
 
         <!-- Main Day: Barat & Wedding -->
-        <div class="royal-card p-5 border-l-4 border-l-maroon relative overflow-hidden bg-white/95">
+        <div class="royal-card p-3.5 sm:p-5 border-l-4 border-l-maroon relative overflow-hidden bg-white/95">
           <div class="flex items-start justify-between">
             <div>
-              <span class="inline-block px-3 py-1 rounded-full text-[11px] font-bold tracking-wider uppercase bg-maroon text-white shadow-sm">
+              <span class="inline-block px-2 py-0.5 rounded-full text-[9px] sm:text-[11px] font-bold tracking-wider uppercase bg-maroon text-white shadow-sm">
                 Main Day
               </span>
-              <h2 class="text-xl sm:text-2xl font-cinzel font-bold text-maroon mt-2">BARAT & WEDDING</h2>
-              <p class="text-xs text-slate-500 font-medium">November 25, 2026 • 06:30 PM onwards</p>
+              <h2 class="text-base sm:text-2xl font-cinzel font-bold text-maroon mt-1">BARAT & WEDDING</h2>
+              <p class="text-[10px] sm:text-xs text-slate-500 font-medium">November 25, 2026 • 06:30 PM • Minavan Resort, Patna</p>
             </div>
-            <div class="text-maroon text-2xl">
+            <div class="text-maroon text-lg sm:text-2xl">
               <i class="fa-solid fa-heart"></i>
             </div>
           </div>
           <!-- 4 Countdown boxes -->
-          <div class="grid grid-cols-4 gap-2 sm:gap-3 mt-4 text-center">
-            <div class="bg-rose-50/70 border border-rose-200 rounded-xl p-2.5">
-              <span id="barat-days" class="block text-2xl sm:text-3xl font-extrabold text-maroon font-cinzel">00</span>
-              <span class="text-[10px] sm:text-xs font-semibold text-maroon-light uppercase tracking-wider">Days</span>
+          <div class="grid grid-cols-4 gap-1.5 sm:gap-3 mt-3 text-center">
+            <div class="bg-rose-50/70 border border-rose-200 rounded-lg sm:rounded-xl p-1.5 sm:p-2.5">
+              <span id="barat-days" class="block text-lg sm:text-3xl font-extrabold text-maroon font-cinzel leading-tight">00</span>
+              <span class="text-[8px] sm:text-xs font-semibold text-maroon-light uppercase tracking-wider">Days</span>
             </div>
-            <div class="bg-rose-50/70 border border-rose-200 rounded-xl p-2.5">
-              <span id="barat-hours" class="block text-2xl sm:text-3xl font-extrabold text-maroon font-cinzel">00</span>
-              <span class="text-[10px] sm:text-xs font-semibold text-maroon-light uppercase tracking-wider">Hours</span>
+            <div class="bg-rose-50/70 border border-rose-200 rounded-lg sm:rounded-xl p-1.5 sm:p-2.5">
+              <span id="barat-hours" class="block text-lg sm:text-3xl font-extrabold text-maroon font-cinzel leading-tight">00</span>
+              <span class="text-[8px] sm:text-xs font-semibold text-maroon-light uppercase tracking-wider">Hours</span>
             </div>
-            <div class="bg-rose-50/70 border border-rose-200 rounded-xl p-2.5">
-              <span id="barat-mins" class="block text-2xl sm:text-3xl font-extrabold text-maroon font-cinzel">00</span>
-              <span class="text-[10px] sm:text-xs font-semibold text-maroon-light uppercase tracking-wider">Mins</span>
+            <div class="bg-rose-50/70 border border-rose-200 rounded-lg sm:rounded-xl p-1.5 sm:p-2.5">
+              <span id="barat-mins" class="block text-lg sm:text-3xl font-extrabold text-maroon font-cinzel leading-tight">00</span>
+              <span class="text-[8px] sm:text-xs font-semibold text-maroon-light uppercase tracking-wider">Mins</span>
             </div>
-            <div class="bg-rose-50/70 border border-rose-200 rounded-xl p-2.5">
-              <span id="barat-secs" class="block text-2xl sm:text-3xl font-extrabold text-maroon font-cinzel">00</span>
-              <span class="text-[10px] sm:text-xs font-semibold text-maroon-light uppercase tracking-wider">Secs</span>
+            <div class="bg-rose-50/70 border border-rose-200 rounded-lg sm:rounded-xl p-1.5 sm:p-2.5">
+              <span id="barat-secs" class="block text-lg sm:text-3xl font-extrabold text-maroon font-cinzel leading-tight">00</span>
+              <span class="text-[8px] sm:text-xs font-semibold text-maroon-light uppercase tracking-wider">Secs</span>
             </div>
           </div>
         </div>
       </div>
 
       <!-- KPI METRIC CARDS -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-4">
         <!-- Budget Spent -->
-        <div class="royal-card p-4 flex items-center gap-4 cursor-pointer hover:border-gold transition-all" onclick="switchTab('budget')">
-          <div class="w-12 h-12 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center text-xl shrink-0">
+        <div class="royal-card p-3 sm:p-4 flex items-center gap-2.5 sm:gap-3.5 cursor-pointer hover:border-gold transition-all" onclick="switchTab('budget')">
+          <div class="w-9 h-9 sm:w-11 sm:h-11 rounded-lg bg-amber-100 text-amber-700 flex items-center justify-center text-base sm:text-lg shrink-0">
             <i class="fa-solid fa-wallet"></i>
           </div>
-          <div class="min-w-0">
-            <p class="text-[11px] font-bold text-slate-500 uppercase tracking-wider">Budget Spent</p>
-            <h3 id="kpi-budget-spent" class="text-lg font-bold text-slate-900 truncate">₹0.00L</h3>
-            <p id="kpi-budget-target" class="text-xs text-amber-700 font-medium truncate">₹0.00L target</p>
+          <div class="min-w-0 flex-1">
+            <p class="text-[9px] sm:text-[11px] font-bold text-slate-500 uppercase tracking-wider truncate">Budget Spent</p>
+            <h3 id="kpi-budget-spent" class="text-xs sm:text-base font-bold text-slate-900 truncate">₹0.00L</h3>
+            <p id="kpi-budget-target" class="text-[9px] sm:text-[11px] text-amber-700 font-medium truncate">Target: ₹14.00L</p>
           </div>
         </div>
 
         <!-- Attending Guests -->
-        <div class="royal-card p-4 flex items-center gap-4 cursor-pointer hover:border-gold transition-all" onclick="switchTab('guests')">
-          <div class="w-12 h-12 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center text-xl shrink-0">
+        <div class="royal-card p-3 sm:p-4 flex items-center gap-2.5 sm:gap-3.5 cursor-pointer hover:border-gold transition-all" onclick="switchTab('guests')">
+          <div class="w-9 h-9 sm:w-11 sm:h-11 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center text-base sm:text-lg shrink-0">
             <i class="fa-solid fa-user-check"></i>
           </div>
-          <div class="min-w-0">
-            <p class="text-[11px] font-bold text-slate-500 uppercase tracking-wider">Attending Guests</p>
-            <h3 id="kpi-attending-guests" class="text-lg font-bold text-slate-900">0</h3>
-            <p id="kpi-guest-groups" class="text-xs text-emerald-700 font-medium">0 guest groups total</p>
+          <div class="min-w-0 flex-1">
+            <p class="text-[9px] sm:text-[11px] font-bold text-slate-500 uppercase tracking-wider truncate">Attending Guests</p>
+            <h3 id="kpi-attending-guests" class="text-xs sm:text-base font-bold text-slate-900 truncate">0</h3>
+            <p id="kpi-guest-groups" class="text-[9px] sm:text-[11px] text-emerald-700 font-medium truncate">0 families</p>
           </div>
         </div>
 
         <!-- Vendors Booked -->
-        <div class="royal-card p-4 flex items-center gap-4 cursor-pointer hover:border-gold transition-all" onclick="switchTab('vendors')">
-          <div class="w-12 h-12 rounded-xl bg-blue-100 text-blue-700 flex items-center justify-center text-xl shrink-0">
+        <div class="royal-card p-3 sm:p-4 flex items-center gap-2.5 sm:gap-3.5 cursor-pointer hover:border-gold transition-all" onclick="switchTab('vendors')">
+          <div class="w-9 h-9 sm:w-11 sm:h-11 rounded-lg bg-blue-100 text-blue-700 flex items-center justify-center text-base sm:text-lg shrink-0">
             <i class="fa-solid fa-handshake"></i>
           </div>
-          <div class="min-w-0">
-            <p class="text-[11px] font-bold text-slate-500 uppercase tracking-wider">Vendors Booked</p>
-            <h3 id="kpi-vendors-count" class="text-lg font-bold text-slate-900">0 Vendors</h3>
-            <p id="kpi-vendors-status" class="text-xs text-blue-700 font-medium">Contracts active</p>
+          <div class="min-w-0 flex-1">
+            <p class="text-[9px] sm:text-[11px] font-bold text-slate-500 uppercase tracking-wider truncate">Vendors</p>
+            <h3 id="kpi-vendors-count" class="text-xs sm:text-base font-bold text-slate-900 truncate">0 Vendors</h3>
+            <p id="kpi-vendors-status" class="text-[9px] sm:text-[11px] text-blue-700 font-medium truncate">Active bookings</p>
           </div>
         </div>
 
-        <!-- Pending Rituals -->
-        <div class="royal-card p-4 flex items-center gap-4 cursor-pointer hover:border-gold transition-all" onclick="switchTab('rituals')">
-          <div class="w-12 h-12 rounded-xl bg-purple-100 text-purple-700 flex items-center justify-center text-xl shrink-0">
-            <i class="fa-solid fa-square-check"></i>
+        <!-- Pending Rituals (Replaced Entertainment as requested) -->
+        <div class="royal-card p-3 sm:p-4 flex items-center gap-2.5 sm:gap-3.5 cursor-pointer hover:border-gold transition-all" onclick="switchTab('rituals')" title="Click to view Rituals Checklist">
+          <div class="w-9 h-9 sm:w-11 sm:h-11 rounded-lg bg-purple-100 text-purple-700 flex items-center justify-center text-base sm:text-lg shrink-0">
+            <i class="fa-solid fa-list-check"></i>
           </div>
-          <div class="min-w-0">
-            <p class="text-[11px] font-bold text-slate-500 uppercase tracking-wider">Pending Rituals</p>
-            <h3 id="kpi-pending-tasks" class="text-lg font-bold text-slate-900">0</h3>
-            <p class="text-xs text-purple-700 font-medium">Across 6 ceremonies</p>
+          <div class="min-w-0 flex-1">
+            <p class="text-[9px] sm:text-[11px] font-bold text-slate-500 uppercase tracking-wider truncate">Pending Rituals</p>
+            <h3 id="kpi-pending-rituals-count" class="text-xs sm:text-base font-bold text-slate-900 truncate">0 Pending</h3>
+            <p id="kpi-pending-rituals-status" class="text-[9px] sm:text-[11px] text-purple-700 font-medium truncate">View checklist</p>
           </div>
         </div>
       </div>
 
       <!-- 6-EVENT CEREMONY TIMELINE OVERVIEW -->
-      <div class="royal-card p-6">
-        <div class="flex flex-wrap items-center justify-between gap-3 mb-5 border-b border-gold/20 pb-3">
+      <div class="royal-card p-3.5 sm:p-5">
+        <div class="flex items-center justify-between gap-2 mb-3 sm:mb-4 border-b border-gold/20 pb-2">
           <div>
-            <h2 class="text-xl font-cinzel font-bold text-maroon flex items-center gap-2">
-              <i class="fa-solid fa-om text-gold"></i> Wedding Celebrations Timeline
+            <h2 class="text-sm sm:text-lg font-cinzel font-bold text-maroon flex items-center gap-1.5">
+              <i class="fa-solid fa-om text-gold text-xs sm:text-sm"></i> Wedding Celebrations Timeline
             </h2>
-            <p class="text-xs text-slate-500">6 Sacred Rituals & Events Scheduled</p>
+            <p class="text-[10px] sm:text-xs text-slate-500">6 Sacred Rituals & Events (Nov 21 - 27, 2026)</p>
           </div>
-          <button onclick="switchTab('events')" class="text-xs font-semibold text-gold-dark hover:text-maroon flex items-center gap-1.5 transition-colors">
-            View Full Itinerary <i class="fa-solid fa-arrow-right"></i>
+          <button onclick="switchTab('events')" class="text-xs font-semibold text-gold-dark hover:text-maroon flex items-center gap-1 transition-colors">
+            View Itinerary <i class="fa-solid fa-arrow-right text-[10px]"></i>
           </button>
         </div>
 
-        <div id="dashboard-events-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div id="dashboard-events-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5 sm:gap-4">
           <!-- Populated by JS -->
         </div>
       </div>
 
       <!-- ANALYTICS: CHARTS ROW -->
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-3.5 sm:gap-5">
         <!-- Budget Allocation Chart -->
-        <div class="royal-card p-5">
-          <div class="flex items-center justify-between mb-4 border-b border-gold/20 pb-2">
+        <div class="royal-card p-3.5 sm:p-5">
+          <div class="flex items-center justify-between mb-2.5 border-b border-gold/20 pb-2">
             <div>
-              <h3 class="font-cinzel font-bold text-base text-maroon flex items-center gap-2">
-                <i class="fa-solid fa-chart-pie text-gold"></i> Budget Breakdown by Category
+              <h3 class="font-cinzel font-bold text-xs sm:text-sm text-maroon flex items-center gap-1.5">
+                <i class="fa-solid fa-chart-pie text-gold"></i> Budget by Category
               </h3>
-              <p class="text-xs text-slate-500">Actual expenses distribution</p>
+              <p class="text-[10px] text-slate-500">Actual expenses distribution</p>
             </div>
             <button onclick="switchTab('budget')" class="text-xs text-gold-dark font-medium hover:underline">Manage</button>
           </div>
-          <div class="h-64 flex items-center justify-center relative">
+          <div class="h-52 sm:h-60 flex items-center justify-center relative w-full">
             <canvas id="chart-budget-category"></canvas>
           </div>
         </div>
 
         <!-- RSVP Attendance Breakdown Chart -->
-        <div class="royal-card p-5">
-          <div class="flex items-center justify-between mb-4 border-b border-gold/20 pb-2">
+        <div class="royal-card p-3.5 sm:p-5">
+          <div class="flex items-center justify-between mb-2.5 border-b border-gold/20 pb-2">
             <div>
-              <h3 class="font-cinzel font-bold text-base text-maroon flex items-center gap-2">
-                <i class="fa-solid fa-chart-column text-maroon"></i> Expected Guests Per Ceremony
+              <h3 class="font-cinzel font-bold text-xs sm:text-sm text-maroon flex items-center gap-1.5">
+                <i class="fa-solid fa-chart-column text-maroon"></i> Headcount Per Ceremony
               </h3>
-              <p class="text-xs text-slate-500">Event-wise headcount based on RSVPs</p>
+              <p class="text-[10px] text-slate-500">Guest distribution across all 6 days</p>
             </div>
             <button onclick="switchTab('guests')" class="text-xs text-gold-dark font-medium hover:underline">RSVPs</button>
           </div>
-          <div class="h-64 flex items-center justify-center relative">
+          <div class="h-52 sm:h-60 flex items-center justify-center relative w-full">
             <canvas id="chart-guests-events"></canvas>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- VIEW 2: EVENTS & ITINERARY -->
-    <section id="view-events" class="hidden space-y-6 animate-fadeIn">
-      <div class="royal-card p-6">
-        <div class="flex flex-wrap items-center justify-between gap-4 border-b border-gold/20 pb-4">
+    <!-- VIEW 2: EVENTS & ITINERARY (Compact mobile-optimized cards) -->
+    <section id="view-events" class="hidden space-y-4 sm:space-y-6 animate-fadeIn">
+      <div class="royal-card p-3.5 sm:p-6">
+        <div class="flex flex-wrap items-center justify-between gap-2.5 border-b border-gold/20 pb-3 mb-4">
           <div>
-            <h2 class="text-2xl font-cinzel font-bold text-maroon flex items-center gap-2">
+            <h2 class="text-base sm:text-xl font-cinzel font-bold text-maroon flex items-center gap-1.5">
               <i class="fa-solid fa-calendar-check text-gold"></i> 6-Day Ceremonial Sequence & Itinerary
             </h2>
-            <p class="text-xs text-slate-500 mt-0.5">Comprehensive schedule, venue addresses, coordinators & cultural context</p>
+            <p class="text-[10px] sm:text-xs text-slate-500">Gaya & Patna celebration venues, dates, and coordinator contacts</p>
           </div>
-          <button onclick="switchTab('rituals')" class="px-4 py-2 bg-maroon text-gold-light hover:bg-maroon-deep rounded-lg text-xs font-semibold transition-all flex items-center gap-2 shadow-sm">
-            <i class="fa-solid fa-list-check"></i> Open Ritual Supplies Checklist
+          <button onclick="switchTab('rituals')" class="px-3 py-1.5 bg-maroon text-gold-light hover:bg-maroon-deep rounded-lg text-xs font-semibold transition-all flex items-center gap-1.5 shadow-sm">
+            <i class="fa-solid fa-list-check"></i> Checklist
           </button>
         </div>
 
-        <div id="events-full-list" class="grid grid-cols-1 md:grid-cols-2 gap-5 mt-6">
+        <!-- 6 Ceremony Boxes (Mobile reduced size) -->
+        <div id="events-full-list" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
           <!-- Populated by JS -->
         </div>
       </div>
     </section>
 
     <!-- VIEW 3: BUDGET & EXPENSES -->
-    <section id="view-budget" class="hidden space-y-6 animate-fadeIn">
+    <section id="view-budget" class="hidden space-y-4 sm:space-y-6 animate-fadeIn">
       <!-- Budget Overview Progress Card -->
-      <div class="royal-card p-6">
-        <div class="flex flex-wrap items-center justify-between gap-4 mb-4">
+      <div class="royal-card p-3.5 sm:p-6">
+        <div class="flex flex-wrap items-center justify-between gap-2.5 mb-3.5">
           <div>
-            <h2 class="text-2xl font-cinzel font-bold text-maroon flex items-center gap-2">
+            <h2 class="text-base sm:text-xl font-cinzel font-bold text-maroon flex items-center gap-1.5">
               <i class="fa-solid fa-coins text-gold"></i> Expense & Budget Manager
             </h2>
-            <p class="text-xs text-slate-500">Monitor estimates, booked costs, and paid balances across ceremonies</p>
+            <p class="text-[10px] sm:text-xs text-slate-500">Target limit ₹14.00 Lakhs • Track estimates, actual costs & paid balance</p>
           </div>
-          <div class="flex items-center gap-2">
-            <button onclick="openExpenseModal()" class="px-4 py-2 bg-maroon text-gold-light hover:bg-maroon-deep rounded-lg text-xs font-bold transition-all flex items-center gap-1.5 shadow-sm">
-              <i class="fa-solid fa-plus"></i> Add Expense
-            </button>
-          </div>
+          <button onclick="openExpenseModal()" class="px-3 py-1.5 bg-maroon text-gold-light hover:bg-maroon-deep rounded-lg text-xs font-bold transition-all flex items-center gap-1 shadow-sm">
+            <i class="fa-solid fa-plus text-xs"></i> Add Expense
+          </button>
         </div>
 
         <!-- Budget Progress Statistics -->
-        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 p-4 rounded-xl bg-amber-royal/60 border border-gold/30 mb-5 text-center">
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3 p-3 rounded-xl bg-amber-royal/60 border border-gold/30 mb-3.5 text-center">
           <div>
-            <p class="text-[11px] font-semibold text-slate-500 uppercase">Target Budget</p>
-            <p id="stat-target-budget" class="text-lg sm:text-xl font-bold text-slate-800 flex items-center justify-center gap-1.5">
-              <span>₹25,00,000</span>
-              <button onclick="window.openEditTargetBudgetModal()" class="text-xs text-gold-dark hover:text-maroon" title="Edit Budget Limit">
+            <p class="text-[9px] sm:text-[10px] font-semibold text-slate-500 uppercase">Target Budget</p>
+            <p id="stat-target-budget" class="text-sm sm:text-lg font-bold text-slate-800 flex items-center justify-center gap-1">
+              <span>₹14,00,000</span>
+              <button onclick="window.openEditTargetBudgetModal()" class="text-[11px] text-gold-dark hover:text-maroon" title="Edit Budget Limit">
                 <i class="fa-solid fa-pen"></i>
               </button>
             </p>
           </div>
           <div>
-            <p class="text-[11px] font-semibold text-slate-500 uppercase">Estimated Total</p>
-            <p id="stat-estimated-budget" class="text-lg sm:text-xl font-bold text-blue-700">₹0</p>
+            <p class="text-[9px] sm:text-[10px] font-semibold text-slate-500 uppercase">Estimated Total</p>
+            <p id="stat-estimated-budget" class="text-sm sm:text-lg font-bold text-blue-700">₹0</p>
           </div>
           <div>
-            <p class="text-[11px] font-semibold text-slate-500 uppercase">Actual Committed</p>
-            <p id="stat-actual-budget" class="text-lg sm:text-xl font-bold text-maroon">₹0</p>
+            <p class="text-[9px] sm:text-[10px] font-semibold text-slate-500 uppercase">Actual Committed</p>
+            <p id="stat-actual-budget" class="text-sm sm:text-lg font-bold text-maroon">₹0</p>
           </div>
           <div>
-            <p class="text-[11px] font-semibold text-slate-500 uppercase">Amount Paid</p>
-            <p id="stat-paid-budget" class="text-lg sm:text-xl font-bold text-emerald-700">₹0</p>
+            <p class="text-[9px] sm:text-[10px] font-semibold text-slate-500 uppercase">Amount Paid</p>
+            <p id="stat-paid-budget" class="text-sm sm:text-lg font-bold text-emerald-700">₹0</p>
           </div>
         </div>
 
         <!-- Dynamic Progress Bar -->
-        <div class="space-y-1.5">
-          <div class="flex justify-between text-xs font-semibold">
+        <div class="space-y-1">
+          <div class="flex justify-between text-[11px] font-semibold">
             <span id="budget-progress-label" class="text-slate-700">Committed: 0% of Target</span>
             <span id="budget-paid-label" class="text-emerald-700">Paid: 0%</span>
           </div>
-          <div class="w-full bg-slate-200 rounded-full h-3.5 overflow-hidden flex shadow-inner">
-            <div id="bar-paid" class="bg-emerald-600 h-3.5 transition-all duration-500" style="width: 0%"></div>
-            <div id="bar-pending-committed" class="bg-amber-500 h-3.5 transition-all duration-500" style="width: 0%"></div>
-          </div>
-          <div class="flex items-center gap-4 text-[11px] text-slate-500 justify-end pt-1">
-            <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-emerald-600 inline-block"></span> Paid</span>
-            <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-amber-500 inline-block"></span> Unpaid Committed</span>
+          <div class="w-full bg-slate-200 rounded-full h-2.5 sm:h-3 overflow-hidden flex shadow-inner">
+            <div id="bar-paid" class="bg-emerald-600 h-2.5 sm:h-3 transition-all duration-500" style="width: 0%"></div>
+            <div id="bar-pending-committed" class="bg-amber-500 h-2.5 sm:h-3 transition-all duration-500" style="width: 0%"></div>
           </div>
         </div>
       </div>
 
       <!-- Expense Filters and Table -->
-      <div class="royal-card p-6">
-        <!-- Day-Wise Ceremony Filter Pills -->
-        <div class="mb-4 pb-3 border-b border-gold/20">
-          <div class="flex items-center justify-between mb-2">
-            <span class="text-[11px] font-bold uppercase tracking-wider text-maroon flex items-center gap-1.5">
-              <i class="fa-solid fa-calendar-days text-gold-dark"></i> Filter Expenses by Ceremony / Day:
-            </span>
-            <span id="budget-day-summary" class="text-xs font-semibold text-slate-600">All Ceremonies</span>
-          </div>
-          <div id="budget-day-pills" class="flex flex-wrap gap-2 text-xs">
-            <!-- Rendered by JS -->
-          </div>
+      <div class="royal-card p-3.5 sm:p-6">
+        <!-- CEREMONY / DAY DROPDOWN FILTER -->
+        <div class="mb-3.5 pb-2.5 border-b border-gold/20 flex flex-wrap items-center justify-between gap-2">
+          <label for="budget-day-filter-select" class="text-[11px] font-bold uppercase tracking-wider text-maroon flex items-center gap-1.5">
+            <i class="fa-solid fa-calendar-days text-gold-dark"></i> Filter Expenses by Ceremony / Day:
+          </label>
+          <select id="budget-day-filter-select" onchange="window.setExpenseDayFilter(this.value)" class="text-xs py-1.5 px-3 rounded-lg border border-slate-300 focus:outline-none focus:border-gold bg-white font-semibold text-slate-800 shadow-sm w-full sm:w-auto">
+            <option value="ALL">All Ceremonies & Days</option>
+            <option value="Tilak">Day 1 • Tilak (Nov 21)</option>
+            <option value="Matkor">Day 2 • Matkor (Nov 22)</option>
+            <option value="Madwa">Day 3 • Madwa (Nov 23)</option>
+            <option value="Bhatman">Day 4 • Bhatman (Nov 24)</option>
+            <option value="Barat">Day 5 • Barat (Nov 25)</option>
+            <option value="Reception">Day 6 • Reception (Nov 27)</option>
+            <option value="General">General / Common</option>
+          </select>
         </div>
 
-        <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
-          <div class="flex flex-wrap items-center gap-2 flex-1 min-w-[280px]">
+        <div class="flex flex-wrap items-center justify-between gap-2.5 mb-3.5">
+          <div class="flex flex-wrap items-center gap-2 flex-1 min-w-full sm:min-w-[280px]">
             <!-- Search -->
-            <div class="relative flex-1 min-w-[160px]">
+            <div class="relative flex-1 min-w-[140px]">
               <i class="fa-solid fa-magnifying-glass absolute left-3 top-2.5 text-slate-400 text-xs"></i>
-              <input type="text" id="expense-search" oninput="renderExpensesTable()" placeholder="Search item or vendor..." class="w-full pl-8 pr-3 py-1.5 text-xs rounded-lg border border-slate-300 focus:outline-none focus:border-gold">
+              <input type="text" id="expense-search" oninput="renderExpensesTable()" placeholder="Search item, vendor..." class="w-full pl-8 pr-3 py-1.5 text-xs rounded-lg border border-slate-300 focus:outline-none focus:border-gold">
             </div>
-            <!-- Filter by Event -->
-            <select id="expense-filter-event" onchange="renderExpensesTable()" class="text-xs py-1.5 px-3 rounded-lg border border-slate-300 focus:outline-none focus:border-gold bg-white font-medium">
-              <option value="ALL">All Days & Events</option>
-              <option value="Tilak">Day 1 • Tilak (Nov 21)</option>
-              <option value="Matkor">Day 2 • Matkor (Nov 22)</option>
-              <option value="Madwa">Day 3 • Madwa (Nov 23)</option>
-              <option value="Bhatman">Day 4 • Bhatman (Nov 24)</option>
-              <option value="Barat">Day 5 • Barat (Nov 25)</option>
-              <option value="Reception">Day 6 • Reception (Nov 27)</option>
-              <option value="General">General / Common</option>
-            </select>
-            <!-- Filter by Category -->
-            <select id="expense-filter-cat" onchange="renderExpensesTable()" class="text-xs py-1.5 px-3 rounded-lg border border-slate-300 focus:outline-none focus:border-gold bg-white">
+            <!-- Category Filter -->
+            <select id="expense-filter-cat" onchange="renderExpensesTable()" class="text-xs py-1.5 px-2.5 rounded-lg border border-slate-300 focus:outline-none focus:border-gold bg-white">
               <option value="ALL">All Categories</option>
               <option value="Catering">Catering</option>
               <option value="Decoration">Decoration</option>
@@ -486,30 +543,36 @@
               <option value="Entertainment">Entertainment</option>
               <option value="Other">Other</option>
             </select>
-            <!-- Filter by Status -->
-            <select id="expense-filter-status" onchange="renderExpensesTable()" class="text-xs py-1.5 px-3 rounded-lg border border-slate-300 focus:outline-none focus:border-gold bg-white">
-              <option value="ALL">All Payment Statuses</option>
+            <!-- Payment Status -->
+            <select id="expense-filter-status" onchange="renderExpensesTable()" class="text-xs py-1.5 px-2.5 rounded-lg border border-slate-300 focus:outline-none focus:border-gold bg-white">
+              <option value="ALL">All Statuses</option>
               <option value="Paid">Paid</option>
               <option value="Partial">Partial</option>
               <option value="Pending">Pending</option>
             </select>
           </div>
-          <span id="expense-filter-count" class="text-xs text-slate-500 font-medium">Showing 0 records</span>
+          <span id="expense-filter-count" class="text-xs text-slate-500 font-medium">0 records</span>
+        </div>
+
+        <!-- Mobile Scroll Indicator -->
+        <div class="sm:hidden text-[10px] text-amber-800/90 mb-1.5 flex items-center gap-1 font-medium">
+          <i class="fa-solid fa-arrows-left-right text-gold-dark"></i>
+          <span>Swipe sideways to see actual, paid & action buttons</span>
         </div>
 
         <!-- Table -->
-        <div class="overflow-x-auto rounded-xl border border-slate-200">
-          <table class="w-full text-left text-xs">
+        <div class="overflow-x-auto custom-scrollbar rounded-xl border border-slate-200 w-full block">
+          <table class="w-full text-left text-xs min-w-[580px]">
             <thead class="bg-amber-warm/50 border-b border-gold/30 text-maroon-dark uppercase tracking-wider font-semibold">
               <tr>
-                <th class="py-3 px-4">Item & Notes</th>
-                <th class="py-3 px-3">Event</th>
-                <th class="py-3 px-3">Category</th>
-                <th class="py-3 px-3 text-right">Estimated</th>
-                <th class="py-3 px-3 text-right">Actual</th>
-                <th class="py-3 px-3 text-right">Paid</th>
-                <th class="py-3 px-3 text-center">Status</th>
-                <th class="py-3 px-4 text-center">Actions</th>
+                <th class="py-2.5 px-3">Item & Notes</th>
+                <th class="py-2.5 px-2">Event</th>
+                <th class="py-2.5 px-2">Category</th>
+                <th class="py-2.5 px-2 text-right">Estimated</th>
+                <th class="py-2.5 px-2 text-right">Actual</th>
+                <th class="py-2.5 px-2 text-right">Paid</th>
+                <th class="py-2.5 px-2 text-center">Status</th>
+                <th class="py-2.5 px-2.5 text-center">Actions</th>
               </tr>
             </thead>
             <tbody id="expenses-table-body" class="divide-y divide-slate-100 bg-white">
@@ -521,66 +584,60 @@
     </section>
 
     <!-- VIEW 4: VENDORS & BOOKINGS -->
-    <section id="view-vendors" class="hidden space-y-6 animate-fadeIn">
-      <div class="royal-card p-6">
-        <div class="flex flex-wrap items-center justify-between gap-4 mb-5 border-b border-gold/20 pb-4">
+    <section id="view-vendors" class="hidden space-y-4 sm:space-y-6 animate-fadeIn">
+      <div class="royal-card p-3.5 sm:p-6">
+        <div class="flex flex-wrap items-center justify-between gap-2.5 mb-3.5 border-b border-gold/20 pb-3">
           <div>
-            <h2 class="text-2xl font-cinzel font-bold text-maroon flex items-center gap-2">
+            <h2 class="text-base sm:text-xl font-cinzel font-bold text-maroon flex items-center gap-1.5">
               <i class="fa-solid fa-briefcase text-gold"></i> Vendor Directory & Order Bookings
             </h2>
-            <p class="text-xs text-slate-500">Contact persons, contract values, advance paid, and direct dial actions</p>
+            <p class="text-[10px] sm:text-xs text-slate-500">Contact persons, contract values, advance paid, and direct dial actions</p>
           </div>
-          <button onclick="openVendorModal()" class="px-4 py-2 bg-maroon text-gold-light hover:bg-maroon-deep rounded-lg text-xs font-bold transition-all flex items-center gap-1.5 shadow-sm">
-            <i class="fa-solid fa-plus"></i> Add New Vendor
+          <button onclick="openVendorModal()" class="px-3 py-1.5 bg-maroon text-gold-light hover:bg-maroon-deep rounded-lg text-xs font-bold transition-all flex items-center gap-1 shadow-sm">
+            <i class="fa-solid fa-plus text-xs"></i> Add Vendor
           </button>
         </div>
 
         <!-- Vendor Financials Summary -->
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
-          <div class="p-4 rounded-xl bg-blue-50/70 border border-blue-200">
-            <p class="text-xs font-semibold text-blue-700 uppercase">Total Contract Value</p>
-            <p id="vendor-stat-total" class="text-xl font-bold text-slate-900 mt-1">₹0</p>
+        <div class="grid grid-cols-3 gap-2 sm:gap-4 mb-3.5">
+          <div class="p-2.5 sm:p-4 rounded-xl bg-blue-50/70 border border-blue-200">
+            <p class="text-[9px] sm:text-xs font-semibold text-blue-700 uppercase">Contract</p>
+            <p id="vendor-stat-total" class="text-xs sm:text-lg font-bold text-slate-900 mt-0.5">₹0</p>
           </div>
-          <div class="p-4 rounded-xl bg-emerald-50/70 border border-emerald-200">
-            <p class="text-xs font-semibold text-emerald-700 uppercase">Total Advance Paid</p>
-            <p id="vendor-stat-paid" class="text-xl font-bold text-slate-900 mt-1">₹0</p>
+          <div class="p-2.5 sm:p-4 rounded-xl bg-emerald-50/70 border border-emerald-200">
+            <p class="text-[9px] sm:text-xs font-semibold text-emerald-700 uppercase">Paid</p>
+            <p id="vendor-stat-paid" class="text-xs sm:text-lg font-bold text-slate-900 mt-0.5">₹0</p>
           </div>
-          <div class="p-4 rounded-xl bg-rose-50/70 border border-rose-200">
-            <p class="text-xs font-semibold text-rose-700 uppercase">Total Balance Due</p>
-            <p id="vendor-stat-balance" class="text-xl font-bold text-rose-800 mt-1">₹0</p>
-          </div>
-        </div>
-
-        <!-- Vendor Day-Wise Filter Pills -->
-        <div class="mb-4 pb-3 border-b border-gold/20">
-          <div class="flex items-center justify-between mb-2">
-            <span class="text-[11px] font-bold uppercase tracking-wider text-maroon flex items-center gap-1.5">
-              <i class="fa-solid fa-calendar-days text-gold-dark"></i> Filter Vendors by Ceremony / Day:
-            </span>
-            <span id="vendor-day-summary" class="text-xs font-semibold text-slate-600">All Days & Bookings</span>
-          </div>
-          <div id="vendor-day-pills" class="flex flex-wrap gap-2 text-xs">
-            <!-- Rendered by JS -->
+          <div class="p-2.5 sm:p-4 rounded-xl bg-rose-50/70 border border-rose-200">
+            <p class="text-[9px] sm:text-xs font-semibold text-rose-700 uppercase">Balance</p>
+            <p id="vendor-stat-balance" class="text-xs sm:text-lg font-bold text-rose-800 mt-0.5">₹0</p>
           </div>
         </div>
 
-        <!-- Vendor Filters -->
-        <div class="flex flex-wrap items-center gap-3 mb-5">
-          <div class="relative flex-1 min-w-[200px]">
-            <i class="fa-solid fa-magnifying-glass absolute left-3 top-2.5 text-slate-400 text-xs"></i>
-            <input type="text" id="vendor-search" oninput="renderVendorsGrid()" placeholder="Search vendor name, service, contact..." class="w-full pl-8 pr-3 py-1.5 text-xs rounded-lg border border-slate-300 focus:outline-none focus:border-gold">
-          </div>
-          <select id="vendor-filter-event" onchange="renderVendorsGrid()" class="text-xs py-1.5 px-3 rounded-lg border border-slate-300 focus:outline-none focus:border-gold bg-white font-medium">
-            <option value="ALL">All Days & Events</option>
+        <!-- VENDOR CEREMONY / DAY DROPDOWN FILTER -->
+        <div class="mb-3.5 pb-2.5 border-b border-gold/20 flex flex-wrap items-center justify-between gap-2">
+          <label for="vendor-day-filter-select" class="text-[11px] font-bold uppercase tracking-wider text-maroon flex items-center gap-1.5">
+            <i class="fa-solid fa-calendar-days text-gold-dark"></i> Filter Vendors by Ceremony / Day:
+          </label>
+          <select id="vendor-day-filter-select" onchange="window.setVendorDayFilter(this.value)" class="text-xs py-1.5 px-3 rounded-lg border border-slate-300 focus:outline-none focus:border-gold bg-white font-semibold text-slate-800 shadow-sm w-full sm:w-auto">
+            <option value="ALL">All Days & Bookings</option>
             <option value="Tilak">Day 1 • Tilak (Nov 21)</option>
             <option value="Matkor">Day 2 • Matkor (Nov 22)</option>
             <option value="Madwa">Day 3 • Madwa (Nov 23)</option>
             <option value="Bhatman">Day 4 • Bhatman (Nov 24)</option>
             <option value="Barat">Day 5 • Barat (Nov 25)</option>
             <option value="Reception">Day 6 • Reception (Nov 27)</option>
-            <option value="All Events">Common / All Events</option>
+            <option value="General">Common / All Events</option>
           </select>
-          <select id="vendor-filter-status" onchange="renderVendorsGrid()" class="text-xs py-1.5 px-3 rounded-lg border border-slate-300 focus:outline-none focus:border-gold bg-white">
+        </div>
+
+        <!-- Vendor Filters -->
+        <div class="flex flex-wrap items-center gap-2 mb-3.5">
+          <div class="relative flex-1 min-w-[160px]">
+            <i class="fa-solid fa-magnifying-glass absolute left-3 top-2.5 text-slate-400 text-xs"></i>
+            <input type="text" id="vendor-search" oninput="renderVendorsGrid()" placeholder="Search vendor name, service..." class="w-full pl-8 pr-3 py-1.5 text-xs rounded-lg border border-slate-300 focus:outline-none focus:border-gold">
+          </div>
+          <select id="vendor-filter-status" onchange="renderVendorsGrid()" class="text-xs py-1.5 px-2.5 rounded-lg border border-slate-300 focus:outline-none focus:border-gold bg-white">
             <option value="ALL">All Statuses</option>
             <option value="Confirmed">Confirmed</option>
             <option value="Tentative">Tentative</option>
@@ -590,86 +647,80 @@
         </div>
 
         <!-- Vendor Cards Grid -->
-        <div id="vendors-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div id="vendors-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
           <!-- Rendered by JS -->
         </div>
       </div>
     </section>
 
-    <!-- VIEW 5: GUEST LIST & RSVP -->
-    <section id="view-guests" class="hidden space-y-6 animate-fadeIn">
-      <div class="royal-card p-6">
-        <div class="flex flex-wrap items-center justify-between gap-4 mb-5 border-b border-gold/20 pb-4">
+    <!-- VIEW 5: GUEST LIST & RSVP MATRIX -->
+    <section id="view-guests" class="hidden space-y-4 sm:space-y-6 animate-fadeIn">
+      <div class="royal-card p-3.5 sm:p-6">
+        <div class="flex flex-wrap items-center justify-between gap-2.5 mb-3.5 border-b border-gold/20 pb-3">
           <div>
-            <h2 class="text-2xl font-cinzel font-bold text-maroon flex items-center gap-2">
+            <h2 class="text-base sm:text-xl font-cinzel font-bold text-maroon flex items-center gap-1.5">
               <i class="fa-solid fa-people-roof text-gold"></i> Guest Hospitality & Multi-Event RSVP Matrix
             </h2>
-            <p class="text-xs text-slate-500">Track Groom/Bride sides, room allocation, travel schedules, and event attendance</p>
+            <p class="text-[10px] sm:text-xs text-slate-500">Track 48 family groups, hotel accommodations & 6-event attendance matrix</p>
           </div>
-          <button onclick="openGuestModal()" class="px-4 py-2 bg-maroon text-gold-light hover:bg-maroon-deep rounded-lg text-xs font-bold transition-all flex items-center gap-1.5 shadow-sm">
-            <i class="fa-solid fa-user-plus"></i> Add Family / Guest
+          <button onclick="openGuestModal()" class="px-3 py-1.5 bg-maroon text-gold-light hover:bg-maroon-deep rounded-lg text-xs font-bold transition-all flex items-center gap-1 shadow-sm">
+            <i class="fa-solid fa-user-plus text-xs"></i> Add Guest
           </button>
         </div>
 
         <!-- Guest Headcount Stats Cards -->
-        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6">
-          <div class="p-4 rounded-xl bg-amber-50/70 border border-gold/40 text-center">
-            <p class="text-xs font-semibold text-slate-500 uppercase">Total Attending</p>
-            <p id="guest-stat-total" class="text-2xl font-bold text-maroon font-cinzel mt-1">0</p>
-            <p class="text-[11px] text-slate-500">Confirmed heads</p>
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3 mb-3.5 text-center">
+          <div class="p-2.5 sm:p-3.5 rounded-xl bg-amber-50/70 border border-gold/40">
+            <p class="text-[9px] sm:text-xs font-semibold text-slate-500 uppercase">Total Attending</p>
+            <p id="guest-stat-total" class="text-base sm:text-xl font-bold text-maroon font-cinzel mt-0.5">0</p>
+            <p class="text-[9px] sm:text-[10px] text-slate-500">Confirmed heads</p>
           </div>
-          <div class="p-4 rounded-xl bg-blue-50/70 border border-blue-200 text-center">
-            <p class="text-xs font-semibold text-blue-700 uppercase">Groom Side</p>
-            <p id="guest-stat-groom" class="text-2xl font-bold text-blue-900 font-cinzel mt-1">0</p>
-            <p class="text-[11px] text-blue-600">Guests</p>
+          <div class="p-2.5 sm:p-3.5 rounded-xl bg-blue-50/70 border border-blue-200">
+            <p class="text-[9px] sm:text-xs font-semibold text-blue-700 uppercase">Groom Side</p>
+            <p id="guest-stat-groom" class="text-base sm:text-xl font-bold text-blue-900 font-cinzel mt-0.5">0</p>
+            <p class="text-[9px] sm:text-[10px] text-blue-600">Guests</p>
           </div>
-          <div class="p-4 rounded-xl bg-rose-50/70 border border-rose-200 text-center">
-            <p class="text-xs font-semibold text-rose-700 uppercase">Bride Side</p>
-            <p id="guest-stat-bride" class="text-2xl font-bold text-rose-900 font-cinzel mt-1">0</p>
-            <p class="text-[11px] text-rose-600">Guests</p>
+          <div class="p-2.5 sm:p-3.5 rounded-xl bg-rose-50/70 border border-rose-200">
+            <p class="text-[9px] sm:text-xs font-semibold text-rose-700 uppercase">Bride Side</p>
+            <p id="guest-stat-bride" class="text-base sm:text-xl font-bold text-rose-900 font-cinzel mt-0.5">0</p>
+            <p class="text-[9px] sm:text-[10px] text-rose-600">Guests</p>
           </div>
-          <div class="p-4 rounded-xl bg-purple-50/70 border border-purple-200 text-center">
-            <p class="text-xs font-semibold text-purple-700 uppercase">Rooms Assigned</p>
-            <p id="guest-stat-rooms" class="text-2xl font-bold text-purple-900 font-cinzel mt-1">0</p>
-            <p class="text-[11px] text-purple-600">Hotel accommodations</p>
-          </div>
-        </div>
-
-        <!-- Guest Day-Wise Attendance Filter Pills -->
-        <div class="mb-4 pb-3 border-b border-gold/20">
-          <div class="flex items-center justify-between mb-2">
-            <span class="text-[11px] font-bold uppercase tracking-wider text-maroon flex items-center gap-1.5">
-              <i class="fa-solid fa-calendar-check text-gold-dark"></i> Filter Guests by Ceremony Attendance (Day-Wise):
-            </span>
-            <span id="guest-day-summary" class="text-xs font-semibold text-slate-600">All Celebrations</span>
-          </div>
-          <div id="guest-day-pills" class="flex flex-wrap gap-2 text-xs">
-            <!-- Rendered by JS -->
+          <div class="p-2.5 sm:p-3.5 rounded-xl bg-purple-50/70 border border-purple-200">
+            <p class="text-[9px] sm:text-xs font-semibold text-purple-700 uppercase">Rooms Needed</p>
+            <p id="guest-stat-rooms" class="text-base sm:text-xl font-bold text-purple-900 font-cinzel mt-0.5">0</p>
+            <p class="text-[9px] sm:text-[10px] text-purple-600">Accommodations</p>
           </div>
         </div>
 
-        <!-- Guest Filters -->
-        <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
-          <div class="flex flex-wrap items-center gap-2 flex-1 min-w-[280px]">
-            <div class="relative flex-1 min-w-[160px]">
+        <!-- GUEST CEREMONY ATTENDANCE DROPDOWN FILTER -->
+        <div class="mb-3.5 pb-2.5 border-b border-gold/20 flex flex-wrap items-center justify-between gap-2">
+          <label for="guest-day-filter-select" class="text-[11px] font-bold uppercase tracking-wider text-maroon flex items-center gap-1.5">
+            <i class="fa-solid fa-calendar-check text-gold-dark"></i> Filter Guests by Ceremony Attendance:
+          </label>
+          <select id="guest-day-filter-select" onchange="window.setGuestDayFilter(this.value)" class="text-xs py-1.5 px-3 rounded-lg border border-slate-300 focus:outline-none focus:border-gold bg-white font-semibold text-slate-800 shadow-sm w-full sm:w-auto">
+            <option value="ALL">All Celebrations (Complete Guest List)</option>
+            <option value="tilak">Day 1 • Tilak Attendees (Nov 21)</option>
+            <option value="matkor">Day 2 • Matkor Attendees (Nov 22)</option>
+            <option value="madwa">Day 3 • Madwa Attendees (Nov 23)</option>
+            <option value="bhatman">Day 4 • Bhatman Attendees (Nov 24)</option>
+            <option value="barat">Day 5 • Barat Attendees (Nov 25)</option>
+            <option value="reception">Day 6 • Reception Attendees (Nov 27)</option>
+          </select>
+        </div>
+
+        <!-- Search & Filter Options -->
+        <div class="flex flex-wrap items-center justify-between gap-2 mb-3.5">
+          <div class="flex flex-wrap items-center gap-2 flex-1 min-w-full sm:min-w-[280px]">
+            <div class="relative flex-1 min-w-[140px]">
               <i class="fa-solid fa-magnifying-glass absolute left-3 top-2.5 text-slate-400 text-xs"></i>
-              <input type="text" id="guest-search" oninput="renderGuestsTable()" placeholder="Search family name, city, hotel..." class="w-full pl-8 pr-3 py-1.5 text-xs rounded-lg border border-slate-300 focus:outline-none focus:border-gold">
+              <input type="text" id="guest-search" oninput="renderGuestsTable()" placeholder="Search family name, hotel, phone..." class="w-full pl-8 pr-3 py-1.5 text-xs rounded-lg border border-slate-300 focus:outline-none focus:border-gold">
             </div>
-            <select id="guest-filter-event" onchange="renderGuestsTable()" class="text-xs py-1.5 px-3 rounded-lg border border-slate-300 focus:outline-none focus:border-gold bg-white font-medium">
-              <option value="ALL">All Days & Events</option>
-              <option value="tilak">Day 1 • Attending Tilak (Nov 21)</option>
-              <option value="matkor">Day 2 • Attending Matkor (Nov 22)</option>
-              <option value="madwa">Day 3 • Attending Madwa (Nov 23)</option>
-              <option value="bhatman">Day 4 • Attending Bhatman (Nov 24)</option>
-              <option value="barat">Day 5 • Attending Barat (Nov 25)</option>
-              <option value="reception">Day 6 • Attending Reception (Nov 27)</option>
-            </select>
-            <select id="guest-filter-side" onchange="renderGuestsTable()" class="text-xs py-1.5 px-3 rounded-lg border border-slate-300 focus:outline-none focus:border-gold bg-white">
+            <select id="guest-filter-side" onchange="renderGuestsTable()" class="text-xs py-1.5 px-2 rounded-lg border border-slate-300 focus:outline-none focus:border-gold bg-white">
               <option value="ALL">All Sides</option>
               <option value="Groom">Groom's Side</option>
               <option value="Bride">Bride's Side</option>
             </select>
-            <select id="guest-filter-rsvp" onchange="renderGuestsTable()" class="text-xs py-1.5 px-3 rounded-lg border border-slate-300 focus:outline-none focus:border-gold bg-white">
+            <select id="guest-filter-rsvp" onchange="renderGuestsTable()" class="text-xs py-1.5 px-2 rounded-lg border border-slate-300 focus:outline-none focus:border-gold bg-white">
               <option value="ALL">All RSVP</option>
               <option value="Confirmed">Confirmed</option>
               <option value="Pending">Pending</option>
@@ -679,19 +730,25 @@
           <span id="guest-filter-count" class="text-xs text-slate-500 font-medium">0 guests</span>
         </div>
 
+        <!-- Mobile Scroll Indicator -->
+        <div class="sm:hidden text-[10px] text-amber-800/90 mb-1.5 flex items-center gap-1 font-medium">
+          <i class="fa-solid fa-arrows-left-right text-gold-dark"></i>
+          <span>Swipe sideways to see 6-event attendance & phone</span>
+        </div>
+
         <!-- Guests Matrix Table -->
-        <div class="overflow-x-auto rounded-xl border border-slate-200">
-          <table class="w-full text-left text-xs">
+        <div class="overflow-x-auto custom-scrollbar rounded-xl border border-slate-200 w-full block">
+          <table class="w-full text-left text-xs min-w-[680px]">
             <thead class="bg-amber-warm/50 border-b border-gold/30 text-maroon-dark uppercase tracking-wider font-semibold">
               <tr>
-                <th class="py-3 px-4">Family / Guest Name</th>
-                <th class="py-3 px-3">Side</th>
-                <th class="py-3 px-2 text-center">Pax</th>
-                <th class="py-3 px-3">Hotel & Room</th>
-                <th class="py-3 px-3">Travel / Transit</th>
-                <th class="py-3 px-3 text-center">6-Event Attendance Matrix</th>
-                <th class="py-3 px-3 text-center">RSVP</th>
-                <th class="py-3 px-4 text-center">Actions</th>
+                <th class="py-2.5 px-3">Family / Guest Name</th>
+                <th class="py-2.5 px-2">Side</th>
+                <th class="py-2.5 px-1.5 text-center">Pax</th>
+                <th class="py-2.5 px-2">Hotel / Stay</th>
+                <th class="py-2.5 px-2">Travel</th>
+                <th class="py-2.5 px-2 text-center">6-Event Attendance</th>
+                <th class="py-2.5 px-2 text-center">RSVP</th>
+                <th class="py-2.5 px-2.5 text-center">Actions</th>
               </tr>
             </thead>
             <tbody id="guests-table-body" class="divide-y divide-slate-100 bg-white">
@@ -702,49 +759,49 @@
       </div>
     </section>
 
-    <!-- VIEW 6: RITUAL & OPERATIONAL CHECKLIST -->
-    <section id="view-rituals" class="hidden space-y-6 animate-fadeIn">
-      <div class="royal-card p-6">
-        <div class="flex flex-wrap items-center justify-between gap-4 border-b border-gold/20 pb-4">
+    <!-- VIEW 6: RITUAL & OPERATIONAL CHECKLIST (Reduced Reception box size) -->
+    <section id="view-rituals" class="hidden space-y-4 sm:space-y-6 animate-fadeIn">
+      <div class="royal-card p-3.5 sm:p-6">
+        <div class="flex flex-wrap items-center justify-between gap-2.5 border-b border-gold/20 pb-3">
           <div>
-            <h2 class="text-2xl font-cinzel font-bold text-maroon flex items-center gap-2">
-              <i class="fa-solid fa-list-check text-gold"></i> Ceremonial Rituals & Operational Master Checklist
+            <h2 class="text-base sm:text-xl font-cinzel font-bold text-maroon flex items-center gap-1.5">
+              <i class="fa-solid fa-list-check text-gold"></i> Ceremonial Rituals & Operations Checklist
             </h2>
-            <p class="text-xs text-slate-500">Traditional Samagri lists, ritual steps, and assigned coordinators per event</p>
+            <p class="text-[10px] sm:text-xs text-slate-500">Pooja Samagri, family responsibilities & coordinator assignments</p>
           </div>
-          <button onclick="openAddTaskModal()" class="px-4 py-2 bg-maroon text-gold-light hover:bg-maroon-deep rounded-lg text-xs font-bold transition-all flex items-center gap-1.5 shadow-sm">
-            <i class="fa-solid fa-plus"></i> Add New Task
+          <button onclick="openAddTaskModal()" class="px-3 py-1.5 bg-maroon text-gold-light hover:bg-maroon-deep rounded-lg text-xs font-bold transition-all flex items-center gap-1 shadow-sm">
+            <i class="fa-solid fa-plus text-xs"></i> Add Task
           </button>
         </div>
 
         <!-- Event Sub-Tabs for the 6 ceremonies -->
-        <div class="flex flex-wrap items-center gap-2 mt-4 border-b border-slate-200 pb-3" id="ritual-event-tabs">
+        <div class="flex flex-wrap items-center gap-1.5 sm:gap-2 mt-3 border-b border-slate-200 pb-2.5" id="ritual-event-tabs">
           <!-- Filled by JS -->
         </div>
 
-        <!-- Active Event Details Banner -->
-        <div id="active-event-details-card" class="mt-4 p-4 rounded-xl bg-amber-50/80 border border-gold/40 flex flex-wrap items-center justify-between gap-4">
+        <!-- Active Event Details Banner (Compact padding & fonts for Reception) -->
+        <div id="active-event-details-card" class="mt-3 p-3 rounded-xl bg-amber-50/80 border border-gold/40 flex flex-wrap items-center justify-between gap-2 text-xs">
           <!-- Filled by JS -->
         </div>
 
         <!-- Task Checklist Grouped -->
-        <div class="mt-6 space-y-6">
+        <div class="mt-4 space-y-4">
           <!-- Ritual Samagri & Pooja Items -->
           <div>
-            <h3 class="text-base font-cinzel font-bold text-maroon flex items-center gap-2 mb-3">
+            <h3 class="text-xs sm:text-sm font-cinzel font-bold text-maroon flex items-center gap-1.5 mb-2">
               <i class="fa-solid fa-spa text-gold"></i> Sacred Ritual Items & Pooja Samagri
             </h3>
-            <div id="ritual-samagri-list" class="space-y-2.5">
+            <div id="ritual-samagri-list" class="space-y-1.5">
               <!-- Rendered by JS -->
             </div>
           </div>
 
           <!-- Logistics & Operations -->
           <div>
-            <h3 class="text-base font-cinzel font-bold text-maroon flex items-center gap-2 mb-3">
+            <h3 class="text-xs sm:text-sm font-cinzel font-bold text-maroon flex items-center gap-1.5 mb-2">
               <i class="fa-solid fa-clipboard-check text-slate-700"></i> Event Operations & Coordination
             </h3>
-            <div id="ritual-operations-list" class="space-y-2.5">
+            <div id="ritual-operations-list" class="space-y-1.5">
               <!-- Rendered by JS -->
             </div>
           </div>
@@ -752,115 +809,102 @@
       </div>
     </section>
 
-    <!-- VIEW 7: EMERGENCY & LEGAL READINESS -->
-    <section id="view-emergency" class="hidden space-y-6 animate-fadeIn">
-      <div class="royal-card p-6">
-        <div class="flex flex-wrap items-center justify-between gap-4 border-b border-gold/20 pb-4 mb-5">
+    <!-- VIEW 7: ENTERTAINMENT (Positioned Right after Ritual Checklist, Renamed to Entertainment) -->
+    <section id="view-entertainment" class="hidden space-y-4 sm:space-y-6 animate-fadeIn">
+      <div class="royal-card p-3.5 sm:p-6">
+        <div class="flex flex-wrap items-center justify-between gap-2.5 mb-3.5 border-b border-gold/20 pb-3">
           <div>
-            <h2 class="text-2xl font-cinzel font-bold text-maroon flex items-center gap-2">
-              <i class="fa-solid fa-shield-halved text-rose-700"></i> Emergency, Legal & Infrastructure Readiness
+            <h2 class="text-base sm:text-xl font-cinzel font-bold text-maroon flex items-center gap-1.5">
+              <i class="fa-solid fa-music text-gold"></i> Entertainment
             </h2>
-            <p class="text-xs text-slate-500">Statutory permissions, power backup, medical safety, and emergency contacts</p>
+            <p class="text-[10px] sm:text-xs text-slate-500">Curated song playlists, dance choreographies, entry tracks & anchoring sequence</p>
           </div>
-          <span class="px-3 py-1 bg-emerald-100 text-emerald-800 text-xs font-bold rounded-full flex items-center gap-1.5">
-            <i class="fa-solid fa-circle-check"></i> High Priority Response Kit
-          </span>
+          <button onclick="openEntertainmentModal()" class="px-3 py-1.5 bg-maroon text-gold-light hover:bg-maroon-deep rounded-lg text-xs font-bold transition-all flex items-center gap-1 shadow-sm">
+            <i class="fa-solid fa-plus text-xs"></i> Add Song / Track
+          </button>
         </div>
 
-        <!-- Emergency Quick-Dial Contacts Grid -->
-        <h3 class="text-base font-cinzel font-bold text-maroon mb-3 flex items-center gap-2">
-          <i class="fa-solid fa-phone-volume text-rose-600"></i> Immediate Emergency Speed-Dial
-        </h3>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-          <div class="p-4 rounded-xl border border-rose-200 bg-rose-50/60 flex items-center justify-between">
-            <div>
-              <p class="text-xs font-bold text-rose-900">Dr. Sanjeev Varma</p>
-              <p class="text-[11px] text-rose-700">Family Doctor On Call</p>
-              <p class="text-xs font-semibold text-slate-700 mt-1">+91 98112 33445</p>
-            </div>
-            <a href="tel:+919811233445" class="w-10 h-10 rounded-full bg-rose-600 hover:bg-rose-700 text-white flex items-center justify-center shadow-md transition-all">
-              <i class="fa-solid fa-phone"></i>
-            </a>
+        <!-- Entertainment KPI Metrics Cards -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3 mb-3.5 text-center">
+          <div class="p-2 sm:p-3 rounded-xl bg-purple-50/70 border border-purple-200">
+            <p class="text-[9px] sm:text-[10px] font-semibold text-purple-700 uppercase">Total Tracks</p>
+            <p id="ent-stat-total" class="text-sm sm:text-xl font-bold text-purple-900 font-cinzel mt-0.5">0</p>
           </div>
-
-          <div class="p-4 rounded-xl border border-amber-200 bg-amber-50/60 flex items-center justify-between">
-            <div>
-              <p class="text-xs font-bold text-amber-900">Ramesh Electrician</p>
-              <p class="text-[11px] text-amber-700">DG Generator Backup Lead</p>
-              <p class="text-xs font-semibold text-slate-700 mt-1">+91 98234 55667</p>
-            </div>
-            <a href="tel:+919823455667" class="w-10 h-10 rounded-full bg-amber-600 hover:bg-amber-700 text-white flex items-center justify-center shadow-md transition-all">
-              <i class="fa-solid fa-phone"></i>
-            </a>
+          <div class="p-2 sm:p-3 rounded-xl bg-emerald-50/70 border border-emerald-200">
+            <p class="text-[9px] sm:text-[10px] font-semibold text-emerald-700 uppercase">Finalized</p>
+            <p id="ent-stat-ready" class="text-sm sm:text-xl font-bold text-emerald-900 font-cinzel mt-0.5">0</p>
           </div>
-
-          <div class="p-4 rounded-xl border border-blue-200 bg-blue-50/60 flex items-center justify-between">
-            <div>
-              <p class="text-xs font-bold text-blue-900">Vikram Singh</p>
-              <p class="text-[11px] text-blue-700">Venue Operations Manager</p>
-              <p class="text-xs font-semibold text-slate-700 mt-1">+91 98345 66778</p>
-            </div>
-            <a href="tel:+919834566778" class="w-10 h-10 rounded-full bg-blue-600 hover:bg-blue-700 text-white flex items-center justify-center shadow-md transition-all">
-              <i class="fa-solid fa-phone"></i>
-            </a>
+          <div class="p-2 sm:p-3 rounded-xl bg-amber-50/70 border border-amber-200">
+            <p class="text-[9px] sm:text-[10px] font-semibold text-amber-700 uppercase">Rehearsing</p>
+            <p id="ent-stat-rehearsing" class="text-sm sm:text-xl font-bold text-amber-900 font-cinzel mt-0.5">0</p>
           </div>
-
-          <div class="p-4 rounded-xl border border-purple-200 bg-purple-50/60 flex items-center justify-between">
-            <div>
-              <p class="text-xs font-bold text-purple-900">Pt. Harish Shastri Ji</p>
-              <p class="text-[11px] text-purple-700">Head Family Acharya / Priest</p>
-              <p class="text-xs font-semibold text-slate-700 mt-1">+91 98456 77889</p>
-            </div>
-            <a href="tel:+919845677889" class="w-10 h-10 rounded-full bg-purple-600 hover:bg-purple-700 text-white flex items-center justify-center shadow-md transition-all">
-              <i class="fa-solid fa-phone"></i>
-            </a>
+          <div class="p-2 sm:p-3 rounded-xl bg-rose-50/70 border border-rose-200">
+            <p class="text-[9px] sm:text-[10px] font-semibold text-rose-700 uppercase">Special Entries</p>
+            <p id="ent-stat-entries" class="text-sm sm:text-xl font-bold text-rose-900 font-cinzel mt-0.5">0</p>
           </div>
         </div>
 
-        <!-- 3 Essential Readiness Checklist Columns -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <!-- Legal & Municipal Permits -->
-          <div class="p-5 rounded-xl border border-slate-200 bg-slate-50/50">
-            <h4 class="font-cinzel font-bold text-sm text-maroon flex items-center gap-2 mb-3">
-              <i class="fa-solid fa-scale-balanced text-gold"></i> Statutory Permissions
-            </h4>
-            <div id="checklist-legal" class="space-y-2.5 text-xs">
-              <!-- Rendered by JS -->
-            </div>
-          </div>
+        <!-- CHOOSE CEREMONY / FUNCTION DROPDOWN FILTER -->
+        <div class="mb-3.5 pb-2.5 border-b border-gold/20 flex flex-wrap items-center justify-between gap-2">
+          <label for="entertainment-day-filter-select" class="text-[11px] font-bold uppercase tracking-wider text-maroon flex items-center gap-1.5">
+            <i class="fa-solid fa-compact-disc text-gold-dark"></i> Choose Ceremony / Function:
+          </label>
+          <select id="entertainment-day-filter-select" onchange="window.setEntertainmentDayFilter(this.value)" class="text-xs py-1.5 px-3 rounded-lg border border-slate-300 focus:outline-none focus:border-gold bg-white font-semibold text-slate-800 shadow-sm w-full sm:w-auto">
+            <option value="ALL">All Ceremonies (Complete Playlists)</option>
+            <option value="tilak">Day 1 • Tilak (Nov 21)</option>
+            <option value="matkor">Day 2 • Matkor (Nov 22)</option>
+            <option value="madwa">Day 3 • Madwa (Nov 23)</option>
+            <option value="bhatman">Day 4 • Bhatman (Nov 24)</option>
+            <option value="barat">Day 5 • Barat (Nov 25)</option>
+            <option value="reception">Day 6 • Reception (Nov 27)</option>
+          </select>
+        </div>
 
-          <!-- Power & Infrastructure -->
-          <div class="p-5 rounded-xl border border-slate-200 bg-slate-50/50">
-            <h4 class="font-cinzel font-bold text-sm text-maroon flex items-center gap-2 mb-3">
-              <i class="fa-solid fa-bolt text-amber-500"></i> Power & DG Generator
-            </h4>
-            <div id="checklist-power" class="space-y-2.5 text-xs">
-              <!-- Rendered by JS -->
-            </div>
+        <!-- Entertainment Filters & Search -->
+        <div class="flex flex-wrap items-center gap-2 mb-3.5">
+          <div class="relative flex-1 min-w-[150px]">
+            <i class="fa-solid fa-magnifying-glass absolute left-3 top-2.5 text-slate-400 text-xs"></i>
+            <input type="text" id="entertainment-search" oninput="renderEntertainment()" placeholder="Search song title, performer..." class="w-full pl-8 pr-3 py-1.5 text-xs rounded-lg border border-slate-300 focus:outline-none focus:border-gold">
           </div>
+          <select id="entertainment-filter-category" onchange="renderEntertainment()" class="text-xs py-1.5 px-2.5 rounded-lg border border-slate-300 focus:outline-none focus:border-gold bg-white">
+            <option value="ALL">All Categories</option>
+            <option value="Entry Song">Entry Song</option>
+            <option value="Dance Performance">Dance Performance</option>
+            <option value="Couple Special">Couple Special</option>
+            <option value="Folk / Traditional Geet">Folk / Traditional Geet</option>
+            <option value="DJ / BGM Track">DJ / BGM Track</option>
+            <option value="Anchoring / Sequence">Anchoring / Sequence</option>
+          </select>
+          <select id="entertainment-filter-status" onchange="renderEntertainment()" class="text-xs py-1.5 px-2.5 rounded-lg border border-slate-300 focus:outline-none focus:border-gold bg-white">
+            <option value="ALL">All Statuses</option>
+            <option value="Ready / Finalized">Ready / Finalized</option>
+            <option value="Rehearsing">Rehearsing</option>
+            <option value="Shortlisted">Shortlisted</option>
+          </select>
+          <span id="entertainment-filter-count" class="text-xs text-slate-500 font-medium">0 tracks</span>
+        </div>
 
-          <!-- Medical & Emergency First-Aid -->
-          <div class="p-5 rounded-xl border border-slate-200 bg-slate-50/50">
-            <h4 class="font-cinzel font-bold text-sm text-maroon flex items-center gap-2 mb-3">
-              <i class="fa-solid fa-kit-medical text-rose-500"></i> Medical & Bridal Kit
-            </h4>
-            <div id="checklist-medical" class="space-y-2.5 text-xs">
-              <!-- Rendered by JS -->
-            </div>
-          </div>
+        <!-- Active Function Highlight Banner -->
+        <div id="active-entertainment-banner" class="mb-3.5 p-3 rounded-xl bg-amber-50/80 border border-gold/40 flex flex-wrap items-center justify-between gap-2 text-xs">
+          <!-- Filled by JS -->
+        </div>
+
+        <!-- Programmes & Playlist Grid Cards -->
+        <div id="entertainment-items-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
+          <!-- Rendered by JS -->
         </div>
       </div>
     </section>
   </main>
 
-  <!-- FOOTER -->
-  <footer class="bg-maroon-dark border-t border-gold/30 text-amber-100/70 text-xs py-6 mt-12">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
+  <!-- FOOTER (Renamed as requested: Made By: Ravi Shankar Sharma) -->
+  <footer class="bg-maroon-dark border-t border-gold/30 text-amber-100/70 text-xs py-4 sm:py-5 mt-8 w-full">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-2.5 text-center sm:text-left">
       <div>
         <p class="font-cinzel font-semibold text-gold tracking-wide">SHUBH VIVAH • NOV 21 - 27, 2026</p>
-        <p class="text-[11px] text-amber-100/60 mt-0.5">Sharma & Verma Royal Wedding Celebration Management Platform</p>
+        <p class="text-[12px] text-gold-light font-bold mt-0.5 tracking-wide">Made By: Ravi Shankar Sharma</p>
       </div>
-      <p class="text-[11px] text-amber-100/50">Data automatically saved to Local Storage • Offline Compatible</p>
+      <p class="text-[10px] sm:text-[11px] text-amber-100/60">Permanently Linked to Google Sheet • Mobile Responsive</p>
     </div>
   </footer>
 
@@ -868,9 +912,9 @@
   <div id="modals-placeholder"></div>
 
   <!-- TOAST NOTIFICATION CONTAINER -->
-  <div id="toast-container" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2 pointer-events-none"></div>
+  <div id="toast-container" class="fixed bottom-3 right-3 left-3 sm:left-auto z-50 flex flex-col gap-2 pointer-events-none"></div>
 
-  <!-- Main Application TypeScript & Google Sheets Sync Module -->
+  <!-- Main Application TypeScript Module -->
   <script type="module" src="/src/app.ts"></script>
 </body>
 </html>

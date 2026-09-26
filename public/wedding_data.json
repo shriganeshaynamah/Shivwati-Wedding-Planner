@@ -1,0 +1,1853 @@
+{
+  "targetBudget": 1400000,
+  "googleSheetId": "",
+  "googleSheetUrl": "https://docs.google.com/spreadsheets",
+  "googleWebAppUrl": "https://script.google.com/macros/s/AKfycbzNPm5z0rQsjgieTXnJzgWjKLcGUl2PyJaiGetkyOWy-fJOPymK3YkuogSrsKnrZk09/exec",
+  "lastSyncedAt": "",
+  "events": [
+    {
+      "id": "tilak",
+      "title": "Tilak Ceremony",
+      "hindi": "तिलक उत्सव",
+      "dateStr": "November 21, 2026",
+      "venue": "Shanti Kunj, Gaya",
+      "time": "03:00 PM - 09:00 PM",
+      "coordinator": "Manish Sharma & Ravi Shankar (+91 7979935746)",
+      "description": "Auspicious welcoming of groom & family, tilak applying by bride's brother & elders, presentation of sacred shagun gifts, gold coins, and sweets.",
+      "dressCode": "Royal Yellow / Mustard Kurta Pajama & Sarees",
+      "tagColor": "bg-amber-100 text-amber-900 border-amber-300"
+    },
+    {
+      "id": "matkor",
+      "title": "Matkor Ceremony",
+      "hindi": "मटकोर पूजा",
+      "dateStr": "November 22, 2026",
+      "venue": "Temple (Pond)",
+      "time": "05:00 PM - 08:00 PM",
+      "coordinator": "Fuaa & Ladies (+91 6200104197)",
+      "description": "Traditional soil collection ritual by married ladies, singing folk Mangal Geet with dhol, bringing blessed clay to construct the sacred wedding chulha.",
+      "dressCode": "Traditional Bandhani / Leheriya Orange & Red",
+      "tagColor": "bg-orange-100 text-orange-900 border-orange-300"
+    },
+    {
+      "id": "madwa",
+      "title": "Madwa (Mandap Chhadan)",
+      "hindi": "मड़वा पूजन",
+      "dateStr": "November 23, 2026",
+      "venue": "Home (Rooftop)",
+      "time": "09:30 AM - 05:00 PM",
+      "coordinator": "Manish Sharma (+91 7301120825)",
+      "description": "Erection of the holy bamboo & mango leaf canopy (Madwa), Harish wooden pillar installation, Gauri-Ganesh sthapana, and Kuldevta invocation + Mehndi.",
+      "dressCode": "Pastel Peach, Mint Green & Ivory Silks",
+      "tagColor": "bg-emerald-100 text-emerald-900 border-emerald-300"
+    },
+    {
+      "id": "bhatman",
+      "title": "Bhatman (Mamere Feast)",
+      "hindi": "भात / मायरा पूजन",
+      "dateStr": "November 24, 2026",
+      "venue": "Home (Rooftop)",
+      "time": "09:00 AM - 09:00 PM",
+      "coordinator": "Manish Sharma & Fuaa (+91 7301120825)",
+      "description": "Grand festive reception of maternal uncles (Nanihal / Mama-Mami), presentation of bridal jewelry, wedding trousseau, and lavish sit-down traditional feast + Haldi.",
+      "dressCode": "Banarasi Brocade & Royal Magenta / Fuchsia",
+      "tagColor": "bg-purple-100 text-purple-900 border-purple-300"
+    },
+    {
+      "id": "barat",
+      "title": "Barat & Sacred Wedding",
+      "hindi": "शुभ विवाह एवं बारात",
+      "dateStr": "November 25, 2026",
+      "venue": "Minavan Resort, Patna",
+      "time": "06:30 PM - Late Night (Pheras at 01:15 AM)",
+      "coordinator": "Manish Sharma & Ravi Shankar (+91 7301120825)",
+      "description": "The Royal Procession with vintage carriage & brass band, hydraulic varmala exchange, Vedic 7-pheras around sacred fire, Sindoor daan, and emotional Bidaai.",
+      "dressCode": "Black Tie / Royal Sherwani & Heavy Zardozi Lehengas",
+      "tagColor": "bg-rose-100 text-rose-900 border-rose-300"
+    },
+    {
+      "id": "reception",
+      "title": "Royal Wedding Reception",
+      "hindi": "प्रीतिभोज स्वागत समारोह",
+      "dateStr": "November 27, 2026",
+      "venue": "Hotel Garv, Gaya",
+      "time": "07:30 PM - 12:00 Midnight",
+      "coordinator": "Manish Sharma & Ravi Shankar (+91 98765 43215)",
+      "description": "Formal gala night to celebrate the newlywed couple with dignitary blessings, live Sufi band, cake cutting, multi-cuisine banquet, and photo reception.",
+      "dressCode": "Black Tie, Indo-Western Tuxedos & Cocktail Gowns",
+      "tagColor": "bg-indigo-100 text-indigo-900 border-indigo-300"
+    }
+  ],
+  "expenses": [
+    {
+      "id": "exp-1790362724289",
+      "name": "Raw Material for Regular Home Use",
+      "event": "General",
+      "category": "Catering",
+      "estimated": 0,
+      "actual": 0,
+      "paid": 0,
+      "status": "Pending",
+      "notes": "Regular Kitchen Needs"
+    },
+    {
+      "id": "exp-1790362667920",
+      "name": "Cylinder 4-5",
+      "event": "General",
+      "category": "Catering",
+      "estimated": 0,
+      "actual": 0,
+      "paid": 0,
+      "status": "Pending",
+      "notes": "Required by regular Halwai"
+    },
+    {
+      "id": "exp-1790362609745",
+      "name": "Water 20L For Regular Days",
+      "event": "General",
+      "category": "Catering",
+      "estimated": 0,
+      "actual": 0,
+      "paid": 0,
+      "status": "Pending",
+      "notes": "Needs complete wedding for home"
+    },
+    {
+      "id": "exp-1790362543898",
+      "name": "Halwai Regular (Home)",
+      "event": "General",
+      "category": "Catering",
+      "estimated": 0,
+      "actual": 0,
+      "paid": 0,
+      "status": "Pending",
+      "notes": "Needs 2 Halwai for Regular Home Catering"
+    },
+    {
+      "id": "exp-1790362460016",
+      "name": "Invitation Card",
+      "event": "General",
+      "category": "Other",
+      "estimated": 0,
+      "actual": 0,
+      "paid": 0,
+      "status": "Pending",
+      "notes": "Need to print (in Nov)"
+    },
+    {
+      "id": "exp-1790362406699",
+      "name": "Crackers (Baraat)",
+      "event": "Barat",
+      "category": "Entertainment",
+      "estimated": 0,
+      "actual": 0,
+      "paid": 0,
+      "status": "Pending",
+      "notes": "Need to buy (in Nov)"
+    },
+    {
+      "id": "exp-1790362360606",
+      "name": "Clothes",
+      "event": "General",
+      "category": "Attire",
+      "estimated": 0,
+      "actual": 0,
+      "paid": 0,
+      "status": "Pending",
+      "notes": "Need to purchase (in Oct)"
+    },
+    {
+      "id": "exp-1790357918570",
+      "name": "Camera Samir Films",
+      "event": "General",
+      "category": "Photography",
+      "estimated": 55000,
+      "actual": 50000,
+      "paid": 10000,
+      "status": "Partial",
+      "notes": "Includes Traditional Photo (15000), Traditional Video (18000), Cinematic One Day (8000), Photo Frame (9000), Drone One Day (5000)"
+    },
+    {
+      "id": "exp-1790357660487",
+      "name": "Jwelllery (For Bride)",
+      "event": "Barat",
+      "category": "Attire",
+      "estimated": 445000,
+      "actual": 445000,
+      "paid": 445000,
+      "status": "Paid",
+      "notes": "Jwellery Tanishq"
+    },
+    {
+      "id": "exp-1790357567550",
+      "name": "Hotel Garv Palace",
+      "event": "Reception",
+      "category": "Venue",
+      "estimated": 281000,
+      "actual": 281000,
+      "paid": 50000,
+      "status": "Partial",
+      "notes": "For 250Person, 4Room,Decoration,Lawn,Dj floor (may)"
+    },
+    {
+      "id": "exp-1790357424810",
+      "name": "Rishav Dj (Patna to Patna)",
+      "event": "Barat",
+      "category": "Entertainment",
+      "estimated": 31000,
+      "actual": 31000,
+      "paid": 5000,
+      "status": "Partial",
+      "notes": "Patna baraat procession"
+    },
+    {
+      "id": "exp-1790357282087",
+      "name": "Gadi (8 Ertiga/Scorpio + 1 Dulha Gadi)",
+      "event": "Barat",
+      "category": "Transport",
+      "estimated": 29400,
+      "actual": 29400,
+      "paid": 5000,
+      "status": "Partial",
+      "notes": "Exclude Petrol (Bus booked for Baraat&Tilak)"
+    },
+    {
+      "id": "exp-1790357157624",
+      "name": "Gadi(Bus)",
+      "event": "Tilak",
+      "category": "Transport",
+      "estimated": 35000,
+      "actual": 35000,
+      "paid": 5000,
+      "status": "Partial",
+      "notes": "Includes Baraat also (may exclude diesel )"
+    },
+    {
+      "id": "exp-1790357057934",
+      "name": "Ghar/Gali Decoration",
+      "event": "Tilak",
+      "category": "Decoration",
+      "estimated": 20000,
+      "actual": 20000,
+      "paid": 0,
+      "status": "Pending",
+      "notes": "Includes Lights,Decorations,Sounds, Generator for all functions (exclude gadda, chairs etc)"
+    },
+    {
+      "id": "exp-1790356962069",
+      "name": "Shanti Kunj Palace",
+      "event": "Tilak",
+      "category": "Venue",
+      "estimated": 82500,
+      "actual": 82500,
+      "paid": 20000,
+      "status": "Partial",
+      "notes": "Includes: Food ₹450*125 =₹56000, Nasta ₹50*50=₹2,500.00 ₹2500, 4Room+1Hall+Lawn= ₹23000, Simple Decoration included."
+    }
+  ],
+  "vendors": [
+    {
+      "id": "v-1",
+      "name": "Shanti Kunj & Banquets (Tilak)",
+      "service": "Catering",
+      "event": "Tilak",
+      "contactPerson": "Mritunjay",
+      "phone": "+917979935746",
+      "contractAmount": 82500,
+      "advancePaid": 20000,
+      "status": "Confirmed",
+      "notes": "Separate pure sattvic kitchen arranged."
+    },
+    {
+      "id": "v-2",
+      "name": "Mukesh Decoration",
+      "service": "Decoration",
+      "event": "General",
+      "contactPerson": "Mukesh Kumar",
+      "phone": "00000000",
+      "contractAmount": 20000,
+      "advancePaid": 0,
+      "status": "Tentative",
+      "notes": "Ghar+Gali Decoration, Lights & Sounds, Generator (exclude Gadda, Tables)"
+    },
+    {
+      "id": "v-3",
+      "name": "Samir Films",
+      "service": "Photography",
+      "event": "General",
+      "contactPerson": "Mritunjay Bhaiya",
+      "phone": "+917979935746",
+      "contractAmount": 50000,
+      "advancePaid": 10000,
+      "status": "Confirmed",
+      "notes": "Complete Wedding (Mritunjay Bhaiya)."
+    },
+    {
+      "id": "v-4",
+      "name": "Rishav Dj (Patna)",
+      "service": "Entertainment",
+      "event": "Barat",
+      "contactPerson": "Roshan Kumar (Mritunjay)",
+      "phone": "+918789007576",
+      "contractAmount": 31000,
+      "advancePaid": 5000,
+      "status": "Confirmed",
+      "notes": "Uniformed 10 players + royal umbrella."
+    },
+    {
+      "id": "v-5",
+      "name": "Deen Automobiles",
+      "service": "Transport",
+      "event": "Barat",
+      "contactPerson": "Chacha (Ghugritad Bypass)",
+      "phone": "+917004136046",
+      "contractAmount": 24400,
+      "advancePaid": 5000,
+      "status": "Confirmed",
+      "notes": "8 Ertiga/Scorpio + 1 Dulha Gadi (w/o decorations)"
+    },
+    {
+      "id": "v-6",
+      "name": "Singer Riya or Musician",
+      "service": "Entertainment",
+      "event": "Tilak",
+      "contactPerson": "Bablu Kumar",
+      "phone": "+916206308451",
+      "contractAmount": 0,
+      "advancePaid": 0,
+      "status": "Tentative",
+      "notes": ""
+    },
+    {
+      "id": "v-1790358915085",
+      "name": "Hotel Garv Palace (Reception)",
+      "service": "Catering",
+      "event": "Reception",
+      "contactPerson": "Ravi",
+      "phone": "+91 8271890090",
+      "contractAmount": 281000,
+      "advancePaid": 51000,
+      "status": "Confirmed",
+      "notes": "250 to 300 person"
+    },
+    {
+      "id": "v-1790362827381",
+      "name": "Catering For Regular Use (Home)",
+      "service": "Catering",
+      "event": "General",
+      "contactPerson": "",
+      "phone": "+91",
+      "contractAmount": 0,
+      "advancePaid": 0,
+      "status": "Tentative",
+      "notes": "Needs to book"
+    },
+    {
+      "id": "v-1790362875445",
+      "name": "Pani 20L (Regular Use)",
+      "service": "Catering",
+      "event": "General",
+      "contactPerson": "",
+      "phone": "+91",
+      "contractAmount": 0,
+      "advancePaid": 0,
+      "status": "Tentative",
+      "notes": "Daily till wedding"
+    }
+  ],
+  "guests": [
+    {
+      "id": "g-1",
+      "name": "Sharma Ji & Family",
+      "side": "Groom",
+      "members": 7,
+      "accommodation": true,
+      "hotel": "Home",
+      "transport": "-",
+      "rsvp": "Confirmed",
+      "events": {
+        "tilak": true,
+        "matkor": true,
+        "madwa": true,
+        "bhatman": true,
+        "barat": true,
+        "reception": true
+      },
+      "contact": "+91 8271890090"
+    },
+    {
+      "id": "g-2",
+      "name": "Fuaa & Fufa Family",
+      "side": "Groom",
+      "members": 5,
+      "accommodation": true,
+      "hotel": "Home",
+      "transport": "-",
+      "rsvp": "Confirmed",
+      "events": {
+        "tilak": true,
+        "matkor": true,
+        "madwa": true,
+        "bhatman": true,
+        "barat": true,
+        "reception": true
+      },
+      "contact": "+91 6200104197"
+    },
+    {
+      "id": "g-3",
+      "name": "Bablu Da & Family",
+      "side": "Groom",
+      "members": 9,
+      "accommodation": true,
+      "hotel": "Home/Guest House",
+      "transport": "Self",
+      "rsvp": "Confirmed",
+      "events": {
+        "tilak": true,
+        "matkor": true,
+        "madwa": true,
+        "bhatman": true,
+        "barat": true,
+        "reception": true
+      },
+      "contact": "+91 6206308451"
+    },
+    {
+      "id": "g-1790363320460",
+      "name": "Bride Brothers & Family",
+      "side": "Bride",
+      "members": 25,
+      "rsvp": "Confirmed",
+      "contact": "+91 9741909722",
+      "accommodation": true,
+      "hotel": "Shanti Kunj 4 Rooms & Hall",
+      "transport": "Self",
+      "events": {
+        "tilak": true,
+        "matkor": false,
+        "madwa": false,
+        "bhatman": false,
+        "barat": false,
+        "reception": false
+      }
+    },
+    {
+      "id": "g-1790363597813",
+      "name": "Bhaluan (Nitanshu)",
+      "side": "Groom",
+      "members": 1,
+      "rsvp": "Confirmed",
+      "contact": "+91 981807877",
+      "accommodation": true,
+      "hotel": "Guest House",
+      "transport": "Self",
+      "events": {
+        "tilak": true,
+        "matkor": false,
+        "madwa": false,
+        "bhatman": false,
+        "barat": true,
+        "reception": true
+      }
+    },
+    {
+      "id": "g-1790363685701",
+      "name": "Prabhakar G & Family",
+      "side": "Groom",
+      "members": 5,
+      "rsvp": "Confirmed",
+      "contact": "+91 7461970069",
+      "accommodation": true,
+      "hotel": "Guest House",
+      "transport": "Self",
+      "events": {
+        "tilak": true,
+        "matkor": false,
+        "madwa": false,
+        "bhatman": false,
+        "barat": true,
+        "reception": true
+      }
+    },
+    {
+      "id": "g-1790363725857",
+      "name": "Prabhakar G / Sister",
+      "side": "Groom",
+      "members": 2,
+      "rsvp": "Confirmed",
+      "contact": "",
+      "accommodation": true,
+      "hotel": "Guest House",
+      "transport": "Self",
+      "events": {
+        "tilak": false,
+        "matkor": true,
+        "madwa": true,
+        "bhatman": true,
+        "barat": false,
+        "reception": false
+      }
+    },
+    {
+      "id": "g-1790363811891",
+      "name": "Chirailee",
+      "side": "Groom",
+      "members": 7,
+      "rsvp": "Confirmed",
+      "contact": "",
+      "accommodation": true,
+      "hotel": "Guest House",
+      "transport": "Self",
+      "events": {
+        "tilak": true,
+        "matkor": true,
+        "madwa": true,
+        "bhatman": true,
+        "barat": true,
+        "reception": true
+      }
+    },
+    {
+      "id": "g-1790363874121",
+      "name": "Chumchum Di Family",
+      "side": "Groom",
+      "members": 3,
+      "rsvp": "Confirmed",
+      "contact": "",
+      "accommodation": true,
+      "hotel": "Guest House",
+      "transport": "Self",
+      "events": {
+        "tilak": true,
+        "matkor": true,
+        "madwa": true,
+        "bhatman": true,
+        "barat": true,
+        "reception": true
+      }
+    },
+    {
+      "id": "g-1790363942020",
+      "name": "Dharmendra Family",
+      "side": "Groom",
+      "members": 4,
+      "rsvp": "Confirmed",
+      "contact": "+91 9852510441",
+      "accommodation": true,
+      "hotel": "Guest House",
+      "transport": "Self",
+      "events": {
+        "tilak": true,
+        "matkor": false,
+        "madwa": false,
+        "bhatman": false,
+        "barat": true,
+        "reception": true
+      }
+    },
+    {
+      "id": "g-1790363990583",
+      "name": "Pawan Da Family",
+      "side": "Groom",
+      "members": 3,
+      "rsvp": "Confirmed",
+      "contact": "",
+      "accommodation": true,
+      "hotel": "Guest House",
+      "transport": "Self",
+      "events": {
+        "tilak": true,
+        "matkor": true,
+        "madwa": true,
+        "bhatman": true,
+        "barat": true,
+        "reception": true
+      }
+    },
+    {
+      "id": "g-1790364025370",
+      "name": "Mantoon Family",
+      "side": "Groom",
+      "members": 4,
+      "rsvp": "Confirmed",
+      "contact": "",
+      "accommodation": true,
+      "hotel": "Guest House",
+      "transport": "Self",
+      "events": {
+        "tilak": true,
+        "matkor": false,
+        "madwa": false,
+        "bhatman": false,
+        "barat": false,
+        "reception": true
+      }
+    },
+    {
+      "id": "g-1790364074228",
+      "name": "Badhki Mausi (Prince Family)",
+      "side": "Groom",
+      "members": 5,
+      "rsvp": "Confirmed",
+      "contact": "",
+      "accommodation": true,
+      "hotel": "Guest House",
+      "transport": "Self",
+      "events": {
+        "tilak": true,
+        "matkor": true,
+        "madwa": true,
+        "bhatman": true,
+        "barat": true,
+        "reception": true
+      }
+    },
+    {
+      "id": "g-1790364100853",
+      "name": "Manjhli Mausi Family",
+      "side": "Groom",
+      "members": 2,
+      "rsvp": "Confirmed",
+      "contact": "",
+      "accommodation": true,
+      "hotel": "Guest House",
+      "transport": "Self",
+      "events": {
+        "tilak": true,
+        "matkor": true,
+        "madwa": true,
+        "bhatman": true,
+        "barat": true,
+        "reception": true
+      }
+    },
+    {
+      "id": "g-1790364122477",
+      "name": "Chhotki Mausi Family",
+      "side": "Groom",
+      "members": 2,
+      "rsvp": "Confirmed",
+      "contact": "",
+      "accommodation": true,
+      "hotel": "Guest House",
+      "transport": "Self",
+      "events": {
+        "tilak": true,
+        "matkor": true,
+        "madwa": true,
+        "bhatman": true,
+        "barat": true,
+        "reception": true
+      }
+    },
+    {
+      "id": "g-1790364164824",
+      "name": "Arun Da Family",
+      "side": "Groom",
+      "members": 4,
+      "rsvp": "Confirmed",
+      "contact": "",
+      "accommodation": false,
+      "hotel": "",
+      "transport": "Self",
+      "events": {
+        "tilak": true,
+        "matkor": false,
+        "madwa": false,
+        "bhatman": false,
+        "barat": true,
+        "reception": true
+      }
+    },
+    {
+      "id": "g-1790364197335",
+      "name": "Parvesh Da Family",
+      "side": "Groom",
+      "members": 2,
+      "rsvp": "Confirmed",
+      "contact": "",
+      "accommodation": false,
+      "hotel": "",
+      "transport": "Self",
+      "events": {
+        "tilak": true,
+        "matkor": false,
+        "madwa": false,
+        "bhatman": false,
+        "barat": true,
+        "reception": true
+      }
+    },
+    {
+      "id": "g-1790364248797",
+      "name": "Murari Pandee G Family",
+      "side": "Groom",
+      "members": 2,
+      "rsvp": "Confirmed",
+      "contact": "",
+      "accommodation": true,
+      "hotel": "Guest House",
+      "transport": "Bus",
+      "events": {
+        "tilak": true,
+        "matkor": true,
+        "madwa": true,
+        "bhatman": true,
+        "barat": true,
+        "reception": false
+      }
+    },
+    {
+      "id": "g-1790364329274",
+      "name": "RadheShyam (Pp Chacha Family)",
+      "side": "Groom",
+      "members": 4,
+      "rsvp": "Confirmed",
+      "contact": "",
+      "accommodation": false,
+      "hotel": "",
+      "transport": "Self",
+      "events": {
+        "tilak": true,
+        "matkor": true,
+        "madwa": true,
+        "bhatman": true,
+        "barat": true,
+        "reception": true
+      }
+    },
+    {
+      "id": "g-1790364367158",
+      "name": "Thakurain, Kumhain, Dhobin etc",
+      "side": "Groom",
+      "members": 5,
+      "rsvp": "Confirmed",
+      "contact": "",
+      "accommodation": true,
+      "hotel": "Guest House",
+      "transport": "Bus",
+      "events": {
+        "tilak": true,
+        "matkor": true,
+        "madwa": true,
+        "bhatman": true,
+        "barat": true,
+        "reception": false
+      }
+    },
+    {
+      "id": "g-1790364424482",
+      "name": "Bilinder Bhaiya (Bhavanpur)",
+      "side": "Groom",
+      "members": 4,
+      "rsvp": "Confirmed",
+      "contact": "",
+      "accommodation": false,
+      "hotel": "",
+      "transport": "Self",
+      "events": {
+        "tilak": true,
+        "matkor": false,
+        "madwa": false,
+        "bhatman": false,
+        "barat": true,
+        "reception": true
+      }
+    },
+    {
+      "id": "g-1790364465278",
+      "name": "Mehmadpur (Mammy Side)",
+      "side": "Groom",
+      "members": 8,
+      "rsvp": "Confirmed",
+      "contact": "",
+      "accommodation": false,
+      "hotel": "Guest House",
+      "transport": "Self",
+      "events": {
+        "tilak": true,
+        "matkor": false,
+        "madwa": false,
+        "bhatman": false,
+        "barat": true,
+        "reception": true
+      }
+    },
+    {
+      "id": "g-1790364524681",
+      "name": "Babhna Chachi Side",
+      "side": "Groom",
+      "members": 4,
+      "rsvp": "Confirmed",
+      "contact": "",
+      "accommodation": false,
+      "hotel": "Guest House",
+      "transport": "Self",
+      "events": {
+        "tilak": true,
+        "matkor": false,
+        "madwa": false,
+        "bhatman": false,
+        "barat": true,
+        "reception": true
+      }
+    },
+    {
+      "id": "g-1790364560485",
+      "name": "Chacha Frnd",
+      "side": "Groom",
+      "members": 2,
+      "rsvp": "Confirmed",
+      "contact": "",
+      "accommodation": false,
+      "hotel": "",
+      "transport": "Self",
+      "events": {
+        "tilak": true,
+        "matkor": false,
+        "madwa": false,
+        "bhatman": false,
+        "barat": true,
+        "reception": true
+      }
+    },
+    {
+      "id": "g-1790364642823",
+      "name": "Ravi Frnd (Including Rishu Family)",
+      "side": "Groom",
+      "members": 6,
+      "rsvp": "Confirmed",
+      "contact": "",
+      "accommodation": false,
+      "hotel": "",
+      "transport": "Self",
+      "events": {
+        "tilak": true,
+        "matkor": true,
+        "madwa": true,
+        "bhatman": true,
+        "barat": true,
+        "reception": true
+      }
+    },
+    {
+      "id": "g-1790364688507",
+      "name": "Bhaiya Frnd",
+      "side": "Groom",
+      "members": 25,
+      "rsvp": "Confirmed",
+      "contact": "",
+      "accommodation": false,
+      "hotel": "",
+      "transport": "Self",
+      "events": {
+        "tilak": true,
+        "matkor": false,
+        "madwa": false,
+        "bhatman": false,
+        "barat": true,
+        "reception": true
+      }
+    },
+    {
+      "id": "g-1790364713602",
+      "name": "Bhaiya Frnd 2",
+      "side": "Groom",
+      "members": 15,
+      "rsvp": "Confirmed",
+      "contact": "",
+      "accommodation": false,
+      "hotel": "",
+      "transport": "Self",
+      "events": {
+        "tilak": true,
+        "matkor": false,
+        "madwa": false,
+        "bhatman": false,
+        "barat": true,
+        "reception": true
+      }
+    },
+    {
+      "id": "g-1790364800657",
+      "name": "Mammy Frnd",
+      "side": "Groom",
+      "members": 7,
+      "rsvp": "Confirmed",
+      "contact": "",
+      "accommodation": false,
+      "hotel": "",
+      "transport": "Self",
+      "events": {
+        "tilak": true,
+        "matkor": false,
+        "madwa": false,
+        "bhatman": false,
+        "barat": true,
+        "reception": true
+      }
+    },
+    {
+      "id": "g-1790364848124",
+      "name": "Police Wali Family",
+      "side": "Groom",
+      "members": 4,
+      "rsvp": "Confirmed",
+      "contact": "",
+      "accommodation": false,
+      "hotel": "",
+      "transport": "",
+      "events": {
+        "tilak": true,
+        "matkor": false,
+        "madwa": false,
+        "bhatman": false,
+        "barat": false,
+        "reception": true
+      }
+    },
+    {
+      "id": "g-1790364871788",
+      "name": "Koeri Family",
+      "side": "Groom",
+      "members": 2,
+      "rsvp": "Confirmed",
+      "contact": "",
+      "accommodation": true,
+      "hotel": "",
+      "transport": "",
+      "events": {
+        "tilak": true,
+        "matkor": false,
+        "madwa": false,
+        "bhatman": false,
+        "barat": false,
+        "reception": true
+      }
+    },
+    {
+      "id": "g-1790364884510",
+      "name": "Bela Aunty Family",
+      "side": "Groom",
+      "members": 2,
+      "rsvp": "Confirmed",
+      "contact": "",
+      "accommodation": true,
+      "hotel": "",
+      "transport": "",
+      "events": {
+        "tilak": true,
+        "matkor": false,
+        "madwa": false,
+        "bhatman": false,
+        "barat": false,
+        "reception": true
+      }
+    },
+    {
+      "id": "g-1790364913438",
+      "name": "Thakur Family",
+      "side": "Groom",
+      "members": 2,
+      "rsvp": "Confirmed",
+      "contact": "",
+      "accommodation": false,
+      "hotel": "",
+      "transport": "",
+      "events": {
+        "tilak": true,
+        "matkor": false,
+        "madwa": false,
+        "bhatman": false,
+        "barat": false,
+        "reception": true
+      }
+    },
+    {
+      "id": "g-1790364925573",
+      "name": "Satyam School Family",
+      "side": "Groom",
+      "members": 2,
+      "rsvp": "Confirmed",
+      "contact": "",
+      "accommodation": true,
+      "hotel": "",
+      "transport": "",
+      "events": {
+        "tilak": true,
+        "matkor": false,
+        "madwa": false,
+        "bhatman": false,
+        "barat": false,
+        "reception": true
+      }
+    },
+    {
+      "id": "g-1790364955373",
+      "name": "Mritunjay Family",
+      "side": "Groom",
+      "members": 4,
+      "rsvp": "Confirmed",
+      "contact": "",
+      "accommodation": false,
+      "hotel": "",
+      "transport": "",
+      "events": {
+        "tilak": true,
+        "matkor": false,
+        "madwa": false,
+        "bhatman": false,
+        "barat": true,
+        "reception": true
+      }
+    },
+    {
+      "id": "g-1790364966666",
+      "name": "Anshu Family",
+      "side": "Groom",
+      "members": 3,
+      "rsvp": "Confirmed",
+      "contact": "",
+      "accommodation": true,
+      "hotel": "",
+      "transport": "",
+      "events": {
+        "tilak": true,
+        "matkor": false,
+        "madwa": false,
+        "bhatman": false,
+        "barat": true,
+        "reception": true
+      }
+    },
+    {
+      "id": "g-1790364999292",
+      "name": "Raju Family (Rishu)",
+      "side": "Groom",
+      "members": 4,
+      "rsvp": "Confirmed",
+      "contact": "",
+      "accommodation": true,
+      "hotel": "",
+      "transport": "",
+      "events": {
+        "tilak": true,
+        "matkor": false,
+        "madwa": false,
+        "bhatman": false,
+        "barat": false,
+        "reception": true
+      }
+    },
+    {
+      "id": "g-1790365015763",
+      "name": "Ganesh Baba Family",
+      "side": "Groom",
+      "members": 4,
+      "rsvp": "Confirmed",
+      "contact": "",
+      "accommodation": false,
+      "hotel": "",
+      "transport": "",
+      "events": {
+        "tilak": true,
+        "matkor": true,
+        "madwa": true,
+        "bhatman": true,
+        "barat": true,
+        "reception": true
+      }
+    },
+    {
+      "id": "g-1790365033564",
+      "name": "Damodar G Family",
+      "side": "Groom",
+      "members": 2,
+      "rsvp": "Confirmed",
+      "contact": "",
+      "accommodation": true,
+      "hotel": "",
+      "transport": "",
+      "events": {
+        "tilak": true,
+        "matkor": false,
+        "madwa": false,
+        "bhatman": false,
+        "barat": true,
+        "reception": true
+      }
+    },
+    {
+      "id": "g-1790365047632",
+      "name": "Pintu Family",
+      "side": "Groom",
+      "members": 4,
+      "rsvp": "Confirmed",
+      "contact": "",
+      "accommodation": false,
+      "hotel": "",
+      "transport": "",
+      "events": {
+        "tilak": true,
+        "matkor": false,
+        "madwa": false,
+        "bhatman": false,
+        "barat": false,
+        "reception": true
+      }
+    },
+    {
+      "id": "g-1790365067091",
+      "name": "Lala G 1",
+      "side": "Groom",
+      "members": 4,
+      "rsvp": "Confirmed",
+      "contact": "",
+      "accommodation": false,
+      "hotel": "",
+      "transport": "",
+      "events": {
+        "tilak": true,
+        "matkor": false,
+        "madwa": false,
+        "bhatman": false,
+        "barat": false,
+        "reception": true
+      }
+    },
+    {
+      "id": "g-1790365082676",
+      "name": "Lala G 2 (Back Side)",
+      "side": "Groom",
+      "members": 2,
+      "rsvp": "Confirmed",
+      "contact": "",
+      "accommodation": false,
+      "hotel": "",
+      "transport": "",
+      "events": {
+        "tilak": true,
+        "matkor": false,
+        "madwa": false,
+        "bhatman": false,
+        "barat": false,
+        "reception": true
+      }
+    },
+    {
+      "id": "g-1790365116822",
+      "name": "Brajesh Pandit & School Bgl Ghr Pandit",
+      "side": "Groom",
+      "members": 4,
+      "rsvp": "Confirmed",
+      "contact": "",
+      "accommodation": false,
+      "hotel": "",
+      "transport": "",
+      "events": {
+        "tilak": true,
+        "matkor": false,
+        "madwa": false,
+        "bhatman": false,
+        "barat": false,
+        "reception": true
+      }
+    },
+    {
+      "id": "g-1790365131962",
+      "name": "Mantu Dish",
+      "side": "Groom",
+      "members": 4,
+      "rsvp": "Confirmed",
+      "contact": "",
+      "accommodation": false,
+      "hotel": "",
+      "transport": "",
+      "events": {
+        "tilak": true,
+        "matkor": false,
+        "madwa": false,
+        "bhatman": false,
+        "barat": false,
+        "reception": true
+      }
+    },
+    {
+      "id": "g-1790365146807",
+      "name": "Nippu Dakshin Darwaja",
+      "side": "Groom",
+      "members": 4,
+      "rsvp": "Confirmed",
+      "contact": "",
+      "accommodation": false,
+      "hotel": "",
+      "transport": "",
+      "events": {
+        "tilak": true,
+        "matkor": false,
+        "madwa": false,
+        "bhatman": false,
+        "barat": false,
+        "reception": true
+      }
+    },
+    {
+      "id": "g-1790365171755",
+      "name": "Pari K Mammy & Family",
+      "side": "Groom",
+      "members": 5,
+      "rsvp": "Confirmed",
+      "contact": "",
+      "accommodation": false,
+      "hotel": "",
+      "transport": "",
+      "events": {
+        "tilak": true,
+        "matkor": false,
+        "madwa": false,
+        "bhatman": false,
+        "barat": false,
+        "reception": true
+      }
+    },
+    {
+      "id": "g-1790365188044",
+      "name": "Megha Family",
+      "side": "Groom",
+      "members": 4,
+      "rsvp": "Confirmed",
+      "contact": "",
+      "accommodation": false,
+      "hotel": "",
+      "transport": "",
+      "events": {
+        "tilak": true,
+        "matkor": false,
+        "madwa": false,
+        "bhatman": false,
+        "barat": false,
+        "reception": true
+      }
+    },
+    {
+      "id": "g-1790365224354",
+      "name": "Fulwa Wali",
+      "side": "Groom",
+      "members": 2,
+      "rsvp": "Confirmed",
+      "contact": "",
+      "accommodation": false,
+      "hotel": "",
+      "transport": "",
+      "events": {
+        "tilak": true,
+        "matkor": false,
+        "madwa": false,
+        "bhatman": false,
+        "barat": false,
+        "reception": true
+      }
+    },
+    {
+      "id": "g-1790365296786",
+      "name": "Jagdar Tola 1",
+      "side": "Groom",
+      "members": 25,
+      "rsvp": "Confirmed",
+      "contact": "",
+      "accommodation": false,
+      "hotel": "",
+      "transport": "Bus",
+      "events": {
+        "tilak": true,
+        "matkor": false,
+        "madwa": false,
+        "bhatman": false,
+        "barat": true,
+        "reception": false
+      }
+    },
+    {
+      "id": "g-1790365348526",
+      "name": "Jagdar Tola 2",
+      "side": "Groom",
+      "members": 20,
+      "rsvp": "Confirmed",
+      "contact": "",
+      "accommodation": false,
+      "hotel": "",
+      "transport": "Bus",
+      "events": {
+        "tilak": true,
+        "matkor": false,
+        "madwa": false,
+        "bhatman": false,
+        "barat": true,
+        "reception": false
+      }
+    }
+  ],
+  "rituals": {
+    "tilak": [
+      {
+        "id": "r-t2",
+        "text": "Pooja Samagri: Roli, Chandan, Akshat, Supari, Paan, Fresh Flowers, Ghee Diya etc",
+        "category": "Samagri",
+        "done": false,
+        "notes": "In-Charge: Baba, Pp Chacha, Rishu"
+      },
+      {
+        "id": "r-t3",
+        "text": "Silver coins / Cash Shagun Envelopes organized by denomination (Optional)",
+        "category": "Samagri",
+        "done": false,
+        "notes": "Handed to Dadaji"
+      },
+      {
+        "id": "t-1790365591308",
+        "text": "Day: Decorations, Lights, Sounds Ghar/Gali & Hotel (Stage Prep)",
+        "category": "Operations",
+        "done": false,
+        "notes": "In-Charge: Manish, Ravi, Rohit, Mritunjay"
+      },
+      {
+        "id": "t-1790365658593",
+        "text": "Day: Nasta & Food Prep Hotel",
+        "category": "Operations",
+        "done": false,
+        "notes": "In-Charge: Chacha & Baba (Rishu for external works) & Ravi, Mritunjay"
+      },
+      {
+        "id": "t-1790365716055",
+        "text": "Day: Nasta & Food Prep & Distribution (Home)",
+        "category": "Operations",
+        "done": false,
+        "notes": "In-Charge: Fuaa, Sakshi, Mama, Mammy, Khushi, Balaji"
+      },
+      {
+        "id": "t-1790366534967",
+        "text": "Evening: Camera and Shehnai & Live Folk Welcome Musicians arrival check at 05:00 PM",
+        "category": "Operations",
+        "done": false,
+        "notes": "In-Charge: Chacha & Ravi, Mritunjay, Rohit"
+      },
+      {
+        "id": "t-1790366597586",
+        "text": "Evening: Catering welcome drinks (Badam Milk, Coffee & Starters) & Nasta",
+        "category": "Operations",
+        "done": false,
+        "notes": "SetUp Ready @ 5:30pm (In-Charge: Ravi, Rohit, Mritunjay)"
+      },
+      {
+        "id": "t-1790366817962",
+        "text": "Evening: Tilak Puja",
+        "category": "Operations",
+        "done": false,
+        "notes": "In-Charge: Pandit G, Baba, Chacha"
+      },
+      {
+        "id": "t-1790366878163",
+        "text": "Evening: Food Banquet Service",
+        "category": "Operations",
+        "done": false,
+        "notes": "In-Charge: Ravi Shankar & Rohit & Mritunjay"
+      },
+      {
+        "id": "t-1790367619622",
+        "text": "Evening: Check all 5 Pandit G arrive (4pm)",
+        "category": "Samagri",
+        "done": false,
+        "notes": "In-Charge: Baba, Chacha, Ravi"
+      },
+      {
+        "id": "t-1790367943848",
+        "text": "Treasurer / Bhandara Ghar Management (Complete Wedding)",
+        "category": "Operations",
+        "done": false,
+        "notes": "In-Charge: Baba, Fuaa"
+      },
+      {
+        "id": "t-1790368087735",
+        "text": "Morning: Thali/Pattal & paper Glass stock check",
+        "category": "Operations",
+        "done": false,
+        "notes": "In-Charge: Baba, Sakshi, Khushi"
+      },
+      {
+        "id": "t-1790368426217",
+        "text": "Raw Materials Kitchen Supplies",
+        "category": "Samagri",
+        "done": false,
+        "notes": "In-Charge: Baba, Pp Chacha, Rishu, Rohit"
+      },
+      {
+        "id": "t-1790369247536",
+        "text": "Emergency Kit: pain reliefs, first-aid, other medicines",
+        "category": "Samagri",
+        "done": false,
+        "notes": "In-Charge: Ravi, Rohit"
+      }
+    ],
+    "matkor": [
+      {
+        "id": "r-m1",
+        "text": "Spade (Kudal) decorated with turmeric, mouli & marigold garland",
+        "category": "Samagri",
+        "done": false,
+        "notes": "Fuaa to oversee decoration"
+      },
+      {
+        "id": "r-m2",
+        "text": "Decorated wicker baskets (Soop), new earthen pot (Ghada) & cloth cover",
+        "category": "Samagri",
+        "done": false,
+        "notes": "4 decorative soop ready"
+      },
+      {
+        "id": "r-m4",
+        "text": "Evening: Dhol & Women Folk Singer troupe arrival at 04:30 PM",
+        "category": "Operations",
+        "done": false,
+        "notes": "Sound check in courtyard & In-Charge: Fuaa, Mammy, Ravi (Dhol)"
+      },
+      {
+        "id": "t-1790367119849",
+        "text": "Evening: Mitti Khodna from Pond",
+        "category": "Operations",
+        "done": false,
+        "notes": "In-Charge: Fuaa, Mammy, Mama, Sakshi"
+      },
+      {
+        "id": "t-1790367693964",
+        "text": "Evening: Camera arrive check (4:30pm)",
+        "category": "Operations",
+        "done": false,
+        "notes": "In-Charge: Chacha, Ravi, Mritunjay"
+      }
+    ],
+    "madwa": [
+      {
+        "id": "r-mw1",
+        "text": "Morning: Green Bamboo poles & fresh Mango branch canopy structure set (7:30am)",
+        "category": "Operations",
+        "done": false,
+        "notes": "In-Charge: Chacha, Baba, Ravi, Rohit"
+      },
+      {
+        "id": "r-mw2",
+        "text": "Mandap consecration Samagri: Hawan Kund, 5 Dry Coconuts, Navgrah Samidha etc",
+        "category": "Samagri",
+        "done": false,
+        "notes": "Pandit Ji list verified (In-Charge: Baba, Chacha, Ravi)"
+      },
+      {
+        "id": "r-mw4",
+        "text": "Morning: Family sitting arrangement with gaddas, masnads & floral carpets",
+        "category": "Operations",
+        "done": false,
+        "notes": "In-Charge: Rohit, Rishu, Ravi"
+      },
+      {
+        "id": "t-1790367289437",
+        "text": "Pandit G (Murari) Ko lana for katha and other process",
+        "category": "Samagri",
+        "done": false,
+        "notes": "In-Charge: Baba, Chacha"
+      },
+      {
+        "id": "t-1790367529928",
+        "text": "Evening: Mehndi by Khushi",
+        "category": "Operations",
+        "done": false,
+        "notes": "Decoration Secure: Ravi, Rohit"
+      },
+      {
+        "id": "t-1790367784032",
+        "text": "Morning: Camera arrive check",
+        "category": "Operations",
+        "done": false,
+        "notes": "In-Charge: Chacha, Ravi, Mritunjay, Rohit"
+      },
+      {
+        "id": "t-1790367833135",
+        "text": "Morning: Ghar Ka Sound setup check",
+        "category": "Operations",
+        "done": false,
+        "notes": "In-Charge: Rohit, Rishu"
+      }
+    ],
+    "bhatman": [
+      {
+        "id": "t-1790368208069",
+        "text": "Morning: Haldi Programme then Bath",
+        "category": "Operations",
+        "done": false,
+        "notes": "In-Charge: Chacha, Ravi, Rohit, Fuaa, Sakshi"
+      },
+      {
+        "id": "t-1790368267348",
+        "text": "Ghridadi Programme by Chacha & Pandit G then Janeu",
+        "category": "Operations",
+        "done": false,
+        "notes": "In-Charge: Ravi, Rohit, Fuaa"
+      },
+      {
+        "id": "t-1790368330281",
+        "text": "Morning: Camera Arrive Check",
+        "category": "Samagri",
+        "done": false,
+        "notes": "In-Charge: Ravi, Rohit, Mritunjay"
+      },
+      {
+        "id": "t-1790368357885",
+        "text": "Morning: ghar ka Sound check",
+        "category": "Samagri",
+        "done": false,
+        "notes": "In-Charge: Rohit, Rishu"
+      }
+    ],
+    "barat": [
+      {
+        "id": "r-ba2",
+        "text": "Morning: Vintage Car / Dulha Gadi Floral Decoration & rest 8 car & bus to village check and water supply to each vehicle",
+        "category": "Operations",
+        "done": false,
+        "notes": "Reporting at 05:00 PM sharp (In-Charge: Chacha, Ravi, Rohit, Baba for Bus)"
+      },
+      {
+        "id": "r-ba3",
+        "text": "Gaya Dhol & Sounds + Patna Band Update",
+        "category": "Operations",
+        "done": false,
+        "notes": "Full uniform check (In-Charge: Ravi, Rohit, Mritunjay, Chacha)"
+      },
+      {
+        "id": "r-ba6",
+        "text": "All Materials of Baraat Check (Sindoor, Mangal Sutra, Varmala etc)",
+        "category": "Samagri",
+        "done": false,
+        "notes": "Pandit ji sacred basket (In-Charge: Baba, Chacha, Ravi, Rohit, Rishu)"
+      },
+      {
+        "id": "r-ba7",
+        "text": "Diesel & Petrol Ready by Drivers",
+        "category": "Operations",
+        "done": false,
+        "notes": "In-Charge: Ravi, Rohit, Chacha"
+      },
+      {
+        "id": "r-ba8",
+        "text": "Bidaai decorated royal car & luggage transport escort team ready after shadi",
+        "category": "Operations",
+        "done": false,
+        "notes": "Driver verified & briefed (In-Charge: Chacha, Ravi, Baba, Mritunjay, Rohit)"
+      },
+      {
+        "id": "t-1790368651254",
+        "text": "Morning: Khaar Chhutana, Lava Bhunjana, Mauri Ghumana by 5 women",
+        "category": "Operations",
+        "done": false,
+        "notes": "In-Charge: Fuaa, Sakshi, Khushi"
+      }
+    ],
+    "reception": [
+      {
+        "id": "r-r1",
+        "text": "Stage grand entry sequence, low-smoke fog & cold spark pyros",
+        "category": "Operations",
+        "done": false,
+        "notes": "Stage Decorations (In-Charge: Chacha, Ravi, Rohit, Mritunjay)"
+      },
+      {
+        "id": "r-r2",
+        "text": "Token & Shagun gift registry collection by Baba, Mama, Mammy, Chacha",
+        "category": "Operations",
+        "done": false,
+        "notes": "2 coordinators on duty (List each gift later)"
+      },
+      {
+        "id": "r-r3",
+        "text": "VIP hospitality & royal family photo-op queue manager",
+        "category": "Operations",
+        "done": false,
+        "notes": "In-Charge: Baba, Chacha, Ravi, Sakshi"
+      },
+      {
+        "id": "r-r4",
+        "text": "Live Sufi band soundcheck completed by 06:00 PM",
+        "category": "Operations",
+        "done": false,
+        "notes": "In-Charge: Sakshi, Ravi"
+      },
+      {
+        "id": "r-r5",
+        "text": "Camera arrive (5pm) check",
+        "category": "Operations",
+        "done": false,
+        "notes": "In-Charge: Chacha, Ravi, Rohit, Mritunjay, Sakshi"
+      },
+      {
+        "id": "t-1790369324468",
+        "text": "Cab arrange / Bike arrange for Garv Hotel Visits",
+        "category": "Samagri",
+        "done": false,
+        "notes": "In-Charge: Ravi, Rohit, Chacha"
+      }
+    ]
+  },
+  "entertainment": [
+    {
+      "id": "ent-1",
+      "eventId": "tilak",
+      "sequence": 1,
+      "title": "Shubharambh & Ganesh Vandana Live Shehnai",
+      "category": "Entry Song",
+      "performers": "Master Bilal Troupe & Bride Sisters",
+      "songLink": "Traditional Classical Raga",
+      "duration": "4:15 mins",
+      "status": "Ready / Finalized",
+      "notes": "Welcoming groom and his family with rose petal shower & aarti thali"
+    },
+    {
+      "id": "ent-2",
+      "eventId": "tilak",
+      "sequence": 2,
+      "title": "Aaye Hum Barati & Shagun Mangal Geet",
+      "category": "Folk / Traditional Geet",
+      "performers": "Elder Ladies & Chachi Ji",
+      "songLink": "Folk Wedding Geet",
+      "duration": "5:30 mins",
+      "status": "Ready / Finalized",
+      "notes": "Auspicious background geet while applying Tilak, giving gold coin & shagun"
+    },
+    {
+      "id": "ent-3",
+      "eventId": "tilak",
+      "sequence": 3,
+      "title": "Nachde Ne Saare & Didi Tera Devar Deewana",
+      "category": "Dance Performance",
+      "performers": "Groom Sisters & Cousins",
+      "songLink": "Bollywood Remix (Baar Baar Dekho)",
+      "duration": "3:45 mins",
+      "status": "Rehearsing",
+      "notes": "Playful teasing performance during high tea & sweet exchange"
+    },
+    {
+      "id": "ent-4",
+      "eventId": "matkor",
+      "sequence": 1,
+      "title": "Bhoomi Poojan & Matkor Procession Mangal Geet",
+      "category": "Folk / Traditional Geet",
+      "performers": "Traditional Dholak Troupe & Women Elders",
+      "songLink": "Folk Soil Collection Geet",
+      "duration": "6:00 mins",
+      "status": "Ready / Finalized",
+      "notes": "Singing with brass spade and decorated wicker baskets on courtyard route"
+    },
+    {
+      "id": "ent-5",
+      "eventId": "matkor",
+      "sequence": 2,
+      "title": "Ghoomar & Bole Chudiyan Royal Mashup",
+      "category": "Dance Performance",
+      "performers": "Bride with Mother & Mami Ji",
+      "songLink": "Padmaavat / K3G Mashup",
+      "duration": "4:20 mins",
+      "status": "Rehearsing",
+      "notes": "Traditional Bandhani poshak with matching glass bangles and ghungroos"
+    },
+    {
+      "id": "ent-6",
+      "eventId": "matkor",
+      "sequence": 3,
+      "title": "Kala Chashma & London Thumakda Flashmob",
+      "category": "Dance Performance",
+      "performers": "Combined Cousins (Both Sides)",
+      "songLink": "Bollywood Dance Party Medley",
+      "duration": "5:10 mins",
+      "status": "Rehearsing",
+      "notes": "High-energy surprise flashmob! Props: Neon sunglasses & LED glow sticks"
+    },
+    {
+      "id": "ent-7",
+      "eventId": "matkor",
+      "sequence": 4,
+      "title": "Chhote Chhote Bhaiyon Ke Bade Bhaiya",
+      "category": "Couple Special",
+      "performers": "Brothers of the Groom & Bride",
+      "songLink": "Hum Saath Saath Hain",
+      "duration": "3:30 mins",
+      "status": "Ready / Finalized",
+      "notes": "Emotional video tribute running on LED wall in background"
+    },
+    {
+      "id": "ent-8",
+      "eventId": "madwa",
+      "sequence": 1,
+      "title": "Vedic Madwa Sthapana & Bamboo Canopy Stuti",
+      "category": "Folk / Traditional Geet",
+      "performers": "Pt. Harish Shastri Ji & Vedic Choir",
+      "songLink": "Vedic Chants",
+      "duration": "8:00 mins",
+      "status": "Ready / Finalized",
+      "notes": "Consecration of Harish wooden pillar & mango leaf canopy"
+    },
+    {
+      "id": "ent-9",
+      "eventId": "madwa",
+      "sequence": 2,
+      "title": "Aaj Sajeya / Kabira (Haldi Phoolon Ki Chaadar)",
+      "category": "Entry Song",
+      "performers": "Bride escorted by Chacha & Mama",
+      "songLink": "Acoustic Wedding Version",
+      "duration": "3:50 mins",
+      "status": "Ready / Finalized",
+      "notes": "Yellow marigold petal shower under fresh floral net"
+    },
+    {
+      "id": "ent-10",
+      "eventId": "madwa",
+      "sequence": 3,
+      "title": "Gal Mitthi Mitthi Bol & Punjabi Haldi Grooves",
+      "category": "DJ / BGM Track",
+      "performers": "DJ Console Live Mix",
+      "songLink": "Aisha / Folk Beats",
+      "duration": "15:00 mins",
+      "status": "Ready / Finalized",
+      "notes": "Continuous upbeat music during Ubtan/Haldi application"
+    },
+    {
+      "id": "ent-11",
+      "eventId": "bhatman",
+      "sequence": 1,
+      "title": "Banna Re Baugon Me / Grand Mayra Welcoming",
+      "category": "Folk / Traditional Geet",
+      "performers": "Bride Family Welcoming Nanihal Troupe",
+      "songLink": "Royal Marwari/Avadhi Folk",
+      "duration": "5:45 mins",
+      "status": "Ready / Finalized",
+      "notes": "Grand Aarti with silver diyas as Mama-Mami arrive with trousseau"
+    },
+    {
+      "id": "ent-12",
+      "eventId": "bhatman",
+      "sequence": 2,
+      "title": "Mama Ji Ka Tashan (Sauda Khara Khara)",
+      "category": "Dance Performance",
+      "performers": "Mama Ji, Mami & Nephews Group",
+      "songLink": "Good Newwz Mix",
+      "duration": "3:40 mins",
+      "status": "Rehearsing",
+      "notes": "Presents unveiling of bridal zardozi lehenga and gold jewellery"
+    },
+    {
+      "id": "ent-13",
+      "eventId": "bhatman",
+      "sequence": 3,
+      "title": "Sitar & Santoor Royal Feasting Jugalbandi",
+      "category": "DJ / BGM Track",
+      "performers": "Live Classical Instrumentalists",
+      "songLink": "Raag Bhupali & Yaman",
+      "duration": "45:00 mins",
+      "status": "Ready / Finalized",
+      "notes": "Melodious classical background music during royal sit-down thali lunch"
+    },
+    {
+      "id": "ent-14",
+      "eventId": "barat",
+      "sequence": 1,
+      "title": "Dulhe Ka Sehra & Aaj Mere Yaar Ki Shaadi Hai",
+      "category": "Entry Song",
+      "performers": "Jea 25-Piece Brass Band & Baraatis",
+      "songLink": "Dhadkan / Classic Brass Band",
+      "duration": "20:00 mins",
+      "status": "Ready / Finalized",
+      "notes": "Grand Barat procession with vintage carriage, dhol beats & royal chhatra"
+    },
+    {
+      "id": "ent-15",
+      "eventId": "barat",
+      "sequence": 2,
+      "title": "Kudmayi / Din Shagna Da (Royal Bridal Walk)",
+      "category": "Entry Song",
+      "performers": "Bride with 4 Real Brothers carrying Chaadar",
+      "songLink": "Rocky Aur Rani Kii Prem Kahaani",
+      "duration": "4:20 mins",
+      "status": "Ready / Finalized",
+      "notes": "Cold pyros spark fountain & low-smoke fog blanket at entry aisle"
+    },
+    {
+      "id": "ent-16",
+      "eventId": "barat",
+      "sequence": 3,
+      "title": "Ve Maahi & Kesariya (Hydraulic Stage Varmala Theme)",
+      "category": "Couple Special",
+      "performers": "Bride & Groom Stage Exchange",
+      "songLink": "Kesariya Cinematic Symphony",
+      "duration": "3:15 mins",
+      "status": "Ready / Finalized",
+      "notes": "Hydraulic elevation cue at crescendo. Flower petal cannons launch on garland exchange"
+    },
+    {
+      "id": "ent-17",
+      "eventId": "barat",
+      "sequence": 4,
+      "title": "Mangalyam Tantunanena & Vedic Phera Ragas",
+      "category": "Folk / Traditional Geet",
+      "performers": "Acharya Pt. Harish Shastri & Shehnai",
+      "songLink": "Sacred Sanskrit Vedic Mantras",
+      "duration": "60:00 mins",
+      "status": "Ready / Finalized",
+      "notes": "7 sacred vows around Agni Kund and Sindoor daan ceremony"
+    },
+    {
+      "id": "ent-18",
+      "eventId": "barat",
+      "sequence": 5,
+      "title": "Madhanya & Babul Ki Duayen (Emotional Bidaai)",
+      "category": "Entry Song",
+      "performers": "Family Farewell Choir",
+      "songLink": "Rahul Vaidya / Madhanya Acoustic",
+      "duration": "4:45 mins",
+      "status": "Ready / Finalized",
+      "notes": "Floral decorated vintage departure car with family blessings"
+    },
+    {
+      "id": "ent-19",
+      "eventId": "reception",
+      "sequence": 1,
+      "title": "Can't Take My Eyes Off You & Tum Hi Ho Jazz Duet",
+      "category": "Entry Song",
+      "performers": "Newlywed Couple Grand Red Carpet Entry",
+      "songLink": "Acoustic Jazz Romantic Medley",
+      "duration": "3:30 mins",
+      "status": "Ready / Finalized",
+      "notes": "Grand staircase entry, multi-tier cake cutting & champagne toast"
+    },
+    {
+      "id": "ent-20",
+      "eventId": "reception",
+      "sequence": 2,
+      "title": "Afreen Afreen & Mast Qalandar (Live Sufi Night)",
+      "category": "DJ / BGM Track",
+      "performers": "Faizan Warsi & Raga Soul Ensemble",
+      "songLink": "Coke Studio Live Sufi Style",
+      "duration": "90:00 mins",
+      "status": "Ready / Finalized",
+      "notes": "Soulful live Sufi concert while guests enjoy gala dinner and cocktail lounge"
+    },
+    {
+      "id": "ent-21",
+      "eventId": "reception",
+      "sequence": 3,
+      "title": "Gallan Goodiyaan & Badtameez Dil Non-Stop Party DJ",
+      "category": "Dance Performance",
+      "performers": "DJ Console with Open Dance Floor",
+      "songLink": "Bollywood Mega Party Mashup",
+      "duration": "45:00 mins",
+      "status": "Ready / Finalized",
+      "notes": "Grand celebration finale with both families dancing on stage"
+    }
+  ]
+}

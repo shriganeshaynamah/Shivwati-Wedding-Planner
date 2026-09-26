@@ -8,194 +8,39 @@ import {
   initGoogleAuth,
   signInWithGoogleWorkspace,
   signOutGoogleWorkspace,
-  ensureWeddingSpreadsheet,
-  syncDataToGoogleSheet,
   getCurrentUser,
-  getCachedToken
+  getCachedToken,
+  getStoredWebAppUrl,
+  setStoredWebAppUrl,
+  saveToAppsScriptWebApp,
+  fetchFromAppsScriptWebApp
 } from './googleSheetsSync.ts';
+import {
+  DEFAULT_ENTERTAINMENT,
+  renderEntertainment,
+  openEntertainmentModal,
+  handleSaveEntertainment,
+  deleteEntertainment,
+  cycleEntertainmentStatus,
+  setEntertainmentDayFilter
+} from './entertainment.ts';
+import {
+  openGoogleSheetLinkModal,
+  copyAppsScriptCode,
+  handleSaveWebAppUrl,
+  handleDisconnectWebApp,
+  pushDataToGoogleSheet,
+  fetchDataFromGoogleSheet
+} from './googleSheetLinkModal.ts';
+import { MASTER_WEDDING_DATA, PERMANENT_WEBAPP_URL } from './defaultWeddingData.ts';
 
 const STORAGE_KEY = 'royal_wedding_planner_2026_data';
 
 // Default 6-event sequences
-export const DEFAULT_EVENTS = [
-  {
-    id: 'tilak',
-    title: 'Tilak Ceremony',
-    hindi: 'तिलक उत्सव',
-    dateStr: 'November 21, 2026',
-    venue: 'The Grand Heritage Ballroom, Lucknow',
-    time: '11:00 AM - 04:00 PM',
-    coordinator: 'Rajesh Sharma (+91 98765 43210)',
-    description: 'Auspicious welcoming of groom & family, tilak applying by bride\'s brother & elders, presentation of sacred shagun gifts, gold coins, and sweets.',
-    dressCode: 'Royal Yellow / Mustard Kurta Pajama & Sarees',
-    tagColor: 'bg-amber-100 text-amber-900 border-amber-300'
-  },
-  {
-    id: 'matkor',
-    title: 'Matkor Ceremony',
-    hindi: 'मटकोर पूजा',
-    dateStr: 'November 22, 2026',
-    venue: 'Ancestral Courtyard & Riverbank Route',
-    time: '04:00 PM - 08:30 PM',
-    coordinator: 'Sunita Sharma & Chachi Ji (+91 98765 43211)',
-    description: 'Traditional soil collection ritual by married ladies, singing folk Mangal Geet with dhol, bringing blessed clay to construct the sacred wedding chulha.',
-    dressCode: 'Traditional Bandhani / Leheriya Orange & Red',
-    tagColor: 'bg-orange-100 text-orange-900 border-orange-300'
-  },
-  {
-    id: 'madwa',
-    title: 'Madwa (Mandap Chhadan)',
-    hindi: 'मड़वा पूजन',
-    dateStr: 'November 23, 2026',
-    venue: 'Palace Central Lawns, Pavilion A',
-    time: '09:30 AM - 02:00 PM',
-    coordinator: 'Manoj Sharma (+91 98765 43212)',
-    description: 'Erection of the holy bamboo & mango leaf canopy (Madwa), Harish wooden pillar installation, Gauri-Ganesh sthapana, and Kuldevta invocation.',
-    dressCode: 'Pastel Peach, Mint Green & Ivory Silks',
-    tagColor: 'bg-emerald-100 text-emerald-900 border-emerald-300'
-  },
-  {
-    id: 'bhatman',
-    title: 'Bhatman (Mamere Feast)',
-    hindi: 'भात / मायरा पूजन',
-    dateStr: 'November 24, 2026',
-    venue: 'The Royal Sheesh Mahal Dining Pavilion',
-    time: '12:00 PM - 05:00 PM',
-    coordinator: 'Ramesh Varma (Mama Ji) (+91 98765 43213)',
-    description: 'Grand festive reception of maternal uncles (Nanihal / Mama-Mami), presentation of bridal jewelry, wedding trousseau, and lavish sit-down traditional feast.',
-    dressCode: 'Banarasi Brocade & Royal Magenta / Fuchsia',
-    tagColor: 'bg-purple-100 text-purple-900 border-purple-300'
-  },
-  {
-    id: 'barat',
-    title: 'Barat & Sacred Wedding',
-    hindi: 'शुभ विवाह एवं बारात',
-    dateStr: 'November 25, 2026',
-    venue: 'Royal Palace Grand Front Lawns & Mandap',
-    time: '06:30 PM - Late Night (Pheras at 01:15 AM)',
-    coordinator: 'Vikram Sharma & Alok Varma (+91 98765 43214)',
-    description: 'The Royal Procession with vintage carriage & brass band, hydraulic varmala exchange, Vedic 7-pheras around sacred fire, Sindoor daan, and emotional Bidaai.',
-    dressCode: 'Black Tie / Royal Sherwani & Heavy Zardozi Lehengas',
-    tagColor: 'bg-rose-100 text-rose-900 border-rose-300'
-  },
-  {
-    id: 'reception',
-    title: 'Royal Wedding Reception',
-    hindi: 'प्रीतिभोज स्वागत समारोह',
-    dateStr: 'November 27, 2026',
-    venue: 'Imperial Crystal Ballroom & Royal Terrace',
-    time: '07:30 PM - 12:00 Midnight',
-    coordinator: 'Kavita Varma (+91 98765 43215)',
-    description: 'Formal gala night to celebrate the newlywed couple with dignitary blessings, live Sufi band, cake cutting, multi-cuisine banquet, and photo reception.',
-    dressCode: 'Black Tie, Indo-Western Tuxedos & Cocktail Gowns',
-    tagColor: 'bg-indigo-100 text-indigo-900 border-indigo-300'
-  }
-];
+export const DEFAULT_EVENTS = MASTER_WEDDING_DATA.events;
 
 export function getDefaultAppState() {
-  return {
-    targetBudget: 2500000,
-    googleSheetId: '',
-    googleSheetUrl: '',
-    lastSyncedAt: '',
-    events: JSON.parse(JSON.stringify(DEFAULT_EVENTS)),
-    expenses: [
-      { id: 'exp-1', name: 'Palace Royal Lawns & Ballroom Venue Deposit', event: 'Barat', category: 'Venue', estimated: 650000, actual: 650000, paid: 500000, status: 'Partial', notes: 'Includes Mandap lawn and banquet halls' },
-      { id: 'exp-2', name: 'Awadhi & Continental Catering (600 Pax Banquet)', event: 'Barat', category: 'Catering', estimated: 750000, actual: 780000, paid: 400000, status: 'Partial', notes: '50 live counters, chaat, royal sweets' },
-      { id: 'exp-3', name: 'Hydraulic Varmala Stage & Floral Mandap', event: 'Barat', category: 'Decoration', estimated: 320000, actual: 300000, paid: 300000, status: 'Paid', notes: 'Imported fresh orchids & lotus' },
-      { id: 'exp-4', name: 'Bridal Zardozi Lehenga & Royal Groom Sherwani', event: 'Barat', category: 'Attire', estimated: 380000, actual: 410000, paid: 410000, status: 'Paid', notes: 'Custom heritage Sabyasachi-inspired embroidery' },
-      { id: 'exp-5', name: 'Cinematic Drone & Candid Photography Team (6 Days)', event: 'General', category: 'Photography', estimated: 240000, actual: 230000, paid: 150000, status: 'Partial', notes: '4 photographers + 2 cinematographers + live stream' },
-      { id: 'exp-6', name: 'Bhatman Sit-Down Traditional Lunch Thali (220 Pax)', event: 'Bhatman', category: 'Catering', estimated: 140000, actual: 135000, paid: 135000, status: 'Paid', notes: 'Traditional Kansa thali service' },
-      { id: 'exp-7', name: 'Tilak Ceremony Shagun Sweets & Silver Coins', event: 'Tilak', category: 'Ritual Supplies', estimated: 95000, actual: 110000, paid: 110000, status: 'Paid', notes: 'Pure silver dry fruit boxes & shagun envelopes' },
-      { id: 'exp-8', name: 'Vintage Carriage, Ghodi & 25-Piece Brass Band', event: 'Barat', category: 'Entertainment', estimated: 85000, actual: 80000, paid: 40000, status: 'Partial', notes: 'Includes floral chhatra & battery lights' },
-      { id: 'exp-9', name: 'Matkor Dholak, Folk Singers & Decorated Baskets', event: 'Matkor', category: 'Ritual Supplies', estimated: 35000, actual: 32000, paid: 32000, status: 'Paid', notes: 'Brass spade, decorative soop & earthen ghada' },
-      { id: 'exp-10', name: 'Guest Transport AC Innovas & Airport Fleet (4 Days)', event: 'General', category: 'Transport', estimated: 120000, actual: 115000, paid: 60000, status: 'Partial', notes: '6 dedicated AC Innovas for outstation families' },
-      { id: 'exp-11', name: 'Reception Live Sufi Band & Pyrotechnics Entry', event: 'Reception', category: 'Entertainment', estimated: 90000, actual: 95000, paid: 50000, status: 'Partial', notes: 'Cold pyros on couple entry + 4-piece Sufi troupe' },
-      { id: 'exp-12', name: 'Madwa Bamboo, Mango Foliage & Hawan Samagri', event: 'Madwa', category: 'Ritual Supplies', estimated: 45000, actual: 48000, paid: 48000, status: 'Paid', notes: 'Fresh mango leaves, samidha, pure cow ghee' }
-    ],
-    vendors: [
-      { id: 'v-1', name: 'Royal Awadh Caterers & Banquets', service: 'Catering', event: 'Barat', contactPerson: 'Chef Irfan Qureshi', phone: '+919876511223', contractAmount: 915000, advancePaid: 535000, status: 'Confirmed', notes: 'Menu frozen. Separate pure sattvic kitchen arranged.' },
-      { id: 'v-2', name: 'Mayur Floral Decorators & Mandap Specialists', service: 'Decoration', event: 'Barat', contactPerson: 'Sunil Kumar', phone: '+919876522334', contractAmount: 420000, advancePaid: 350000, status: 'Confirmed', notes: 'Hydraulic stage safety test scheduled Nov 24.' },
-      { id: 'v-3', name: 'Drishti Cinematic Moments & Films', service: 'Photography', event: 'General', contactPerson: 'Aakash Mehra', phone: '+919876533445', contractAmount: 230000, advancePaid: 150000, status: 'Confirmed', notes: 'Deliver same-day teaser for Barat reception.' },
-      { id: 'v-4', name: 'Jea Brass Band & Vintage Carriage Fleet', service: 'Entertainment', event: 'Barat', contactPerson: 'Master Pappu Khan', phone: '+919876544556', contractAmount: 80000, advancePaid: 40000, status: 'Confirmed', notes: 'Uniformed 25 players + royal umbrella.' },
-      { id: 'v-5', name: 'Maharaja Luxury Fleet & Airport Shuttles', service: 'Transport', event: 'General', contactPerson: 'Gurvinder Singh', phone: '+919876555667', contractAmount: 115000, advancePaid: 60000, status: 'Confirmed', notes: '6 Innova Crysta with placards.' },
-      { id: 'v-6', name: 'Raga Soul & Sufi Ensemble', service: 'Entertainment', event: 'Reception', contactPerson: 'Faizan Warsi', phone: '+919876566778', contractAmount: 95000, advancePaid: 50000, status: 'Tentative', notes: 'Sound rider received, pending sound check.' }
-    ],
-    guests: [
-      { id: 'g-1', name: 'Sharma Ji & Family (Chacha Ji)', side: 'Groom', members: 4, accommodation: true, hotel: 'Fortune Landmark, Suite 302', transport: 'Arriving Nov 20 Indigo 6E-241', rsvp: 'Confirmed', events: { tilak: true, matkor: true, madwa: true, bhatman: true, barat: true, reception: true }, contact: '+91 98101 23456' },
-      { id: 'g-2', name: 'Ramesh Varma (Maternal Uncle / Mama Ji)', side: 'Bride', members: 5, accommodation: true, hotel: 'Fortune Landmark, Room 405-406', transport: 'Arriving Nov 22 Vande Bharat Express', rsvp: 'Confirmed', events: { tilak: false, matkor: true, madwa: true, bhatman: true, barat: true, reception: true }, contact: '+91 98102 34567' },
-      { id: 'g-3', name: 'Dr. Vivek Saxena & Family', side: 'Groom', members: 3, accommodation: true, hotel: 'Hotel Royal Orchid, Room 210', transport: 'Arriving Nov 24 by Road from Kanpur', rsvp: 'Confirmed', events: { tilak: false, matkor: false, madwa: false, bhatman: true, barat: true, reception: true }, contact: '+91 98103 45678' },
-      { id: 'g-4', name: 'Pooja Varma & In-laws (Didi & Jija Ji)', side: 'Bride', members: 4, accommodation: true, hotel: 'Fortune Landmark, Room 312', transport: 'Arriving Nov 21 Air India AI-420', rsvp: 'Confirmed', events: { tilak: true, matkor: true, madwa: true, bhatman: true, barat: true, reception: true }, contact: '+91 98104 56789' },
-      { id: 'g-5', name: 'Ambassador K. P. Singh & Family', side: 'Groom', members: 2, accommodation: false, hotel: 'Self-Stay at Gomti Nagar Home', transport: 'Local City Car', rsvp: 'Confirmed', events: { tilak: false, matkor: false, madwa: false, bhatman: false, barat: true, reception: true }, contact: '+91 98105 67890' },
-      { id: 'g-6', name: 'Sunil Mathur & Associates (College Friends)', side: 'Groom', members: 5, accommodation: true, hotel: 'Hotel Clarks Avadh, Rooms 101, 102', transport: 'Arriving Nov 24 Shatabdi Express', rsvp: 'Pending', events: { tilak: false, matkor: false, madwa: false, bhatman: false, barat: true, reception: true }, contact: '+91 98106 78901' },
-      { id: 'g-7', name: 'Rajeev Malhotra & Family (Mumbai)', side: 'Bride', members: 3, accommodation: true, hotel: 'Fortune Landmark, Room 410', transport: 'Flight scheduled Nov 23', rsvp: 'Confirmed', events: { tilak: false, matkor: false, madwa: true, bhatman: true, barat: true, reception: true }, contact: '+91 98107 89012' }
-    ],
-    rituals: {
-      tilak: [
-        { id: 'r-t1', text: 'Shagun silver gift display table setup with royal velvet cloth', category: 'Operations', done: true, notes: 'Designated room key with Rajesh' },
-        { id: 'r-t2', text: 'Pooja Samagri: Roli, Chandan, Akshat, Supari, Paan, Fresh Flowers, Ghee Diya', category: 'Samagri', done: true, notes: 'Purchased from Shastri Pooja Bhandar' },
-        { id: 'r-t3', text: 'Silver coins & Cash Shagun Envelopes organized by denomination', category: 'Samagri', done: false, notes: 'Handed to Dadaji' },
-        { id: 'r-t4', text: 'Shehnai & Live Folk Welcome Musicians arrival check at 10:30 AM', category: 'Operations', done: true, notes: 'Contact: Master Bilal' },
-        { id: 'r-t5', text: 'Catering welcome drinks (Kesar Thandai, Badam Milk & Starters)', category: 'Operations', done: false, notes: 'Setup ready by 11:30 AM' }
-      ],
-      matkor: [
-        { id: 'r-m1', text: 'Spade (Kudal) decorated with turmeric, mouli & marigold garland', category: 'Samagri', done: false, notes: 'Chachi Ji to oversee decoration' },
-        { id: 'r-m2', text: 'Decorated wicker baskets (Soop), new earthen pot (Ghada) & cloth cover', category: 'Samagri', done: false, notes: '4 decorative soop ready' },
-        { id: 'r-m3', text: 'Police route intimation & local path clearance for soil procession', category: 'Operations', done: true, notes: 'Intimation letter submitted' },
-        { id: 'r-m4', text: 'Dhol & Women Folk Singer troupe arrival at 03:30 PM', category: 'Operations', done: false, notes: 'Sound check in courtyard' },
-        { id: 'r-m5', text: 'Fresh Haldi / Ubtan paste preparation with sandalwood & saffron', category: 'Samagri', done: false, notes: 'Natural ingredients only' }
-      ],
-      madwa: [
-        { id: 'r-mw1', text: 'Green Bamboo poles & fresh Mango branch canopy structure check', category: 'Operations', done: false, notes: 'Carpenter team arriving 07:00 AM' },
-        { id: 'r-mw2', text: 'Mandap consecration Samagri: Hawan Kund, 5 Dry Coconuts, Navgrah Samidha', category: 'Samagri', done: false, notes: 'Acharya Harish Ji list verified' },
-        { id: 'r-mw3', text: 'Harish wooden pillar installation & vermilion auspicious marks', category: 'Operations', done: false, notes: 'Elder uncle lead ritual' },
-        { id: 'r-mw4', text: 'Family sitting arrangement with gaddas, masnads & floral carpets', category: 'Operations', done: false, notes: 'Shade awning confirmed' }
-      ],
-      bhatman: [
-        { id: 'r-b1', text: 'Maternal Uncle (Mama & Mami) reception welcoming team at entry gate', category: 'Operations', done: false, notes: 'Aarti thali with silver diyas' },
-        { id: 'r-b2', text: 'Mamere / Bhat inventory room setup with lock & secure registry book', category: 'Operations', done: false, notes: 'Treasurer: Manoj Sharma' },
-        { id: 'r-b3', text: 'Traditional sit-down feast service (Patta / Kansa Thali arrangement)', category: 'Operations', done: false, notes: 'Puri, Daal Kachori, Ghevar, Rabri' },
-        { id: 'r-b4', text: 'Presents of wedding clothes (Mayra attire) display & inspection', category: 'Operations', done: false, notes: 'Dry-cleaned and pressed' }
-      ],
-      barat: [
-        { id: 'r-ba1', text: 'Procession route legal permission & traffic marshal deployment', category: 'Operations', done: true, notes: 'Permit #LP-8842/26' },
-        { id: 'r-ba2', text: 'Vintage Car / Ghodi with floral chhatra & water supply vehicle', category: 'Operations', done: false, notes: 'Reporting at 05:30 PM sharp' },
-        { id: 'r-ba3', text: '25-piece Brass band & lighting trolley test', category: 'Operations', done: false, notes: 'Full uniform check' },
-        { id: 'r-ba4', text: 'Hydraulic Varmala Stage motor test & safety barrier inspection', category: 'Operations', done: false, notes: 'Engineer Sunil signoff' },
-        { id: 'r-ba5', text: 'Fresh Varmalas (Exotic Thai Orchids & Red Roses) in cold storage', category: 'Samagri', done: false, notes: 'Keep at 18 deg C until 08:30 PM' },
-        { id: 'r-ba6', text: 'Full Phera Hawan Kit: 5kg Desi Ghee, Lave/Puffed Rice, Gangajal, Sindoor, Mangalsutra, Janeu', category: 'Samagri', done: false, notes: 'Pandit ji sacred basket' },
-        { id: 'r-ba7', text: 'Emergency Bridal Kit: Safety pins, touchup cosmetics, pain relief, extra heels', category: 'Operations', done: true, notes: 'With Bridesmaid Kavita' },
-        { id: 'r-ba8', text: 'Bidaai decorated royal car & luggage transport escort team ready', category: 'Operations', done: false, notes: 'Driver verified & briefed' }
-      ],
-      reception: [
-        { id: 'r-r1', text: 'Stage grand entry sequence, low-smoke fog & cold spark pyros', category: 'Operations', done: false, notes: 'Safety distance 15 feet verified' },
-        { id: 'r-r2', text: 'Token & Shagun gift registry collection desk with digital QR & ledger', category: 'Operations', done: false, notes: '2 coordinators on duty' },
-        { id: 'r-r3', text: 'VIP hospitality & royal family photo-op queue manager', category: 'Operations', done: false, notes: 'Hostess team briefed' },
-        { id: 'r-r4', text: 'Live Sufi band soundcheck completed by 06:00 PM', category: 'Operations', done: false, notes: 'Sound engineer on console' },
-        { id: 'r-r5', text: 'Valet parking desk & key storage tagged system with 12 valets', category: 'Operations', done: true, notes: 'Covered parking for 250 cars' }
-      ]
-    },
-    emergencyChecklist: {
-      legal: [
-        { text: 'Police station intimation for Barat procession & route clearance', done: true },
-        { text: 'Sound & acoustic amplification permission post 10:00 PM', done: true },
-        { text: 'Fire safety NOC & fire extinguisher inspection at palace lawns', done: true },
-        { text: 'Excise license for private reception cocktail area', done: false }
-      ],
-      power: [
-        { text: 'Primary 125 KVA DG generator fueled & load-tested', done: true },
-        { text: 'Secondary backup 82.5 KVA generator on hot standby', done: true },
-        { text: 'Dedicated electrician on-site with emergency contact radio', done: true },
-        { text: 'Heavy load cables insulated & covered with safety ramps', done: false }
-      ],
-      medical: [
-        { text: 'Emergency doctor on-call with private phone line verified', done: true },
-        { text: 'First-aid kit with ORS, antacids, painkillers, bandages at front desk', done: true },
-        { text: 'Designated emergency ambulance stationed 500m from venue gate', done: false },
-        { text: 'Wheelchairs available at main palace entrance for elders', done: true }
-      ]
-    }
-  };
+  return JSON.parse(JSON.stringify(MASTER_WEDDING_DATA));
 }
 
 export let appState: any = null;
@@ -225,10 +70,18 @@ export function loadData() {
     const saved = localStorage.getItem(STORAGE_KEY);
     if (saved) {
       appState = JSON.parse(saved);
-      // Migrate events if not in saved state
+      // Migrate to master wedding plan if previous state had old Lucknow sample data
+      if (appState.targetBudget === 2500000 || !appState.expenses || appState.expenses.length < 5 || !appState.guests || appState.guests.length < 15) {
+        appState = getDefaultAppState();
+      }
       if (!appState.events || !Array.isArray(appState.events) || appState.events.length === 0) {
         appState.events = JSON.parse(JSON.stringify(DEFAULT_EVENTS));
       }
+      if (!appState.entertainment || !Array.isArray(appState.entertainment) || appState.entertainment.length === 0) {
+        appState.entertainment = JSON.parse(JSON.stringify(DEFAULT_ENTERTAINMENT));
+      }
+      appState.googleWebAppUrl = PERMANENT_WEBAPP_URL;
+      setStoredWebAppUrl(PERMANENT_WEBAPP_URL);
     } else {
       appState = getDefaultAppState();
       saveData(false);
@@ -274,6 +127,26 @@ export function scheduleGoogleSheetsAutoSync() {
   if (autoSyncTimeout) clearTimeout(autoSyncTimeout);
 
   autoSyncTimeout = setTimeout(async () => {
+    const webAppUrl = getStoredWebAppUrl() || appState.googleWebAppUrl;
+    
+    if (webAppUrl) {
+      try {
+        isSyncingToSheets = true;
+        updateSyncStatusUI('syncing');
+        const res = await saveToAppsScriptWebApp(webAppUrl, appState);
+        appState.lastSyncedAt = res.timestamp;
+        saveData(false);
+        updateSyncStatusUI('synced');
+      } catch (err: any) {
+        console.warn('Apps Script sync notice:', err?.message || err);
+        updateSyncStatusUI('error', err.message);
+      } finally {
+        isSyncingToSheets = false;
+      }
+      return;
+    }
+
+    // Fallback to token if connected via OAuth
     const token = getCachedToken();
     if (!token) {
       updateSyncStatusUI('offline');
@@ -283,18 +156,6 @@ export function scheduleGoogleSheetsAutoSync() {
     try {
       isSyncingToSheets = true;
       updateSyncStatusUI('syncing');
-
-      // Ensure spreadsheet exists
-      if (!appState.googleSheetId) {
-        const sheet = await ensureWeddingSpreadsheet();
-        appState.googleSheetId = sheet.id;
-        appState.googleSheetUrl = sheet.url;
-        saveData(false);
-      }
-
-      const res = await syncDataToGoogleSheet(appState.googleSheetId, appState);
-      appState.lastSyncedAt = res.lastSyncedAt;
-      saveData(false);
       updateSyncStatusUI('synced');
     } catch (err: any) {
       console.warn('Google Sheets sync notice:', err?.message || err);
@@ -309,82 +170,88 @@ export function updateSyncStatusUI(status: 'offline' | 'saving_local' | 'syncing
   const container = document.getElementById('google-sync-indicator');
   if (!container) return;
 
-  const user = getCurrentUser();
-
-  if (!user) {
+  if (status === 'syncing') {
     container.innerHTML = `
-      <button onclick="window.triggerGoogleSignIn()" class="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 border border-[#D4AF37]/50 text-xs font-semibold text-[#FFF8E7] transition-all shadow-sm">
-        <svg class="w-4 h-4" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>
-        <span>Connect Google Sheet</span>
-      </button>
+      <div class="w-full bg-[#1b0509] border border-gold/50 rounded-xl p-2.5 space-y-1.5 shadow-inner">
+        <div class="flex items-center justify-between text-[11px]">
+          <div class="flex items-center gap-1.5 text-amber-300 font-bold">
+            <i class="fa-solid fa-arrows-rotate fa-spin text-gold text-xs"></i>
+            <span>Saving to Sheet...</span>
+          </div>
+          <span class="text-[9px] text-amber-200/70">Syncing</span>
+        </div>
+        <p class="text-[10px] text-slate-300 leading-tight">Updating all 6 events, expenses, vendors, guests & rituals in Google Sheet...</p>
+      </div>
     `;
     return;
   }
 
-  const sheetUrl = appState.googleSheetUrl || (appState.googleSheetId ? `https://docs.google.com/spreadsheets/d/${appState.googleSheetId}/edit` : null);
-
-  if (status === 'syncing') {
+  if (status === 'saving_local') {
     container.innerHTML = `
-      <div class="flex items-center gap-2 bg-amber-950/60 border border-gold/40 px-3 py-1.5 rounded-lg text-xs text-amber-200">
-        <i class="fa-solid fa-arrows-rotate fa-spin text-gold"></i>
-        <span>Auto-saving to Google Sheet...</span>
-      </div>
-    `;
-  } else if (status === 'error') {
-    container.innerHTML = `
-      <div class="flex items-center gap-2 bg-red-950/60 border border-rose-500/50 px-2.5 py-1.5 rounded-lg text-xs text-rose-200">
-        <i class="fa-solid fa-triangle-exclamation text-rose-400"></i>
-        <span class="max-w-[140px] truncate" title="${errorMsg || 'Sync failed'}">Sheet Sync Error</span>
-        <button onclick="window.forceManualSync()" class="underline text-gold hover:text-white text-[11px] font-bold">Retry</button>
-      </div>
-    `;
-  } else {
-    // Synced / active state
-    container.innerHTML = `
-      <div class="flex items-center gap-2 bg-emerald-950/60 border border-emerald-500/40 px-3 py-1 rounded-lg text-xs text-emerald-200">
-        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-        <div class="flex flex-col">
-          <span class="font-bold flex items-center gap-1.5">
-            Auto-saved to Sheet
-            ${sheetUrl ? `<a href="${sheetUrl}" target="_blank" rel="noopener noreferrer" class="text-gold hover:text-white transition-colors" title="Open Google Sheet"><i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i></a>` : ''}
-          </span>
-          <span class="text-[10px] text-emerald-300/80 leading-none">${appState.lastSyncedAt ? appState.lastSyncedAt.split(',')[1] || appState.lastSyncedAt : 'Active'}</span>
+      <div class="w-full bg-[#1b0509] border border-amber-600/50 rounded-xl p-2.5 space-y-1.5 shadow-inner">
+        <div class="flex items-center justify-between text-[11px]">
+          <div class="flex items-center gap-1.5 text-amber-200 font-semibold">
+            <span class="w-2 h-2 rounded-full bg-amber-400 animate-ping"></span>
+            <span>Auto-Syncing Changes...</span>
+          </div>
+          <span class="text-[9px] text-amber-200/70">Live</span>
         </div>
-        <button onclick="window.forceManualSync()" class="ml-1 p-1 hover:text-white text-gold" title="Push Now">
-          <i class="fa-solid fa-cloud-arrow-up"></i>
-        </button>
-        <button onclick="window.triggerGoogleSignOut()" class="p-1 text-slate-400 hover:text-rose-300" title="Disconnect (${user.email})">
-          <i class="fa-solid fa-right-from-bracket"></i>
+      </div>
+    `;
+    return;
+  }
+
+  if (status === 'error') {
+    container.innerHTML = `
+      <div class="w-full bg-[#1b0509] border border-rose-600/60 rounded-xl p-2.5 space-y-2 shadow-inner">
+        <div class="flex items-center justify-between text-[11px]">
+          <div class="flex items-center gap-1.5 text-rose-300 font-bold">
+            <i class="fa-solid fa-circle-exclamation text-rose-400"></i>
+            <span>Saved Locally</span>
+          </div>
+          <button onclick="window.pushDataToGoogleSheet()" class="text-[10px] text-amber-300 underline font-semibold">Retry</button>
+        </div>
+        <button onclick="window.pushDataToGoogleSheet()" class="w-full py-1.5 bg-emerald-700 hover:bg-emerald-600 text-white rounded-lg text-xs font-bold flex items-center justify-center gap-1.5 shadow-sm transition-colors cursor-pointer">
+          <i class="fa-solid fa-cloud-arrow-up text-xs text-amber-200"></i>
+          <span>Save to Sheet Now</span>
         </button>
       </div>
     `;
+    return;
   }
+
+  // Default Synced state with prominent "Save to Sheet" button and auto-sync badge
+  container.innerHTML = `
+    <div class="w-full bg-[#1b0509] border border-emerald-600/60 rounded-xl p-2.5 space-y-2 shadow-inner">
+      <div class="flex items-center justify-between text-[11px]">
+        <div class="flex items-center gap-1.5">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          <span class="font-bold text-emerald-300">Auto-Sync Active</span>
+        </div>
+        <span class="text-[9px] text-amber-200/80 font-medium">Auto-updates on save</span>
+      </div>
+      
+      <div class="grid grid-cols-2 gap-1.5 pt-0.5">
+        <button onclick="window.pushDataToGoogleSheet()" class="py-1.5 px-2 bg-emerald-700 hover:bg-emerald-600 text-white rounded-lg text-xs font-bold flex items-center justify-center gap-1.5 transition-colors shadow-sm cursor-pointer" title="Save & push all changes directly to Google Sheet now">
+          <i class="fa-solid fa-cloud-arrow-up text-xs text-amber-200"></i>
+          <span>Save to Sheet</span>
+        </button>
+        <button onclick="window.fetchDataFromGoogleSheet()" class="py-1.5 px-2 bg-[#4A0815] hover:bg-slate-700 text-slate-200 rounded-lg text-xs font-semibold flex items-center justify-center gap-1.5 border border-gold/40 transition-colors cursor-pointer" title="Fetch latest data from Google Sheet">
+          <i class="fa-solid fa-cloud-arrow-down text-xs text-gold"></i>
+          <span>Fetch Data</span>
+        </button>
+      </div>
+    </div>
+  `;
 }
 
 export async function forceManualSync() {
-  const token = getCachedToken();
-  if (!token) {
-    await triggerGoogleSignIn();
+  const webAppUrl = getStoredWebAppUrl() || appState.googleWebAppUrl;
+  if (webAppUrl) {
+    await pushDataToGoogleSheet();
     return;
   }
-  showToast('Pushing updates to Google Sheet...', 'info');
-  try {
-    updateSyncStatusUI('syncing');
-    if (!appState.googleSheetId) {
-      const sheet = await ensureWeddingSpreadsheet();
-      appState.googleSheetId = sheet.id;
-      appState.googleSheetUrl = sheet.url;
-      saveData(false);
-    }
-    const res = await syncDataToGoogleSheet(appState.googleSheetId, appState);
-    appState.lastSyncedAt = res.lastSyncedAt;
-    saveData(false);
-    updateSyncStatusUI('synced');
-    showToast('Successfully synced with Google Sheets!', 'success');
-  } catch (err: any) {
-    showToast(err.message || 'Failed to sync with Google Sheet', 'error');
-    updateSyncStatusUI('error', err.message);
-  }
+  openGoogleSheetLinkModal();
 }
 
 export async function triggerGoogleSignIn() {
@@ -637,11 +504,22 @@ export function renderDashboard() {
   if (vendorStatusEl) vendorStatusEl.innerText = `${activeContracts} confirmed active`;
 
   let pendingRituals = 0;
+  let totalRituals = 0;
   Object.values(appState.rituals || {}).forEach((taskList: any) => {
-    pendingRituals += (taskList || []).filter((t: any) => !t.done).length;
+    (taskList || []).forEach((t: any) => {
+      totalRituals++;
+      if (!t.done) pendingRituals++;
+    });
   });
-  const pendingTasksEl = document.getElementById('kpi-pending-tasks');
-  if (pendingTasksEl) pendingTasksEl.innerText = String(pendingRituals);
+
+  const pendingRitualsEl = document.getElementById('kpi-pending-rituals-count') || document.getElementById('kpi-pending-tasks');
+  if (pendingRitualsEl) pendingRitualsEl.innerText = `${pendingRituals} Pending`;
+
+  const pendingRitualsStatusEl = document.getElementById('kpi-pending-rituals-status');
+  if (pendingRitualsStatusEl) {
+    const done = totalRituals - pendingRituals;
+    pendingRitualsStatusEl.innerText = `${done} of ${totalRituals} completed`;
+  }
 
   renderDashboardEventsGrid();
   initOrUpdateCharts();
@@ -663,33 +541,33 @@ export function renderDashboardEventsGrid() {
       .reduce((sum: number, g: any) => sum + Number(g.members), 0);
 
     return `
-      <div class="p-4 rounded-xl border border-slate-200 bg-amber-royal/30 hover:border-gold/60 transition-all flex flex-col justify-between">
+      <div class="p-3 sm:p-4 rounded-xl border border-slate-200 bg-amber-royal/30 hover:border-gold/60 transition-all flex flex-col justify-between">
         <div>
-          <div class="flex items-center justify-between gap-2 mb-2">
-            <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase ${evt.tagColor || 'bg-amber-100 text-amber-900'}">
+          <div class="flex items-center justify-between gap-1.5 mb-1.5">
+            <span class="px-2 py-0.5 rounded-full text-[9px] sm:text-[10px] font-bold uppercase ${evt.tagColor || 'bg-amber-100 text-amber-900'}">
               ${evt.dateStr.split(',')[0]}
             </span>
-            <span class="text-xs font-semibold text-slate-500">${guestsForEvent} Confirmed</span>
+            <span class="text-[10px] sm:text-xs font-semibold text-slate-500">${guestsForEvent} Confirmed</span>
           </div>
           <div class="flex items-start justify-between">
-            <h4 class="font-cinzel font-bold text-base text-maroon">${evt.title}</h4>
-            <button onclick="window.openEditCeremonyModal('${evt.id}')" class="text-slate-400 hover:text-gold-dark p-1" title="Edit Ceremony Details">
+            <h4 class="font-cinzel font-bold text-sm sm:text-base text-maroon">${evt.title}</h4>
+            <button onclick="window.openEditCeremonyModal('${evt.id}')" class="text-slate-400 hover:text-gold-dark p-0.5" title="Edit Ceremony Details">
               <i class="fa-solid fa-pen-to-square text-xs"></i>
             </button>
           </div>
-          <p class="text-xs text-slate-600 line-clamp-1 mt-0.5"><i class="fa-solid fa-location-dot text-gold-dark text-[11px] mr-1"></i> ${evt.venue}</p>
-          <p class="text-[11px] text-slate-500 mt-1 line-clamp-1"><i class="fa-solid fa-user-tie text-slate-400 mr-1"></i> ${evt.coordinator.split('(')[0]}</p>
+          <p class="text-[11px] sm:text-xs text-slate-600 line-clamp-1 mt-0.5"><i class="fa-solid fa-location-dot text-gold-dark text-[10px] mr-1"></i> ${evt.venue}</p>
+          <p class="text-[10px] sm:text-[11px] text-slate-500 mt-0.5 line-clamp-1"><i class="fa-solid fa-user-tie text-slate-400 mr-1"></i> ${evt.coordinator.split('(')[0]}</p>
         </div>
         
-        <div class="mt-4 pt-3 border-t border-gold/20 flex items-center justify-between text-xs">
-          <div class="flex items-center gap-2 flex-1 mr-3">
+        <div class="mt-3 pt-2 border-t border-gold/20 flex items-center justify-between text-xs">
+          <div class="flex items-center gap-1.5 flex-1 mr-2">
             <div class="w-full bg-slate-200 rounded-full h-1.5 overflow-hidden">
               <div class="bg-gold-dark h-1.5 rounded-full" style="width: ${pct}%"></div>
             </div>
-            <span class="text-[11px] font-bold text-slate-600 shrink-0">${completed}/${total}</span>
+            <span class="text-[10px] sm:text-[11px] font-bold text-slate-600 shrink-0">${completed}/${total}</span>
           </div>
-          <button onclick="window.openEventDetails('${evt.id}')" class="text-maroon hover:text-gold-dark font-semibold text-xs transition-colors shrink-0">
-            Tasks <i class="fa-solid fa-arrow-right text-[10px]"></i>
+          <button onclick="window.openEventDetails('${evt.id}')" class="text-maroon hover:text-gold-dark font-semibold text-[11px] transition-colors shrink-0">
+            Tasks <i class="fa-solid fa-arrow-right text-[9px]"></i>
           </button>
         </div>
       </div>
@@ -711,41 +589,41 @@ export function renderEventsView() {
       .reduce((sum: number, g: any) => sum + Number(g.members), 0);
 
     return `
-      <div class="royal-card p-5 border-l-4 ${idx % 2 === 0 ? 'border-l-gold' : 'border-l-maroon'} flex flex-col justify-between">
+      <div class="royal-card p-3 sm:p-4 border-l-4 ${idx % 2 === 0 ? 'border-l-gold' : 'border-l-maroon'} flex flex-col justify-between hover:border-gold/60 transition-all">
         <div>
-          <div class="flex items-center justify-between gap-2 mb-2">
-            <span class="px-2.5 py-1 rounded-full text-[11px] font-bold uppercase tracking-wider ${evt.tagColor || 'bg-amber-100 text-amber-900'}">
-              Event ${idx + 1} • ${evt.dateStr}
+          <div class="flex items-center justify-between gap-1.5 mb-1.5">
+            <span class="px-2 py-0.5 rounded-full text-[10px] sm:text-[11px] font-bold uppercase tracking-wider ${evt.tagColor || 'bg-amber-100 text-amber-900'}">
+              Event ${idx + 1} • ${evt.dateStr.split(',')[0]}
             </span>
-            <div class="flex items-center gap-2">
-              <span class="text-xs font-semibold text-slate-500">${attending} Guests</span>
-              <button onclick="window.openEditCeremonyModal('${evt.id}')" class="px-2.5 py-1 bg-amber-50 hover:bg-gold hover:text-maroon text-gold-dark border border-gold/40 rounded-lg text-xs font-bold transition-all flex items-center gap-1 shadow-xs">
-                <i class="fa-solid fa-pen"></i> Edit
+            <div class="flex items-center gap-1.5">
+              <span class="text-[10px] sm:text-xs font-semibold text-slate-500">${attending} Guests</span>
+              <button onclick="window.openEditCeremonyModal('${evt.id}')" class="px-2 py-0.5 bg-amber-50 hover:bg-gold hover:text-maroon text-gold-dark border border-gold/40 rounded text-[10px] sm:text-xs font-bold transition-all flex items-center gap-1 shadow-2xs">
+                <i class="fa-solid fa-pen text-[9px]"></i> Edit
               </button>
             </div>
           </div>
           
-          <div class="flex items-baseline justify-between mt-1">
-            <h3 class="font-cinzel font-bold text-xl text-maroon">${evt.title}</h3>
-            <span class="text-xs font-serif text-gold-dark font-medium">${evt.hindi || ''}</span>
+          <div class="flex items-baseline justify-between mt-0.5">
+            <h3 class="font-cinzel font-bold text-sm sm:text-base text-maroon">${evt.title}</h3>
+            <span class="text-[10px] sm:text-xs font-serif text-gold-dark font-medium">${evt.hindi || ''}</span>
           </div>
 
-          <div class="space-y-1.5 mt-3 text-xs text-slate-600">
-            <p><i class="fa-regular fa-clock text-gold-dark w-4"></i> <span class="font-medium">${evt.time}</span></p>
-            <p><i class="fa-solid fa-location-dot text-gold-dark w-4"></i> <span class="font-medium">${evt.venue}</span></p>
-            <p><i class="fa-solid fa-user-check text-gold-dark w-4"></i> <span>Coordinator: <strong class="text-slate-800">${evt.coordinator}</strong></span></p>
-            <p><i class="fa-solid fa-vest text-gold-dark w-4"></i> <span>Dress Code: <strong class="text-slate-700">${evt.dressCode || 'Traditional Wedding Attire'}</strong></span></p>
+          <div class="space-y-1 mt-2 text-[11px] sm:text-xs text-slate-600">
+            <p class="truncate"><i class="fa-regular fa-clock text-gold-dark w-3.5"></i> <span class="font-medium">${evt.time}</span></p>
+            <p class="truncate"><i class="fa-solid fa-location-dot text-gold-dark w-3.5"></i> <span class="font-medium">${evt.venue}</span></p>
+            <p class="truncate"><i class="fa-solid fa-user-check text-gold-dark w-3.5"></i> <span>Coord: <strong class="text-slate-800">${evt.coordinator}</strong></span></p>
+            <p class="truncate"><i class="fa-solid fa-vest text-gold-dark w-3.5"></i> <span>Dress: <strong class="text-slate-700">${evt.dressCode || 'Traditional'}</strong></span></p>
           </div>
 
-          <p class="text-xs text-slate-600 bg-amber-50/60 p-3 rounded-lg border border-gold/20 mt-3 leading-relaxed">
+          <p class="text-[10px] sm:text-[11px] text-slate-600 bg-amber-50/60 p-2 sm:p-2.5 rounded-lg border border-gold/20 mt-2 leading-relaxed">
             ${evt.description}
           </p>
         </div>
 
-        <div class="mt-4 pt-3 border-t border-gold/20 flex items-center justify-between">
-          <span class="text-xs text-slate-500 font-medium">Checklist: <strong>${completed}/${tasks.length}</strong> tasks ready</span>
-          <button onclick="window.openEventDetails('${evt.id}')" class="px-3 py-1.5 bg-maroon hover:bg-maroon-deep text-gold-light rounded-lg text-xs font-semibold transition-all">
-            Manage Tasks <i class="fa-solid fa-arrow-right ml-1"></i>
+        <div class="mt-2.5 pt-2 border-t border-gold/20 flex items-center justify-between text-[11px]">
+          <span class="text-[10px] sm:text-xs text-slate-500 font-medium">Tasks: <strong>${completed}/${tasks.length}</strong></span>
+          <button onclick="window.openEventDetails('${evt.id}')" class="px-2.5 py-1 bg-maroon hover:bg-maroon-deep text-gold-light rounded text-[10px] sm:text-xs font-semibold transition-all">
+            Tasks <i class="fa-solid fa-arrow-right text-[9px] ml-0.5"></i>
           </button>
         </div>
       </div>
@@ -800,19 +678,19 @@ export function renderBudgetStats() {
 // -------------------------------------------------------------
 
 export function setExpenseDayFilter(dayId: string) {
-  const sel = document.getElementById('expense-filter-event') as HTMLSelectElement;
+  const sel = (document.getElementById('budget-day-filter-select') || document.getElementById('expense-filter-event')) as HTMLSelectElement;
   if (sel) sel.value = dayId;
   renderExpensesTable();
 }
 
 export function setVendorDayFilter(dayId: string) {
-  const sel = document.getElementById('vendor-filter-event') as HTMLSelectElement;
+  const sel = (document.getElementById('vendor-day-filter-select') || document.getElementById('vendor-filter-event')) as HTMLSelectElement;
   if (sel) sel.value = dayId;
   renderVendorsGrid();
 }
 
 export function setGuestDayFilter(dayId: string) {
-  const sel = document.getElementById('guest-filter-event') as HTMLSelectElement;
+  const sel = (document.getElementById('guest-day-filter-select') || document.getElementById('guest-filter-event')) as HTMLSelectElement;
   if (sel) sel.value = dayId;
   renderGuestsTable();
 }
@@ -820,39 +698,52 @@ export function setGuestDayFilter(dayId: string) {
 function renderBudgetDayPills(activeDay: string) {
   const pillsContainer = document.getElementById('budget-day-pills');
   const summaryEl = document.getElementById('budget-day-summary');
-  if (!pillsContainer) return;
+  const selectEl = document.getElementById('budget-day-filter-select') as HTMLSelectElement;
 
   const daysConfig = [
-    { id: 'ALL', label: 'All Days', sub: 'Nov 21-27' },
-    { id: 'Tilak', label: 'Day 1 • Tilak', sub: 'Nov 21' },
-    { id: 'Matkor', label: 'Day 2 • Matkor', sub: 'Nov 22' },
-    { id: 'Madwa', label: 'Day 3 • Madwa', sub: 'Nov 23' },
-    { id: 'Bhatman', label: 'Day 4 • Bhatman', sub: 'Nov 24' },
-    { id: 'Barat', label: 'Day 5 • Barat', sub: 'Nov 25' },
-    { id: 'Reception', label: 'Day 6 • Reception', sub: 'Nov 27' },
-    { id: 'General', label: 'General / Common', sub: 'Misc' }
+    { id: 'ALL', label: 'All Ceremonies & Days' },
+    { id: 'Tilak', label: 'Day 1 • Tilak (Nov 21)' },
+    { id: 'Matkor', label: 'Day 2 • Matkor (Nov 22)' },
+    { id: 'Madwa', label: 'Day 3 • Madwa (Nov 23)' },
+    { id: 'Bhatman', label: 'Day 4 • Bhatman (Nov 24)' },
+    { id: 'Barat', label: 'Day 5 • Barat (Nov 25)' },
+    { id: 'Reception', label: 'Day 6 • Reception (Nov 27)' },
+    { id: 'General', label: 'General / Common Home Needs' }
   ];
 
-  pillsContainer.innerHTML = daysConfig.map(d => {
-    const isActive = activeDay === d.id;
-    const dayTotal = (appState.expenses || [])
-      .filter((e: any) => d.id === 'ALL' || e.event === d.id)
-      .reduce((sum: number, e: any) => sum + (Number(e.actual) || 0), 0);
-    const count = (appState.expenses || []).filter((e: any) => d.id === 'ALL' || e.event === d.id).length;
+  if (selectEl) {
+    const currentVal = selectEl.value || activeDay;
+    selectEl.innerHTML = daysConfig.map(d => {
+      const dayTotal = (appState.expenses || [])
+        .filter((e: any) => d.id === 'ALL' || e.event === d.id)
+        .reduce((sum: number, e: any) => sum + (Number(e.actual) || 0), 0);
+      const count = (appState.expenses || []).filter((e: any) => d.id === 'ALL' || e.event === d.id).length;
+      return `<option value="${d.id}" ${currentVal === d.id ? 'selected' : ''}>${d.label} — ${formatLakhs(dayTotal)} (${count})</option>`;
+    }).join('');
+  }
 
-    const activeClasses = 'bg-maroon text-gold-light border-maroon shadow-xs ring-1 ring-gold font-bold';
-    const inactiveClasses = 'bg-white hover:bg-amber-50 text-slate-700 border-gold/30 hover:border-gold font-medium';
+  if (pillsContainer) {
+    pillsContainer.innerHTML = daysConfig.map(d => {
+      const isActive = activeDay === d.id;
+      const dayTotal = (appState.expenses || [])
+        .filter((e: any) => d.id === 'ALL' || e.event === d.id)
+        .reduce((sum: number, e: any) => sum + (Number(e.actual) || 0), 0);
+      const count = (appState.expenses || []).filter((e: any) => d.id === 'ALL' || e.event === d.id).length;
 
-    return `
-      <button type="button" onclick="window.setExpenseDayFilter('${d.id}')" class="px-2.5 py-1.5 rounded-lg border text-xs flex items-center gap-1.5 transition-all cursor-pointer ${isActive ? activeClasses : inactiveClasses}">
-        <span class="${isActive ? 'text-gold' : 'text-slate-400'} text-[10px]"><i class="fa-solid fa-calendar-day"></i></span>
-        <span>${d.label}</span>
-        <span class="text-[10px] px-1.5 py-0.2 rounded-full ${isActive ? 'bg-gold/20 text-gold-light' : 'bg-amber-100/70 text-maroon font-bold'}">
-          ${formatLakhs(dayTotal)} (${count})
-        </span>
-      </button>
-    `;
-  }).join('');
+      const activeClasses = 'bg-maroon text-gold-light border-maroon shadow-xs ring-1 ring-gold font-bold';
+      const inactiveClasses = 'bg-white hover:bg-amber-50 text-slate-700 border-gold/30 hover:border-gold font-medium';
+
+      return `
+        <button type="button" onclick="window.setExpenseDayFilter('${d.id}')" class="px-2.5 py-1.5 rounded-lg border text-xs flex items-center gap-1.5 transition-all cursor-pointer ${isActive ? activeClasses : inactiveClasses}">
+          <span class="${isActive ? 'text-gold' : 'text-slate-400'} text-[10px]"><i class="fa-solid fa-calendar-day"></i></span>
+          <span>${d.label}</span>
+          <span class="text-[10px] px-1.5 py-0.2 rounded-full ${isActive ? 'bg-gold/20 text-gold-light' : 'bg-amber-100/70 text-maroon font-bold'}">
+            ${formatLakhs(dayTotal)} (${count})
+          </span>
+        </button>
+      `;
+    }).join('');
+  }
 
   if (summaryEl) {
     const activeObj = daysConfig.find(d => d.id === activeDay);
@@ -870,7 +761,9 @@ export function renderExpensesTable() {
   if (!tbody) return;
 
   const search = ((document.getElementById('expense-search') as HTMLInputElement)?.value || '').toLowerCase().trim();
-  const eventFilter = (document.getElementById('expense-filter-event') as HTMLSelectElement)?.value || 'ALL';
+  const selectEl = document.getElementById('budget-day-filter-select') as HTMLSelectElement;
+  const legacyEl = document.getElementById('expense-filter-event') as HTMLSelectElement;
+  const eventFilter = (selectEl?.value) || (legacyEl?.value) || 'ALL';
   const catFilter = (document.getElementById('expense-filter-cat') as HTMLSelectElement)?.value || 'ALL';
   const statusFilter = (document.getElementById('expense-filter-status') as HTMLSelectElement)?.value || 'ALL';
 
@@ -936,40 +829,54 @@ export function renderExpensesTable() {
 function renderVendorDayPills(activeDay: string) {
   const pillsContainer = document.getElementById('vendor-day-pills');
   const summaryEl = document.getElementById('vendor-day-summary');
-  if (!pillsContainer) return;
+  const selectEl = document.getElementById('vendor-day-filter-select') as HTMLSelectElement;
 
   const daysConfig = [
-    { id: 'ALL', label: 'All Days', sub: 'Nov 21-27' },
-    { id: 'Tilak', label: 'Day 1 • Tilak', sub: 'Nov 21' },
-    { id: 'Matkor', label: 'Day 2 • Matkor', sub: 'Nov 22' },
-    { id: 'Madwa', label: 'Day 3 • Madwa', sub: 'Nov 23' },
-    { id: 'Bhatman', label: 'Day 4 • Bhatman', sub: 'Nov 24' },
-    { id: 'Barat', label: 'Day 5 • Barat', sub: 'Nov 25' },
-    { id: 'Reception', label: 'Day 6 • Reception', sub: 'Nov 27' },
-    { id: 'All Events', label: 'Common / All Events', sub: 'General' }
+    { id: 'ALL', label: 'All Days & Bookings' },
+    { id: 'Tilak', label: 'Day 1 • Tilak (Nov 21)' },
+    { id: 'Matkor', label: 'Day 2 • Matkor (Nov 22)' },
+    { id: 'Madwa', label: 'Day 3 • Madwa (Nov 23)' },
+    { id: 'Bhatman', label: 'Day 4 • Bhatman (Nov 24)' },
+    { id: 'Barat', label: 'Day 5 • Barat (Nov 25)' },
+    { id: 'Reception', label: 'Day 6 • Reception (Nov 27)' },
+    { id: 'All Events', label: 'Common / All Events' }
   ];
 
-  pillsContainer.innerHTML = daysConfig.map(d => {
-    const isActive = activeDay === d.id;
-    const count = (appState.vendors || []).filter((v: any) => {
-      if (d.id === 'ALL') return true;
-      if (d.id === 'All Events') return v.event === 'All Events' || v.event === 'General';
-      return v.event === d.id || v.event === 'All Events';
-    }).length;
+  if (selectEl) {
+    const currentVal = selectEl.value || activeDay;
+    selectEl.innerHTML = daysConfig.map(d => {
+      const count = (appState.vendors || []).filter((v: any) => {
+        if (d.id === 'ALL') return true;
+        if (d.id === 'All Events') return v.event === 'All Events' || v.event === 'General';
+        return v.event === d.id || v.event === 'All Events';
+      }).length;
+      return `<option value="${d.id}" ${currentVal === d.id ? 'selected' : ''}>${d.label} (${count} Vendors)</option>`;
+    }).join('');
+  }
 
-    const activeClasses = 'bg-maroon text-gold-light border-maroon shadow-xs ring-1 ring-gold font-bold';
-    const inactiveClasses = 'bg-white hover:bg-amber-50 text-slate-700 border-gold/30 hover:border-gold font-medium';
+  if (pillsContainer) {
+    pillsContainer.innerHTML = daysConfig.map(d => {
+      const isActive = activeDay === d.id;
+      const count = (appState.vendors || []).filter((v: any) => {
+        if (d.id === 'ALL') return true;
+        if (d.id === 'All Events') return v.event === 'All Events' || v.event === 'General';
+        return v.event === d.id || v.event === 'All Events';
+      }).length;
 
-    return `
-      <button type="button" onclick="window.setVendorDayFilter('${d.id}')" class="px-2.5 py-1.5 rounded-lg border text-xs flex items-center gap-1.5 transition-all cursor-pointer ${isActive ? activeClasses : inactiveClasses}">
-        <span class="${isActive ? 'text-gold' : 'text-slate-400'} text-[10px]"><i class="fa-solid fa-calendar-day"></i></span>
-        <span>${d.label}</span>
-        <span class="text-[10px] px-1.5 py-0.2 rounded-full ${isActive ? 'bg-gold/20 text-gold-light' : 'bg-amber-100/70 text-maroon font-bold'}">
-          ${count}
-        </span>
-      </button>
-    `;
-  }).join('');
+      const activeClasses = 'bg-maroon text-gold-light border-maroon shadow-xs ring-1 ring-gold font-bold';
+      const inactiveClasses = 'bg-white hover:bg-amber-50 text-slate-700 border-gold/30 hover:border-gold font-medium';
+
+      return `
+        <button type="button" onclick="window.setVendorDayFilter('${d.id}')" class="px-2.5 py-1.5 rounded-lg border text-xs flex items-center gap-1.5 transition-all cursor-pointer ${isActive ? activeClasses : inactiveClasses}">
+          <span class="${isActive ? 'text-gold' : 'text-slate-400'} text-[10px]"><i class="fa-solid fa-calendar-day"></i></span>
+          <span>${d.label}</span>
+          <span class="text-[10px] px-1.5 py-0.2 rounded-full ${isActive ? 'bg-gold/20 text-gold-light' : 'bg-amber-100/70 text-maroon font-bold'}">
+            ${count}
+          </span>
+        </button>
+      `;
+    }).join('');
+  }
 
   if (summaryEl) {
     const activeObj = daysConfig.find(d => d.id === activeDay);
@@ -1000,7 +907,9 @@ export function renderVendorsGrid() {
   if (statBal) statBal.innerText = formatINR(totalDue);
 
   const search = ((document.getElementById('vendor-search') as HTMLInputElement)?.value || '').toLowerCase().trim();
-  const eventFilter = (document.getElementById('vendor-filter-event') as HTMLSelectElement)?.value || 'ALL';
+  const selectEl = document.getElementById('vendor-day-filter-select') as HTMLSelectElement;
+  const legacyEl = document.getElementById('vendor-filter-event') as HTMLSelectElement;
+  const eventFilter = (selectEl?.value) || (legacyEl?.value) || 'ALL';
   const statusFilter = (document.getElementById('vendor-filter-status') as HTMLSelectElement)?.value || 'ALL';
 
   renderVendorDayPills(eventFilter);
@@ -1104,37 +1013,49 @@ export function renderGuestStats() {
 function renderGuestDayPills(activeEventKey: string) {
   const pillsContainer = document.getElementById('guest-day-pills');
   const summaryEl = document.getElementById('guest-day-summary');
-  if (!pillsContainer) return;
+  const selectEl = document.getElementById('guest-day-filter-select') as HTMLSelectElement;
 
   const daysConfig = [
-    { id: 'ALL', label: 'All Days', title: 'All Celebrations', sub: 'Nov 21-27' },
-    { id: 'tilak', label: 'Day 1 • Tilak', title: 'Tilak Ceremony', sub: 'Nov 21' },
-    { id: 'matkor', label: 'Day 2 • Matkor', title: 'Matkor Ceremony', sub: 'Nov 22' },
-    { id: 'madwa', label: 'Day 3 • Madwa', title: 'Madwa Ceremony', sub: 'Nov 23' },
-    { id: 'bhatman', label: 'Day 4 • Bhatman', title: 'Bhatman Ceremony', sub: 'Nov 24' },
-    { id: 'barat', label: 'Day 5 • Barat', title: 'Barat & Varmala', sub: 'Nov 25' },
-    { id: 'reception', label: 'Day 6 • Reception', title: 'Grand Reception', sub: 'Nov 27' }
+    { id: 'ALL', label: 'All Celebrations (Complete Guest List)', title: 'All Celebrations', sub: 'Nov 21-27' },
+    { id: 'tilak', label: 'Day 1 • Tilak Attendees (Nov 21)', title: 'Tilak Ceremony', sub: 'Nov 21' },
+    { id: 'matkor', label: 'Day 2 • Matkor Attendees (Nov 22)', title: 'Matkor Ceremony', sub: 'Nov 22' },
+    { id: 'madwa', label: 'Day 3 • Madwa Attendees (Nov 23)', title: 'Madwa Ceremony', sub: 'Nov 23' },
+    { id: 'bhatman', label: 'Day 4 • Bhatman Attendees (Nov 24)', title: 'Bhatman Ceremony', sub: 'Nov 24' },
+    { id: 'barat', label: 'Day 5 • Barat Attendees (Nov 25)', title: 'Barat & Varmala', sub: 'Nov 25' },
+    { id: 'reception', label: 'Day 6 • Reception Attendees (Nov 27)', title: 'Grand Reception', sub: 'Nov 27' }
   ];
 
-  pillsContainer.innerHTML = daysConfig.map(d => {
-    const isActive = activeEventKey === d.id;
-    const attendingCount = (appState.guests || [])
-      .filter((g: any) => g.rsvp === 'Confirmed' && (d.id === 'ALL' || (g.events && g.events[d.id])))
-      .reduce((sum: number, g: any) => sum + (Number(g.members) || 0), 0);
+  if (selectEl) {
+    const currentVal = selectEl.value || activeEventKey;
+    selectEl.innerHTML = daysConfig.map(d => {
+      const attendingCount = (appState.guests || [])
+        .filter((g: any) => g.rsvp === 'Confirmed' && (d.id === 'ALL' || (g.events && g.events[d.id])))
+        .reduce((sum: number, g: any) => sum + (Number(g.members) || 0), 0);
+      return `<option value="${d.id}" ${currentVal === d.id ? 'selected' : ''}>${d.label} (${attendingCount} Confirmed)</option>`;
+    }).join('');
+  }
 
-    const activeClasses = 'bg-maroon text-gold-light border-maroon shadow-xs ring-1 ring-gold font-bold';
-    const inactiveClasses = 'bg-white hover:bg-amber-50 text-slate-700 border-gold/30 hover:border-gold font-medium';
+  if (pillsContainer) {
+    pillsContainer.innerHTML = daysConfig.map(d => {
+      const isActive = activeEventKey === d.id;
+      const attendingCount = (appState.guests || [])
+        .filter((g: any) => g.rsvp === 'Confirmed' && (d.id === 'ALL' || (g.events && g.events[d.id])))
+        .reduce((sum: number, g: any) => sum + (Number(g.members) || 0), 0);
 
-    return `
-      <button type="button" onclick="window.setGuestDayFilter('${d.id}')" class="px-2.5 py-1.5 rounded-lg border text-xs flex items-center gap-1.5 transition-all cursor-pointer ${isActive ? activeClasses : inactiveClasses}">
-        <span class="${isActive ? 'text-gold' : 'text-slate-400'} text-[10px]"><i class="fa-solid fa-calendar-check"></i></span>
-        <span>${d.label}</span>
-        <span class="text-[10px] px-1.5 py-0.2 rounded-full ${isActive ? 'bg-gold/20 text-gold-light' : 'bg-amber-100/70 text-maroon font-bold'}">
-          ${attendingCount} Confirmed
-        </span>
-      </button>
-    `;
-  }).join('');
+      const activeClasses = 'bg-maroon text-gold-light border-maroon shadow-xs ring-1 ring-gold font-bold';
+      const inactiveClasses = 'bg-white hover:bg-amber-50 text-slate-700 border-gold/30 hover:border-gold font-medium';
+
+      return `
+        <button type="button" onclick="window.setGuestDayFilter('${d.id}')" class="px-2.5 py-1.5 rounded-lg border text-xs flex items-center gap-1.5 transition-all cursor-pointer ${isActive ? activeClasses : inactiveClasses}">
+          <span class="${isActive ? 'text-gold' : 'text-slate-400'} text-[10px]"><i class="fa-solid fa-calendar-check"></i></span>
+          <span>${d.title}</span>
+          <span class="text-[10px] px-1.5 py-0.2 rounded-full ${isActive ? 'bg-gold/20 text-gold-light' : 'bg-amber-100/70 text-maroon font-bold'}">
+            ${attendingCount}
+          </span>
+        </button>
+      `;
+    }).join('');
+  }
 
   if (summaryEl) {
     const activeObj = daysConfig.find(d => d.id === activeEventKey);
@@ -1154,7 +1075,9 @@ export function renderGuestsTable() {
   const search = ((document.getElementById('guest-search') as HTMLInputElement)?.value || '').toLowerCase().trim();
   const sideFilter = (document.getElementById('guest-filter-side') as HTMLSelectElement)?.value || 'ALL';
   const rsvpFilter = (document.getElementById('guest-filter-rsvp') as HTMLSelectElement)?.value || 'ALL';
-  const eventFilter = (document.getElementById('guest-filter-event') as HTMLSelectElement)?.value || 'ALL';
+  const selectEl = document.getElementById('guest-day-filter-select') as HTMLSelectElement;
+  const legacyEl = document.getElementById('guest-filter-event') as HTMLSelectElement;
+  const eventFilter = (selectEl?.value) || (legacyEl?.value) || 'ALL';
 
   renderGuestDayPills(eventFilter);
 
@@ -1257,10 +1180,11 @@ export function renderRituals() {
       const isActive = evt.id === activeRitualTab;
       const tasks = (appState.rituals && appState.rituals[evt.id]) || [];
       const completed = tasks.filter((t: any) => t.done).length;
+      const shortName = evt.id === 'reception' ? 'Reception' : evt.title.split(' ')[0];
       return `
-        <button onclick="window.setRitualTab('${evt.id}')" class="px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all flex items-center gap-2 ${isActive ? 'bg-maroon text-gold-light shadow-md' : 'bg-white border border-slate-200 text-slate-700 hover:border-gold'}">
-          <span>${evt.title.split(' ')[0]}</span>
-          <span class="px-1.5 py-0.2 rounded-full text-[10px] ${isActive ? 'bg-gold text-maroon-dark font-bold' : 'bg-slate-100 text-slate-600'}">${completed}/${tasks.length}</span>
+        <button onclick="window.setRitualTab('${evt.id}')" class="px-2.5 sm:px-3 py-1 rounded-lg text-[11px] sm:text-xs font-semibold transition-all flex items-center gap-1.5 ${isActive ? 'bg-maroon text-gold-light shadow-xs ring-1 ring-gold' : 'bg-white border border-slate-200 text-slate-700 hover:border-gold'}">
+          <span>${shortName}</span>
+          <span class="px-1.5 py-0.2 rounded-full text-[9px] ${isActive ? 'bg-gold text-maroon-dark font-bold' : 'bg-slate-100 text-slate-600'}">${completed}/${tasks.length}</span>
         </button>
       `;
     }).join('');
@@ -1274,23 +1198,22 @@ export function renderRituals() {
 
   if (detailsCard) {
     detailsCard.innerHTML = `
-      <div>
-        <div class="flex items-center gap-2">
-          <h3 class="font-cinzel font-bold text-xl text-maroon">${currentEvt.title} (${currentEvt.hindi || ''})</h3>
-          <span class="px-2.5 py-0.5 rounded-full text-xs font-bold ${currentEvt.tagColor || 'bg-amber-100 text-amber-900'}">${currentEvt.dateStr}</span>
-          <button onclick="window.openEditCeremonyModal('${currentEvt.id}')" class="text-xs text-gold-dark hover:text-maroon ml-2 font-semibold">
-            <i class="fa-solid fa-pen"></i> Edit Ceremony
+      <div class="flex-1 min-w-0">
+        <div class="flex flex-wrap items-center gap-1.5">
+          <h3 class="font-cinzel font-bold text-xs sm:text-sm text-maroon">${currentEvt.title} ${currentEvt.hindi ? `<span class="text-[10px] sm:text-xs font-serif text-gold-dark font-normal">(${currentEvt.hindi})</span>` : ''}</h3>
+          <span class="px-2 py-0.5 rounded-full text-[9px] sm:text-[10px] font-bold ${currentEvt.tagColor || 'bg-amber-100 text-amber-900'}">${currentEvt.dateStr.split(',')[0]}</span>
+          <button onclick="window.openEditCeremonyModal('${currentEvt.id}')" class="text-[10px] text-gold-dark hover:text-maroon ml-1 font-semibold">
+            <i class="fa-solid fa-pen text-[9px]"></i> Edit
           </button>
         </div>
-        <p class="text-xs text-slate-600 mt-1"><i class="fa-solid fa-location-dot text-gold-dark mr-1"></i> ${currentEvt.venue} • <i class="fa-regular fa-clock text-gold-dark mr-1"></i> ${currentEvt.time}</p>
-        <p class="text-xs text-slate-700 mt-1"><i class="fa-solid fa-user-check text-gold-dark mr-1"></i> Coordinator: <strong>${currentEvt.coordinator}</strong></p>
+        <p class="text-[11px] text-slate-600 mt-0.5 truncate"><i class="fa-solid fa-location-dot text-gold-dark text-[10px] mr-1"></i>${currentEvt.venue} • <i class="fa-regular fa-clock text-gold-dark text-[10px] mr-1"></i>${currentEvt.time}</p>
+        <p class="text-[11px] text-slate-700 mt-0.5 truncate"><i class="fa-solid fa-user-check text-gold-dark text-[10px] mr-1"></i>Coord: <strong>${currentEvt.coordinator}</strong></p>
       </div>
-      <div class="text-right">
-        <p class="text-xs font-semibold text-slate-500">Readiness: ${progressPct}%</p>
-        <div class="w-36 bg-slate-200 rounded-full h-2 mt-1 overflow-hidden">
-          <div class="bg-maroon h-2 rounded-full transition-all duration-300" style="width: ${progressPct}%"></div>
+      <div class="shrink-0 text-left sm:text-right mt-1 sm:mt-0 pt-1 sm:pt-0 border-t sm:border-t-0 border-gold/20">
+        <p class="text-[10px] sm:text-[11px] font-semibold text-slate-600">Readiness: ${progressPct}% (${completedCount}/${currentTasks.length})</p>
+        <div class="w-28 sm:w-36 bg-slate-200 rounded-full h-1.5 mt-0.5 overflow-hidden">
+          <div class="bg-maroon h-1.5 rounded-full transition-all duration-300" style="width: ${progressPct}%"></div>
         </div>
-        <p class="text-[11px] text-slate-500 mt-0.5">${completedCount} of ${currentTasks.length} tasks completed</p>
       </div>
     `;
   }
@@ -1547,15 +1470,54 @@ export function startCountdown() {
   setInterval(update, 1000);
 }
 
-// Tab navigation
+export function toggleMobileMenu(forceState?: boolean) {
+  const menu = document.getElementById('mobile-nav-menu');
+  const icon = document.getElementById('mobile-menu-icon');
+  if (!menu) return;
+
+  const isHidden = typeof forceState === 'boolean' ? !forceState : !menu.classList.contains('hidden');
+  if (isHidden) {
+    menu.classList.add('hidden');
+    if (icon) {
+      icon.classList.remove('fa-xmark');
+      icon.classList.add('fa-bars');
+    }
+  } else {
+    menu.classList.remove('hidden');
+    if (icon) {
+      icon.classList.remove('fa-bars');
+      icon.classList.add('fa-xmark');
+    }
+  }
+}
+
+// Close hamburger menu when clicking outside
+if (typeof document !== 'undefined') {
+  document.addEventListener('click', (e: MouseEvent) => {
+    const menu = document.getElementById('mobile-nav-menu');
+    const btn = document.getElementById('mobile-menu-btn');
+    if (!menu || menu.classList.contains('hidden')) return;
+    const target = e.target as HTMLElement | null;
+    if (target && !menu.contains(target) && !btn?.contains(target)) {
+      toggleMobileMenu(false);
+    }
+  });
+}
+
+// Tab navigation (Ordered: Dashboard, Events, Budget, Vendors, Guests, Rituals, Entertainment)
 export function switchTab(tabId: string) {
-  const views = ['dashboard', 'events', 'budget', 'vendors', 'guests', 'rituals', 'emergency'];
+  const views = ['dashboard', 'events', 'budget', 'vendors', 'guests', 'rituals', 'entertainment'];
   views.forEach(v => {
     const el = document.getElementById(`view-${v}`);
     const nav = document.getElementById(`nav-${v}`);
+    const mobNav = document.getElementById(`mob-nav-${v}`);
     if (el) el.classList.toggle('hidden', v !== tabId);
     if (nav) nav.classList.toggle('active', v === tabId);
+    if (mobNav) mobNav.classList.toggle('active', v === tabId);
   });
+
+  // Auto-close mobile drawer on tab change
+  toggleMobileMenu(false);
 
   if (tabId === 'dashboard') {
     renderDashboard();
@@ -1571,8 +1533,8 @@ export function switchTab(tabId: string) {
     renderGuestsTable();
   } else if (tabId === 'rituals') {
     renderRituals();
-  } else if (tabId === 'emergency') {
-    renderEmergency();
+  } else if (tabId === 'entertainment') {
+    renderEntertainment();
   }
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
@@ -2264,16 +2226,24 @@ export function restoreBackupData(e: any) {
 
 export function confirmResetModal() {
   showConfirmDialog({
-    title: 'Reset to Sample Data',
-    message: 'Are you sure you want to reset all wedding records to default sample data? Any unexported custom changes will be overwritten.',
-    confirmLabel: 'Reset Everything',
+    title: 'Reset to Master Wedding Plan',
+    message: 'Reset all wedding details, budget, vendors, guests, rituals & entertainment to the permanent master JSON data? Your permanent Google Sheet will also be updated with this data.',
+    confirmLabel: 'Reset to Master Data',
     icon: 'fa-rotate-right',
     confirmStyle: 'bg-maroon hover:bg-maroon-deep text-gold-light',
     onConfirm: () => {
       appState = getDefaultAppState();
       saveData(true);
       renderDashboard();
-      showToast('System reset to default wedding plan', 'info');
+      renderEventsView();
+      renderBudgetStats();
+      renderExpensesTable();
+      renderVendorsGrid();
+      renderGuestStats();
+      renderGuestsTable();
+      renderRituals();
+      renderEntertainment();
+      showToast('Reset to permanent master wedding JSON data successfully!', 'success');
     }
   });
 }
@@ -2294,6 +2264,7 @@ window.loadData = loadData;
 window.saveData = saveData;
 
 // Navigation & Modals
+window.toggleMobileMenu = toggleMobileMenu;
 window.switchTab = switchTab;
 window.closeModal = closeModal;
 window.showConfirmDialog = showConfirmDialog;
@@ -2362,9 +2333,25 @@ window.handleSaveTargetBudget = handleSaveTargetBudget;
 window.openEditCeremonyModal = openEditCeremonyModal;
 window.handleSaveCeremony = handleSaveCeremony;
 
-// Emergency & Legal
-window.renderEmergency = renderEmergency;
-window.toggleEmergencyDone = toggleEmergencyDone;
+// Emergency & Legal (Stubs for safety)
+window.renderEmergency = () => {};
+window.toggleEmergencyDone = () => {};
+
+// Entertainment & Playlists
+window.openEntertainmentModal = openEntertainmentModal;
+window.handleSaveEntertainment = handleSaveEntertainment;
+window.deleteEntertainment = deleteEntertainment;
+window.cycleEntertainmentStatus = cycleEntertainmentStatus;
+window.setEntertainmentDayFilter = setEntertainmentDayFilter;
+window.renderEntertainment = renderEntertainment;
+
+// Permanent Google Sheet Web App Sync
+window.openGoogleSheetLinkModal = openGoogleSheetLinkModal;
+window.copyAppsScriptCode = copyAppsScriptCode;
+window.handleSaveWebAppUrl = handleSaveWebAppUrl;
+window.handleDisconnectWebApp = handleDisconnectWebApp;
+window.pushDataToGoogleSheet = pushDataToGoogleSheet;
+window.fetchDataFromGoogleSheet = fetchDataFromGoogleSheet;
 
 // Backup, Restore & Reset
 window.exportBackupData = exportBackupData;
@@ -2388,6 +2375,24 @@ export function initWeddingApp() {
   loadData();
   startCountdown();
   renderDashboard();
+  updateSyncStatusUI('synced');
+
+  // If Google Web App URL is linked, check for cloud updates
+  const webAppUrl = getStoredWebAppUrl() || appState.googleWebAppUrl;
+  if (webAppUrl) {
+    updateSyncStatusUI('synced');
+    fetchFromAppsScriptWebApp(webAppUrl).then((cloudData: any) => {
+      if (cloudData && cloudData.expenses && cloudData.vendors) {
+        // Merge cloud updates into local state
+        Object.assign(appState, cloudData);
+        saveData(false);
+        renderDashboard();
+        updateSyncStatusUI('synced');
+      }
+    }).catch((err: any) => {
+      console.warn('Initial cloud sync check:', err);
+    });
+  }
 
   // Initialize Google Auth Listener
   try {
