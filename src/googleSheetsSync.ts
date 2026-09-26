@@ -115,7 +115,7 @@ function updateSpreadsheetWithState(state) {
   var summaryRows = [
     ["METRIC / KPI", "VALUE", "DETAILS / REMARKS"],
     ["Wedding Celebration", "Shiv & Swati Royal Wedding Celebration 2026", "6 Grand Ceremonies (Nov 21 - 27, 2026)"],
-    ["Platform Architect", "Made By: Ravi Shankar Sharma", "Master Wedding Management Portal"],
+    ["Platform Architect", "Made By: Ravi Shankar Sharma (Contact: +91 8271890090)", "Master Wedding Management Portal"],
     ["Target Budget Limit", state.targetBudget || 2500000, "INR Target Ceiling"],
     ["Total Committed Expenses", totalActual, "INR " + (totalActual / 100000).toFixed(2) + " Lakhs"],
     ["Total Amount Paid", totalPaid, "INR " + (totalPaid / 100000).toFixed(2) + " Lakhs"],
