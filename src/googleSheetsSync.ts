@@ -123,6 +123,7 @@ function updateSpreadsheetWithState(state) {
     ["Total Confirmed Guests", totalAttending, (state.guests || []).length + " Guest families recorded"],
     ["Booked Vendors", vendorsCount, "Active contracts on record"],
     ["Entertainment Programmes", entertainmentCount, "Curated songs, entry tracks & dance choreographies"],
+    ["Pending To-Do Tasks", (state.todos || []).filter(function(t) { return !t.done; }).length, (state.todos || []).length + " Master wedding action items"],
     ["Last Cloud Auto-Sync", nowStr, "Live auto-sync across all connected devices"],
     ["", "", ""],
     ["CEREMONY SCHEDULE OVERVIEW", "DATE & TIME", "VENUE"]
@@ -263,6 +264,24 @@ function updateSpreadsheetWithState(state) {
     });
   }
   writeSheetData(ss, "Ritual Checklists", ritualRows, "#831843", "#FCE7F3");
+
+  // 9. To-Do List & Deadlines Sheet
+  var todoRows = [
+    ["TODO ID", "TASK DESCRIPTION", "DUE DATE", "CATEGORY", "ASSIGNED IN-CHARGE", "STATUS", "NOTES / REMARKS", "CREATED AT"]
+  ];
+  (state.todos || []).forEach(function(t) {
+    todoRows.push([
+      t.id,
+      t.task,
+      t.dueDate || "",
+      t.category || "General",
+      t.assignedTo || "",
+      t.done ? "COMPLETED" : "PENDING",
+      t.notes || "",
+      t.createdAt || ""
+    ]);
+  });
+  writeSheetData(ss, "To-Do List", todoRows, "#1E3A8A", "#EFF6FF");
 }
 
 function getOrCreateSheet(ss, name, hideSheet) {

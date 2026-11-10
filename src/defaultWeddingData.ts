@@ -4,6 +4,74 @@
  * Made By: Ravi Shankar Sharma
  */
 
+export interface TodoItem {
+  id: string;
+  task: string;
+  dueDate: string; // YYYY-MM-DD format (e.g. 2026-11-20)
+  category?: string; // Optional: e.g. Shopping, Outfits, Arrangements, Payments, Transport, Personal
+  assignedTo?: string; // Optional: e.g. Ravi, Rohit, Chacha
+  done: boolean;
+  notes?: string;
+  createdAt?: string;
+}
+
+export const DEFAULT_TODOS: TodoItem[] = [
+  {
+    id: "todo-1",
+    task: "Collect dry cleaning & ironed outfits for Tilak & Haldi",
+    dueDate: "2026-11-19",
+    category: "Outfits",
+    assignedTo: "Rohit & Ravi",
+    done: false,
+    notes: "Check all matching safas and dupattas"
+  },
+  {
+    id: "todo-2",
+    task: "Confirm luxury car / vintage car booking for Groom Barat entry",
+    dueDate: "2026-11-20",
+    category: "Transport",
+    assignedTo: "Chacha & Mritunjay",
+    done: false,
+    notes: "Minavan Resort Patna route briefing"
+  },
+  {
+    id: "todo-3",
+    task: "Purchase puja coconuts, fresh betel leaves & supari samagri box",
+    dueDate: "2026-11-20",
+    category: "Shopping",
+    assignedTo: "Baba & Sakshi",
+    done: false,
+    notes: "Keep in labeled puja bag at Shanti Kunj"
+  },
+  {
+    id: "todo-4",
+    task: "Verify hotel check-in rooms key envelopes & guest welcome kits",
+    dueDate: "2026-11-21",
+    category: "Arrangements",
+    assignedTo: "Ravi Shankar (+91 8271890090)",
+    done: false,
+    notes: "Garv Hotel room allotment chart verification"
+  },
+  {
+    id: "todo-5",
+    task: "Arrange cash envelopes for Shagun, Pandit Ji dakshina & dholak troupe",
+    dueDate: "2026-11-22",
+    category: "Payments",
+    assignedTo: "Chacha & Baba",
+    done: false,
+    notes: "Prepared in distinct colored envelopes"
+  },
+  {
+    id: "todo-6",
+    task: "Final sound-check & pendrive backup for Sangeet & Reception tracks",
+    dueDate: "2026-11-24",
+    category: "Entertainment",
+    assignedTo: "Sakshi & Rohit",
+    done: false,
+    notes: "2 USB drives + phone offline playlist ready"
+  }
+];
+
 export interface EntertainmentItem {
   id: string;
   eventId: string;
@@ -1540,5 +1608,6 @@ export const MASTER_WEDDING_DATA = {
       }
     ]
   },
-  entertainment: JSON.parse(JSON.stringify(DEFAULT_ENTERTAINMENT))
+  entertainment: JSON.parse(JSON.stringify(DEFAULT_ENTERTAINMENT)),
+  todos: JSON.parse(JSON.stringify(DEFAULT_TODOS))
 };

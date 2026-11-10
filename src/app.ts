@@ -25,6 +25,20 @@ import {
   setEntertainmentDayFilter
 } from './entertainment.ts';
 import {
+  DEFAULT_TODOS,
+  renderTodoList,
+  openAddTodoModal,
+  openEditTodoModal,
+  handleSaveTodo,
+  handleUpdateTodo,
+  toggleTodoDone,
+  deleteTodo,
+  setTodoCategoryFilter,
+  setTodoStatusFilter,
+  setTodoDateFilter,
+  setTodoSearch
+} from './todoList.ts';
+import {
   openGoogleSheetLinkModal,
   copyAppsScriptCode,
   handleSaveWebAppUrl,
@@ -79,6 +93,9 @@ export function loadData() {
       }
       if (!appState.entertainment || !Array.isArray(appState.entertainment) || appState.entertainment.length === 0) {
         appState.entertainment = JSON.parse(JSON.stringify(DEFAULT_ENTERTAINMENT));
+      }
+      if (!appState.todos || !Array.isArray(appState.todos)) {
+        appState.todos = JSON.parse(JSON.stringify(DEFAULT_TODOS));
       }
       appState.googleWebAppUrl = PERMANENT_WEBAPP_URL;
       setStoredWebAppUrl(PERMANENT_WEBAPP_URL);
@@ -1504,9 +1521,9 @@ if (typeof document !== 'undefined') {
   });
 }
 
-// Tab navigation (Ordered: Dashboard, Events, Budget, Vendors, Guests, Rituals, Entertainment)
+// Tab navigation (Ordered: Dashboard, Events, Budget, Vendors, Guests, Rituals, Entertainment, Todos)
 export function switchTab(tabId: string) {
-  const views = ['dashboard', 'events', 'budget', 'vendors', 'guests', 'rituals', 'entertainment'];
+  const views = ['dashboard', 'events', 'budget', 'vendors', 'guests', 'rituals', 'entertainment', 'todos'];
   views.forEach(v => {
     const el = document.getElementById(`view-${v}`);
     const nav = document.getElementById(`nav-${v}`);
@@ -1535,6 +1552,8 @@ export function switchTab(tabId: string) {
     renderRituals();
   } else if (tabId === 'entertainment') {
     renderEntertainment();
+  } else if (tabId === 'todos') {
+    renderTodoList();
   }
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
@@ -2243,6 +2262,7 @@ export function confirmResetModal() {
       renderGuestsTable();
       renderRituals();
       renderEntertainment();
+      renderTodoList();
       showToast('Reset to permanent master wedding JSON data successfully!', 'success');
     }
   });
@@ -2344,6 +2364,19 @@ window.deleteEntertainment = deleteEntertainment;
 window.cycleEntertainmentStatus = cycleEntertainmentStatus;
 window.setEntertainmentDayFilter = setEntertainmentDayFilter;
 window.renderEntertainment = renderEntertainment;
+
+// Wedding To-Do List & Deadlines
+window.renderTodoList = renderTodoList;
+window.openAddTodoModal = openAddTodoModal;
+window.openEditTodoModal = openEditTodoModal;
+window.handleSaveTodo = handleSaveTodo;
+window.handleUpdateTodo = handleUpdateTodo;
+window.toggleTodoDone = toggleTodoDone;
+window.deleteTodo = deleteTodo;
+window.setTodoCategoryFilter = setTodoCategoryFilter;
+window.setTodoStatusFilter = setTodoStatusFilter;
+window.setTodoDateFilter = setTodoDateFilter;
+window.setTodoSearch = setTodoSearch;
 
 // Permanent Google Sheet Web App Sync
 window.openGoogleSheetLinkModal = openGoogleSheetLinkModal;
